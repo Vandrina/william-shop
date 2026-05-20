@@ -70,7 +70,9 @@
 </section>
 </div>
 
-<!-- CTA BAR: dark band, all buttons same style, none active -->
+<!-- sentinel for sticky CTA bar detection -->
+<div id="cta-sentinel" style="height:1px;pointer-events:none"></div>
+<!-- CTA BAR -->
 <div class="cat-section">
   <div class="cat-heading">SEE THE COOL SHIT</div>
   <div class="cat-buttons">
@@ -220,6 +222,16 @@ document.querySelectorAll('.cat-btn').forEach(function(b){
     b.classList.add('on');
   });
 });
+// sticky CTA bar: compact when stuck, full when in normal flow
+(function(){
+  var sentinel = document.getElementById('cta-sentinel');
+  var bar = document.querySelector('.cat-section');
+  if(!sentinel || !bar) return;
+  var observer = new IntersectionObserver(function(entries){
+    bar.classList.toggle('is-stuck', !entries[0].isIntersecting);
+  },{threshold:0, rootMargin:'-65px 0px 0px 0px'});
+  observer.observe(sentinel);
+})();
 document.querySelectorAll('.fsw').forEach(function(b){
   b.addEventListener('click',function(){
     document.body.className=b.getAttribute('data-f');

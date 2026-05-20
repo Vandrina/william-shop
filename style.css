@@ -201,16 +201,25 @@ body.fb .hero-caption-price{font-size:20px;font-weight:700}
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    SHOP CTA BAR  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* CTA bar — default: heading + generous padding */
 .cat-section{
   background:var(--dk-4);
   border-bottom:1px solid var(--dk-5);
-  padding:8px 40px; /* minimal — just buttons */
+  padding:28px 40px;
   text-align:center;
   position:sticky;
-  top:64px; /* sits directly below the main nav */
+  top:64px;
   z-index:90;
+  transition:padding .2s ease;
 }
-.cat-heading{display:none} /* heading removed — just buttons in compact bar */
+/* stuck state: compact strip, heading hidden */
+.cat-section.is-stuck{padding:8px 40px}
+.cat-section.is-stuck .cat-heading{display:none}
+.cat-heading{
+  font-family:var(--fh);color:var(--gold);margin-bottom:14px;letter-spacing:.08em;
+}
+body.fa .cat-heading{font-size:20px}
+body.fb .cat-heading{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.18em}
 .cat-buttons{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
 .cat-btn{
   font-family:var(--fb);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
@@ -233,11 +242,10 @@ body.fb .hero-caption-price{font-size:20px;font-weight:700}
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FEATURED SECTION  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.section{padding:48px 40px;background:var(--lt-1);flex:1}
+.section{padding:48px 120px;background:var(--lt-1);flex:1}
 .featured-grid{
   display:grid;
-  grid-template-columns:repeat(3,300px); /* explicit — 25% smaller than ~400px 1fr */
-  justify-content:center;
+  grid-template-columns:repeat(3,1fr);
   gap:20px;
 }
 /* card overrides to match the smaller size */
@@ -568,7 +576,15 @@ body.fb .recs .card-price{font-size:12px}
    FOOTER  (shared)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .footer{background:var(--dk-1);border-top:1px solid var(--dk-5);padding:48px 40px 32px;color:var(--lt-1)}
-.footer-top{display:grid;grid-template-columns:1fr 1fr 2fr;gap:32px;margin-bottom:36px}
+.footer-top{
+  display:grid;
+  grid-template-columns:1fr 1fr 2fr;
+  gap:20px; /* tighter — shop and studio closer */
+  margin-bottom:36px;
+  max-width:1100px;
+  margin-left:auto;
+  margin-right:auto;
+}
 /* brand/tagline column: left-aligned text, pushed to right within footer */
 .footer-top > div:last-child{justify-self:end;text-align:left}
 .footer-logo{line-height:1.15;margin-bottom:12px}
@@ -587,10 +603,10 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em;t
 .footer-links a:hover{color:var(--gold)}
 .footer-bottom{border-top:1px solid var(--dk-5);padding-top:18px;display:flex;justify-content:space-between;font-family:var(--fm);font-size:9px;letter-spacing:.06em;color:rgba(238,238,242,.16)}
 
-/* product page footer: shop | studio | newsletter | brand */
-.footer-top-product{grid-template-columns:1fr 1fr 3fr 1.5fr}
-/* newsletter column centered */
-.footer-nl-col{display:flex;flex-direction:column;justify-content:center}
+/* product page footer: shop | studio | newsletter | brand — ~15% 15% 50% 20% */
+.footer-top-product{grid-template-columns:1.5fr 1.5fr 5fr 2fr;gap:20px}
+/* center newsletter column content */
+.footer-nl-col{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .footer-nl-col .footer-nl-label{
   font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
   color:rgba(238,238,242,.4);margin-bottom:10px;
