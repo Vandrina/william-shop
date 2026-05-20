@@ -14,80 +14,73 @@ body{font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
 button{cursor:pointer;border:none;background:none;font-family:inherit}
 a{text-decoration:none;color:inherit;cursor:pointer}
 
-/* ── PORTFOLIO-MATCHED VARS ── */
+/*
+  PORTFOLIO PALETTE ONLY — shuffled for a light-dominant shop
+  ─────────────────────────────────────────────────────────────
+  dark scale  (nav · hero · footer · adults · newsletter)
+    #1c1c1e  #222224  #242426  #282828  #2e2e32  #3a3a3e
+  mid scale   (borders · secondary text)
+    #52525a  #7a7a84
+  light scale (dominant page backgrounds — inverted from portfolio)
+    #d0d0d8  #eeeef2
+  gold
+    #c8a46e  #d4b580  #6e5830
+*/
+
 :root{
-  /* dark scale — from portfolio stylesheet */
-  --ink:    #1c1c1e;   /* portfolio --bg   */
-  --ink-2:  #222224;   /* portfolio --bg-2 */
-  --ink-3:  #282828;   /* portfolio --bg-3 */
-  --surface:#242426;
-  --border: #2e2e32;
-  --border-mid:#3a3a3e;
-  --mid:    #7a7a84;
-  /* gold — portfolio --accent */
-  --gold:   #c8a46e;
-  --gold-light:#d4b580;
-  --gold-dim: #6e5830;
-  /* shop light scale */
-  --bg:     #f8f8fa;
-  --bg-2:   #eeeef2;
-  --bg-3:   #e4e4e6;
-  --panel:  #ffffff;
-  --text-dim:rgba(28,28,30,.45);
+  /* dark — same as portfolio, same usage */
+  --dk-1:#1c1c1e; --dk-2:#222224; --dk-3:#242426;
+  --dk-4:#282828; --dk-5:#2e2e32; --dk-6:#3a3a3e;
+  /* mid */
+  --md-1:#52525a; --md-2:#7a7a84;
+  /* light — portfolio text/bright, now used as BG */
+  --lt-1:#eeeef2; /* main section bg */
+  --lt-2:#d0d0d8; /* alt section bg */
+  /* gold */
+  --gold:#c8a46e; --gold-hi:#d4b580; --gold-lo:#6e5830;
 }
 
-/* ── FONT SYSTEMS ── */
-/* Font A: Bebas Neue + Outfit (industrial bold) */
-body.fa{--fh:'Bebas Neue',cursive;--fb:'Outfit',system-ui,sans-serif;--fm:'Space Mono',monospace}
-/* Font B: Outfit throughout (matches portfolio exactly) */
-body.fb{--fh:'Outfit',system-ui,sans-serif;--fb:'Inter',system-ui,sans-serif;--fm:'Space Mono',monospace}
-
-body{font-family:var(--fb,'Outfit',sans-serif);background:var(--bg);color:var(--ink)}
+/* font systems */
+body.fa{--fh:'Bebas Neue',cursive;--fb:'Outfit',sans-serif;--fm:'Space Mono',monospace}
+body.fb{--fh:'Outfit',sans-serif;--fb:'Inter',sans-serif;--fm:'Space Mono',monospace}
+body{font-family:var(--fb,'Outfit',sans-serif);background:var(--lt-1);color:var(--dk-1)}
 
 /* ── NAV ── */
 .nav{
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 40px;background:var(--ink);
-  border-bottom:1px solid var(--border-mid);
+  padding:0 40px;background:var(--dk-1);
+  border-bottom:1px solid var(--dk-6);
   height:64px;position:sticky;top:0;z-index:100;gap:24px;
 }
-/* stylized logo */
 .nav-logo{line-height:1.1;cursor:pointer}
-.nav-logo-pre{
-  font-family:var(--fm);font-size:7px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--gold);display:block;
-}
-.nav-logo-name{
-  font-family:var(--fh);
-  display:block;color:#eeeef2;
-}
+.nav-logo-pre{font-family:var(--fm);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block}
+.nav-logo-name{font-family:var(--fh);color:var(--lt-1);display:block}
 body.fa .nav-logo-name{font-size:24px;letter-spacing:.06em}
 body.fb .nav-logo-name{font-size:16px;font-weight:700;letter-spacing:-.01em}
-
 .nav-links{display:flex;gap:22px}
 .nav-links a{
   font-family:var(--fb);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
   color:rgba(238,238,242,.38);transition:color .15s;
 }
 .nav-links a:hover{color:var(--gold)}
-.nav-adults{opacity:.6}
+/* adults only: same style, slightly dimmed */
+.nav-adults{opacity:.55}
 .nav-cart{
-  background:var(--gold);color:var(--ink);
-  font-family:var(--fh);letter-spacing:.08em;
-  transition:background .15s;flex-shrink:0;
+  background:var(--gold);color:var(--dk-1);
+  font-family:var(--fh);letter-spacing:.08em;transition:background .15s;flex-shrink:0;
 }
 body.fa .nav-cart{font-size:18px;padding:9px 22px}
-body.fb .nav-cart{font-size:13px;font-weight:700;padding:10px 22px;text-transform:uppercase}
-.nav-cart:hover{background:var(--gold-light)}
+body.fb .nav-cart{font-size:13px;font-weight:700;padding:10px 22px;text-transform:uppercase;letter-spacing:.12em}
+.nav-cart:hover{background:var(--gold-hi)}
 
 /* ── HERO ── */
 .hero{
   display:grid;grid-template-columns:1fr 1fr;
-  min-height:560px; /* more breathing room */
-  border-bottom:1px solid var(--border-mid);
+  min-height:560px;
+  border-bottom:1px solid var(--dk-5);
 }
 .hero-left{
-  background:var(--ink);padding:80px 56px; /* wider padding = more air */
+  background:var(--dk-1);padding:80px 56px;
   display:flex;flex-direction:column;justify-content:center;
   position:relative;overflow:hidden;
 }
@@ -99,113 +92,88 @@ body.fb .nav-cart{font-size:13px;font-weight:700;padding:10px 22px;text-transfor
 .hero-tag{
   font-family:var(--fm);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
   color:var(--gold);margin-bottom:24px;position:relative;z-index:1;
-  /* no "//" */
 }
 .hero-title{
-  font-family:var(--fh);
-  color:#eeeef2;position:relative;z-index:1;margin-bottom:20px;
+  font-family:var(--fh);color:var(--lt-1);
+  position:relative;z-index:1;margin-bottom:20px;
 }
 body.fa .hero-title{font-size:96px;line-height:.9;letter-spacing:.02em}
 body.fb .hero-title{font-size:64px;line-height:1;letter-spacing:-.03em;font-weight:700}
-
 .hero-sub{
   font-family:var(--fb);font-size:14px;font-weight:300;
-  color:rgba(238,238,242,.45);
-  max-width:340px;line-height:1.75;margin-bottom:44px;
+  color:rgba(238,238,242,.45);max-width:340px;line-height:1.75;margin-bottom:44px;
   position:relative;z-index:1;
 }
 .hero-btn{
-  background:var(--gold);color:var(--ink);
+  background:var(--gold);color:var(--dk-1);
   font-family:var(--fh);letter-spacing:.08em;
   transition:background .15s;align-self:flex-start;position:relative;z-index:1;
 }
 body.fa .hero-btn{font-size:20px;padding:13px 48px}
 body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transform:uppercase;letter-spacing:.12em}
-.hero-btn:hover{background:var(--gold-light)}
-
+.hero-btn:hover{background:var(--gold-hi)}
 .hero-right{
-  background:var(--bg-2);
+  background:var(--lt-2); /* #d0d0d8 — lighter section, portfolio color */
   display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
-  border-left:1px solid var(--border-mid);
+  border-left:1px solid var(--dk-5);
 }
 .hero-img-ph{
   width:100%;height:100%;position:absolute;inset:0;
-  background:repeating-linear-gradient(135deg,#e0e0e2 0,#e0e0e2 5px,#d4d4d6 5px,#d4d4d6 6px);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  /* diagonal stripe using only portfolio colors */
+  background:repeating-linear-gradient(135deg,
+    var(--lt-2) 0,var(--lt-2) 5px,
+    var(--md-2) 5px,var(--md-2) 6px);
 }
-.hero-img-ph svg{opacity:.25}
-.hero-img-ph span{
-  font-family:var(--fm);font-size:9px;letter-spacing:.15em;text-transform:uppercase;
-  color:rgba(110,88,48,.5);
-}
+.hero-img-ph svg{opacity:.3}
+.hero-img-ph span{font-family:var(--fm);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--md-1)}
 .hero-product-label{
   position:absolute;bottom:20px;right:20px;
-  background:var(--ink);color:var(--bg);
+  background:var(--dk-1);color:var(--lt-1);
   font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
   padding:6px 14px;
 }
 
 /* ── SHOP CTA BAR ── */
-/* Separated section — light bg, NOT attached to hero */
+/* #eeeef2 → #d0d0d8: alternates from hero right */
 .cat-section{
-  background:var(--bg-2);
-  border-bottom:1px solid var(--bg-3);
-  padding:40px 40px;
-  text-align:center;
+  background:var(--lt-2);
+  border-bottom:1px solid var(--md-2);
+  padding:36px 40px;text-align:center;
 }
 .cat-heading{
-  font-family:var(--fh);color:var(--ink);margin-bottom:24px;
-  letter-spacing:.06em;
+  font-family:var(--fh);color:var(--dk-1);margin-bottom:20px;letter-spacing:.06em;
 }
-body.fa .cat-heading{font-size:32px}
-body.fb .cat-heading{font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.14em}
-
-.cat-buttons{
-  display:flex;align-items:center;justify-content:center;
-  gap:12px;flex-wrap:wrap;
-}
-/* ghost/gold style — portfolio-adjacent */
+body.fa .cat-heading{font-size:28px}
+body.fb .cat-heading{font-size:18px;font-weight:700;text-transform:uppercase;letter-spacing:.14em}
+.cat-buttons{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+/* all cat buttons same style — including View All */
 .cat-btn{
   font-family:var(--fb);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
-  padding:12px 28px;
-  background:none;color:var(--ink);
-  border:1.5px solid var(--gold-dim);
+  padding:11px 26px;
+  background:none;color:var(--dk-1);
+  border:1px solid var(--gold-lo);
   transition:all .18s;
 }
-.cat-btn:hover,.cat-btn.on{
-  background:var(--ink);color:var(--gold);
-  border-color:var(--ink);
-}
-/* View All gets a filled gold treatment */
-.cat-btn-primary{
-  font-family:var(--fb);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
-  padding:12px 28px;
-  background:var(--gold);color:var(--ink);
-  border:1.5px solid var(--gold);
-  transition:all .18s;
-}
-.cat-btn-primary:hover{background:var(--gold-light);border-color:var(--gold-light)}
+.cat-btn:hover,.cat-btn.on{background:var(--dk-1);color:var(--gold);border-color:var(--dk-1)}
 
 /* ── FEATURED ── */
-.section{padding:56px 40px;background:var(--bg);flex:1}
-.section-hd{margin-bottom:32px}
-.section-title{
-  font-family:var(--fh);color:var(--ink);
-}
-body.fa .section-title{font-size:56px;line-height:1;letter-spacing:.04em}
-body.fb .section-title{font-size:36px;font-weight:700;letter-spacing:-.02em}
-
-/* 3-card grid */
-.featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+/* #eeeef2 — back to lightest */
+.section{padding:48px 40px;background:var(--lt-1);flex:1}
+.featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 .card{
-  background:var(--panel);border:1px solid var(--bg-3);
+  background:var(--lt-2); /* #d0d0d8 card bg — no white */
+  border:1px solid var(--md-2);
   position:relative;transition:transform .15s,box-shadow .15s;display:block;
 }
-.card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(28,28,30,.12)}
+.card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(28,28,30,.15)}
 .card-img{
-  width:100%;background:var(--bg-2);
-  border-bottom:1px solid var(--bg-3);
+  width:100%;
+  background:repeating-linear-gradient(135deg,
+    var(--lt-2) 0,var(--lt-2) 5px,
+    var(--md-2) 5px,var(--md-2) 6px);
+  border-bottom:1px solid var(--md-2);
   display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
 }
@@ -217,189 +185,136 @@ body.fb .section-title{font-size:36px;font-weight:700;letter-spacing:-.02em}
   position:absolute;top:0;left:0;
   font-family:var(--fm);font-size:8px;letter-spacing:.12em;text-transform:uppercase;
   padding:5px 10px;z-index:2;font-weight:700;
-  background:var(--gold);color:var(--ink);
+  background:var(--gold);color:var(--dk-1);
 }
-.badge.new{background:var(--ink);color:var(--bg)}
-.card-body{padding:16px}
-.card-type{
-  font-family:var(--fm);font-size:8px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--gold-dim);margin-bottom:5px;
-}
-.card-title{
-  font-family:var(--fb);font-size:15px;font-weight:600;
-  color:var(--ink);margin-bottom:12px;line-height:1.3;
-}
+.badge.new{background:var(--dk-1);color:var(--lt-1)}
+.card-body{padding:14px}
+.card-type{font-family:var(--fm);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-lo);margin-bottom:4px}
+.card-title{font-family:var(--fb);font-size:15px;font-weight:600;color:var(--dk-1);margin-bottom:12px;line-height:1.3}
 .card-foot{display:flex;align-items:center;justify-content:space-between}
-.card-price{
-  font-family:var(--fh);color:var(--ink);
-}
+.card-price{font-family:var(--fh);color:var(--dk-1)}
 body.fa .card-price{font-size:26px;letter-spacing:.05em}
 body.fb .card-price{font-size:20px;font-weight:700}
 .card-add{
-  background:var(--ink);color:var(--bg);
+  background:var(--dk-1);color:var(--lt-1);
   font-family:var(--fb);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
-  padding:7px 16px;transition:background .15s;
+  padding:7px 14px;transition:background .15s;
 }
-.card-add:hover{background:var(--gold);color:var(--ink)}
+.card-add:hover{background:var(--gold);color:var(--dk-1)}
 
 /* ── FULL SHOP CTA ── */
+/* #d0d0d8 — alternates from featured #eeeef2 */
 .shop-cta{
-  background:var(--bg-2);
-  border-top:1px solid var(--bg-3);
-  border-bottom:1px solid var(--bg-3);
-  padding:48px 40px;text-align:center;
+  background:var(--lt-2);
+  border-top:1px solid var(--md-2);
+  border-bottom:1px solid var(--md-2);
+  padding:44px 40px;text-align:center;
 }
-.shop-cta-title{
-  font-family:var(--fh);color:var(--ink);margin-bottom:8px;
-}
-body.fa .shop-cta-title{font-size:40px;letter-spacing:.04em}
-body.fb .shop-cta-title{font-size:26px;font-weight:700;letter-spacing:-.01em}
-.shop-cta-sub{
-  font-family:var(--fb);font-size:13px;font-weight:300;
-  color:rgba(28,28,30,.5);margin-bottom:28px;
-}
+.shop-cta-title{font-family:var(--fh);color:var(--dk-1);margin-bottom:8px}
+body.fa .shop-cta-title{font-size:36px;letter-spacing:.04em}
+body.fb .shop-cta-title{font-size:24px;font-weight:700;letter-spacing:-.01em}
+.shop-cta-sub{font-family:var(--fb);font-size:13px;font-weight:300;color:var(--md-1);margin-bottom:24px}
 .shop-cta-btn{
-  display:inline-block;
-  font-family:var(--fb);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-  padding:14px 48px;
-  background:none;color:var(--ink);
-  border:1.5px solid var(--gold-dim);
-  transition:all .18s;
+  display:inline-block;font-family:var(--fb);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  padding:12px 44px;background:none;color:var(--dk-1);border:1px solid var(--gold-lo);transition:all .18s;
 }
-.shop-cta-btn:hover{background:var(--ink);color:var(--gold);border-color:var(--ink)}
+.shop-cta-btn:hover{background:var(--dk-1);color:var(--gold);border-color:var(--dk-1)}
 
 /* ── ADULTS / AFTER HOURS ── */
+/* dk-2 — first dark section after light */
 .adults{
-  background:var(--ink-2);
-  border-top:1px solid var(--border);
+  background:var(--dk-2);
+  border-top:1px solid var(--dk-5);
   padding:48px 40px;
   display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;
 }
-/* blurred thumbs — contained column, no absolute overflow */
-.adults-thumbs{display:flex;gap:12px;align-items:center;flex-shrink:0}
+.adults-eyebrow{font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(238,238,242,.35);margin-bottom:10px}
+.adults-title{font-family:var(--fh);color:var(--lt-1);margin-bottom:8px}
+body.fa .adults-title{font-size:40px;line-height:.95;letter-spacing:.04em}
+body.fb .adults-title{font-size:28px;font-weight:700;letter-spacing:-.02em}
+.adults-sub{font-family:var(--fb);font-size:13px;font-weight:300;color:rgba(238,238,242,.4);max-width:420px;line-height:1.7;margin-bottom:22px}
+.adults-form{display:flex;gap:0;max-width:380px}
+.adults-input{
+  flex:1;padding:10px 14px;
+  background:var(--dk-3);color:var(--lt-1);
+  border:1px solid var(--dk-6);border-right:none;
+  font-family:var(--fb);font-size:13px;outline:none;
+}
+.adults-input::placeholder{color:rgba(238,238,242,.2)}
+.adults-btn{
+  background:var(--gold);color:var(--dk-1);
+  font-family:var(--fh);letter-spacing:.08em;transition:background .15s;flex-shrink:0;
+}
+body.fa .adults-btn{font-size:16px;padding:0 20px}
+body.fb .adults-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:0 20px}
+.adults-btn:hover{background:var(--gold-hi)}
+.adults-note{font-family:var(--fm);font-size:9px;letter-spacing:.1em;color:rgba(238,238,242,.2);margin-top:8px}
+/* thumbs: contained column */
+.adults-thumbs{display:flex;gap:10px;align-items:center;flex-shrink:0}
 .adults-thumb{
-  width:100px;height:140px;
-  background:var(--surface);border:1px solid var(--border-mid);
+  width:96px;height:130px;
+  background:var(--dk-3);border:1px solid var(--dk-6);
   filter:blur(8px);position:relative;flex-shrink:0;
 }
 .adults-thumb::after{
-  content:'Soon';position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  font-family:var(--fh);font-size:18px;letter-spacing:.1em;
-  color:rgba(200,164,110,.3);filter:blur(0);
-}
-/* form content */
-.adults-inner{min-width:0}
-.adults-eyebrow{
-  font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(238,238,242,.4);margin-bottom:12px;
-}
-.adults-title{
-  font-family:var(--fh);color:#eeeef2;margin-bottom:8px;
-}
-body.fa .adults-title{font-size:44px;line-height:.95;letter-spacing:.04em}
-body.fb .adults-title{font-size:30px;font-weight:700;letter-spacing:-.02em}
-.adults-sub{
-  font-family:var(--fb);font-size:13px;font-weight:300;
-  color:rgba(238,238,242,.45);max-width:420px;line-height:1.7;margin-bottom:24px;
-}
-.adults-form{display:flex;gap:0;max-width:380px}
-.adults-input{
-  flex:1;padding:11px 16px;
-  background:rgba(255,255,255,.07);color:#eeeef2;
-  border:1px solid var(--border-mid);border-right:none;
-  font-family:var(--fb);font-size:13px;outline:none;
-}
-.adults-input::placeholder{color:rgba(238,238,242,.22)}
-.adults-btn{
-  background:var(--gold);color:var(--ink);
-  font-family:var(--fh);letter-spacing:.08em;
-  transition:background .15s;flex-shrink:0;
-}
-body.fa .adults-btn{font-size:16px;padding:0 22px}
-body.fb .adults-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:0 22px}
-.adults-btn:hover{background:var(--gold-light)}
-.adults-note{
-  font-family:var(--fm);font-size:9px;letter-spacing:.1em;
-  color:rgba(238,238,242,.22);margin-top:10px;
+  content:'Soon';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:var(--fh);font-size:16px;letter-spacing:.1em;
+  color:rgba(200,164,110,.28);filter:blur(0);
 }
 
 /* ── NEWSLETTER ── */
-.newsletter{
-  background:var(--ink-3);
-  border-top:1px solid var(--border);
-  padding:28px 40px;
-}
-.nl-inner{
-  max-width:600px;margin:0 auto;
-  display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;
-}
-.nl-title{
-  font-family:var(--fh);color:#eeeef2;margin-bottom:3px;
-}
-body.fa .nl-title{font-size:32px;letter-spacing:.04em}
-body.fb .nl-title{font-size:22px;font-weight:700;letter-spacing:-.01em}
-.nl-sub{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,238,242,.35)}
+/* dk-4 — second dark, alternates from adults dk-2 */
+.newsletter{background:var(--dk-4);border-top:1px solid var(--dk-5);padding:28px 40px}
+.nl-inner{max-width:600px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.nl-title{font-family:var(--fh);color:var(--lt-1);margin-bottom:3px}
+body.fa .nl-title{font-size:30px;letter-spacing:.04em}
+body.fb .nl-title{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.nl-sub{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,238,242,.3)}
 .nl-form{display:flex;gap:0}
 .nl-input{
-  flex:1;padding:11px 18px;
-  background:rgba(255,255,255,.07);color:#eeeef2;
-  border:1px solid var(--border-mid);border-right:none;
+  flex:1;padding:10px 16px;
+  background:var(--dk-3);color:var(--lt-1);
+  border:1px solid var(--dk-6);border-right:none;
   font-family:var(--fb);font-size:13px;outline:none;min-width:200px;
 }
-.nl-input::placeholder{color:rgba(238,238,242,.25)}
+.nl-input::placeholder{color:rgba(238,238,242,.2)}
 .nl-btn{
-  background:var(--gold);color:var(--ink);
-  font-family:var(--fh);letter-spacing:.08em;
-  transition:background .15s;flex-shrink:0;
+  background:var(--gold);color:var(--dk-1);
+  font-family:var(--fh);letter-spacing:.08em;transition:background .15s;flex-shrink:0;
 }
-body.fa .nl-btn{font-size:17px;padding:0 22px}
-body.fb .nl-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:0 22px}
-.nl-btn:hover{background:var(--gold-light)}
+body.fa .nl-btn{font-size:16px;padding:0 20px}
+body.fb .nl-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:0 20px}
+.nl-btn:hover{background:var(--gold-hi)}
 
 /* ── FOOTER ── */
-.footer{background:var(--ink);padding:48px 40px 32px;color:var(--bg)}
+.footer{background:var(--dk-1);border-top:1px solid var(--dk-5);padding:48px 40px 32px;color:var(--lt-1)}
 .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:36px}
 .footer-logo{line-height:1.15;margin-bottom:12px}
-.footer-logo-pre{
-  font-family:var(--fm);font-size:7px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--gold);display:block;
-}
-.footer-logo-name{
-  font-family:var(--fh);color:#eeeef2;display:block;
-}
-body.fa .footer-logo-name{font-size:28px;letter-spacing:.04em}
-body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
+.footer-logo-pre{font-family:var(--fm);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block}
+.footer-logo-name{font-family:var(--fh);color:var(--lt-1);display:block}
+body.fa .footer-logo-name{font-size:26px;letter-spacing:.04em}
+body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em}
 .footer-tagline{font-family:var(--fb);font-size:13px;font-weight:300;color:rgba(238,238,242,.28);line-height:1.7}
-.footer-hd{
-  font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:14px;
-}
+.footer-hd{font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
 .footer-links{display:flex;flex-direction:column;gap:9px;font-family:var(--fb);font-size:13px;color:rgba(238,238,242,.28)}
 .footer-links a:hover{color:var(--gold)}
-.footer-bottom{
-  border-top:1px solid var(--border);padding-top:18px;
-  display:flex;justify-content:space-between;
-  font-family:var(--fm);font-size:9px;letter-spacing:.06em;color:rgba(238,238,242,.16);
-}
+.footer-bottom{border-top:1px solid var(--dk-5);padding-top:18px;display:flex;justify-content:space-between;font-family:var(--fm);font-size:9px;letter-spacing:.06em;color:rgba(238,238,242,.16)}
 
 /* ── FONT SWITCHER ── */
 #fswitcher{
   position:fixed;bottom:20px;right:20px;z-index:9999;
-  background:rgba(28,28,30,.94);
-  border:1px solid rgba(255,255,255,.1);
+  background:rgba(28,28,30,.94);border:1px solid var(--dk-6);
   padding:6px;display:flex;gap:4px;
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  border-radius:40px;
-  box-shadow:0 6px 28px rgba(0,0,0,.45);
+  border-radius:40px;box-shadow:0 6px 28px rgba(0,0,0,.4);
 }
 .fsw{
   padding:7px 18px;border:none;background:transparent;
-  color:rgba(255,255,255,.4);font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;
+  color:rgba(238,238,242,.38);font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;
   cursor:pointer;border-radius:28px;transition:all .2s;white-space:nowrap;
 }
 .fsw sub{display:block;font-size:8px;opacity:.5;margin-top:1px}
-.fsw.on{background:white;color:#1c1c1e}
+.fsw.on{background:var(--lt-1);color:var(--dk-1)}
 </style>
 </head>
 <body class="fa">
@@ -417,7 +332,6 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
   <button class="nav-cart">Cart (0)</button>
 </nav>
 
-<!-- HERO: single image, more breathing room -->
 <section class="hero">
   <div class="hero-left">
     <div class="hero-bg-word">ART</div>
@@ -428,10 +342,10 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
   </div>
   <div class="hero-right">
     <div class="hero-img-ph">
-      <svg width="64" height="64" viewBox="0 0 40 40" fill="none">
-        <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#6e5830" stroke-width="1.5" fill="none"/>
-        <circle cx="14" cy="14" r="3.5" fill="#6e5830"/>
-        <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#6e5830" stroke-width="1.5" fill="none"/>
+      <svg width="56" height="56" viewBox="0 0 40 40" fill="none">
+        <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#52525a" stroke-width="1.5" fill="none"/>
+        <circle cx="14" cy="14" r="3.5" fill="#52525a"/>
+        <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#52525a" stroke-width="1.5" fill="none"/>
       </svg>
       <span>Featured Product</span>
     </div>
@@ -439,7 +353,7 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
   </div>
 </section>
 
-<!-- SHOP CTA BAR: separated, centered, large portfolio-style ghost buttons -->
+<!-- CTA BAR: all buttons same style, none active -->
 <div class="cat-section">
   <div class="cat-heading">SHOP</div>
   <div class="cat-buttons">
@@ -447,11 +361,11 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
     <button class="cat-btn">T-Shirts</button>
     <button class="cat-btn">Stickers</button>
     <button class="cat-btn">Mugs</button>
-    <button class="cat-btn-primary" onclick="location.href='#'">View All →</button>
+    <button class="cat-btn">View All →</button>
   </div>
 </div>
 
-<!-- FEATURED: just "Featured" -->
+<!-- FEATURED: no header -->
 <section class="section">
   <div class="featured-grid">
 
@@ -460,9 +374,9 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
       <div class="card-img portrait">
         <div class="card-img-inner">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#6e5830" stroke-width="1.5" fill="none"/>
-            <circle cx="14" cy="14" r="3.5" fill="#6e5830"/>
-            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#6e5830" stroke-width="1.5" fill="none"/>
+            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#52525a" stroke-width="1.5" fill="none"/>
+            <circle cx="14" cy="14" r="3.5" fill="#52525a"/>
+            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#52525a" stroke-width="1.5" fill="none"/>
           </svg>
         </div>
       </div>
@@ -478,9 +392,9 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
       <div class="card-img portrait">
         <div class="card-img-inner">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#6e5830" stroke-width="1.5" fill="none"/>
-            <circle cx="14" cy="14" r="3.5" fill="#6e5830"/>
-            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#6e5830" stroke-width="1.5" fill="none"/>
+            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#52525a" stroke-width="1.5" fill="none"/>
+            <circle cx="14" cy="14" r="3.5" fill="#52525a"/>
+            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#52525a" stroke-width="1.5" fill="none"/>
           </svg>
         </div>
       </div>
@@ -496,7 +410,7 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
       <div class="card-img square">
         <div class="card-img-inner">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <path d="M10 6l4-2h12l4 2-4 4v22H14V10L10 6z" stroke="#6e5830" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+            <path d="M10 6l4-2h12l4 2-4 4v22H14V10L10 6z" stroke="#52525a" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
           </svg>
         </div>
       </div>
@@ -510,19 +424,17 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
   </div>
 </section>
 
-<!-- FULL SHOP CTA -->
 <div class="shop-cta">
   <h2 class="shop-cta-title">More Where That Came From</h2>
   <p class="shop-cta-sub">Prints, shirts, stickers, mugs — everything in one place.</p>
   <button class="shop-cta-btn">Browse the Full Shop →</button>
 </div>
 
-<!-- ADULTS / AFTER HOURS: side-by-side, thumbs contained in right column -->
 <section class="adults">
-  <div class="adults-inner">
+  <div>
     <div class="adults-eyebrow">Age-Restricted — Coming Soon</div>
     <h2 class="adults-title">The After Hours Collection.</h2>
-    <p class="adults-sub">Pinups and mature illustration from the studio. Not ready yet — but it's getting there. Join the waitlist and you'll be the first through the door when it opens.</p>
+    <p class="adults-sub">Pinups and mature illustration from the studio. Not ready yet — but it's getting there. Join the waitlist and you'll be first through the door.</p>
     <div class="adults-form">
       <input class="adults-input" type="email" placeholder="your@email.com">
       <button class="adults-btn">Join Waitlist</button>
@@ -536,7 +448,6 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
   </div>
 </section>
 
-<!-- NEWSLETTER: alternating bg from adults section -->
 <section class="newsletter">
   <div class="nl-inner">
     <div>
@@ -550,7 +461,6 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="footer-top">
     <div>
@@ -562,15 +472,11 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
     </div>
     <div>
       <div class="footer-hd">Shop</div>
-      <div class="footer-links">
-        <a>All Products</a><a>Prints</a><a>Apparel</a><a>Merch</a><a>Limited</a>
-      </div>
+      <div class="footer-links"><a>All Products</a><a>Prints</a><a>Apparel</a><a>Merch</a><a>Limited</a></div>
     </div>
     <div>
       <div class="footer-hd">Studio</div>
-      <div class="footer-links">
-        <a>Portfolio</a><a>About</a><a>Contact</a><a>Instagram</a>
-      </div>
+      <div class="footer-links"><a>Portfolio</a><a>About</a><a>Contact</a><a>Instagram</a></div>
     </div>
   </div>
   <div class="footer-bottom">
@@ -579,31 +485,21 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
   </div>
 </footer>
 
-<!-- FONT SWITCHER -->
 <div id="fswitcher">
-  <button class="fsw on" data-f="fa">
-    Font A
-    <sub>Bebas Neue · Industrial</sub>
-  </button>
-  <button class="fsw" data-f="fb">
-    Font B
-    <sub>Outfit · Portfolio-match</sub>
-  </button>
+  <button class="fsw on" data-f="fa">Font A<sub>Bebas · Industrial</sub></button>
+  <button class="fsw" data-f="fb">Font B<sub>Outfit · Portfolio</sub></button>
 </div>
 
 <script>
-// cat buttons
 document.querySelectorAll('.cat-btn').forEach(function(b){
   b.addEventListener('click',function(){
     document.querySelectorAll('.cat-btn').forEach(function(x){x.classList.remove('on')});
     b.classList.add('on');
   });
 });
-// font switcher
 document.querySelectorAll('.fsw').forEach(function(b){
   b.addEventListener('click',function(){
-    var f = b.getAttribute('data-f');
-    document.body.className = f;
+    document.body.className=b.getAttribute('data-f');
     document.querySelectorAll('.fsw').forEach(function(x){x.classList.remove('on')});
     b.classList.add('on');
   });
