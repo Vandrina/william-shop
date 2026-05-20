@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concept Series Tee — WM.SHOP</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;display:flex;flex-direction:column}
+body{font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;font-family:'Outfit',sans-serif}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+a{text-decoration:none;color:inherit;cursor:pointer}
+
+:root{
+  --bg:#faf7f2;
+  --ink:#1c1c1e;
+  --gold:#c8a46e;
+  --dim:#6e5830;
+  --crimson:#b01a14;
+  --ember:#d42010;
+  --panel:#fff;
+  --mid:#e8e0d4;
+}
+
+/* ── NAV ── */
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;background:var(--ink);height:64px;
+  position:sticky;top:0;z-index:100;gap:24px;
+}
+.nav-logo{font-family:'Bebas Neue',cursive;font-size:30px;letter-spacing:.08em;color:var(--bg)}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:24px}
+.nav-links a{
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  color:rgba(250,247,242,.4);transition:color .15s;
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-adults{
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  color:rgba(220,90,85,.7);transition:color .15s;
+}
+.nav-adults:hover{color:#e06560}
+.nav-cart{
+  background:var(--crimson);color:#fff;
+  font-family:'Bebas Neue',cursive;font-size:18px;letter-spacing:.1em;
+  padding:9px 22px;flex-shrink:0;transition:background .15s;
+}
+.nav-cart:hover{background:var(--ember)}
+
+/* ── BREADCRUMB ── */
+.breadcrumb{
+  background:var(--bg);
+  border-bottom:1.5px solid var(--mid);
+  padding:12px 40px;
+  display:flex;align-items:center;gap:8px;
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(28,28,30,.35);
+}
+.breadcrumb a{transition:color .15s}
+.breadcrumb a:hover{color:var(--crimson)}
+.breadcrumb-sep{opacity:.3}
+.breadcrumb-current{color:var(--ink);font-weight:700}
+
+/* ── PRODUCT LAYOUT ── */
+.product{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:0;flex:1;
+}
+
+/* LEFT: image */
+.product-img-wrap{
+  background:#f0e8d8;
+  border-right:1.5px solid var(--mid);
+  position:relative;
+  min-height:560px;
+  display:flex;align-items:center;justify-content:center;
+}
+.product-img{
+  width:100%;height:100%;
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:16px;
+}
+/* shirt flat lay placeholder — larger, more detailed */
+.shirt-ph{
+  width:340px;height:380px;
+  position:relative;
+}
+.product-img-badge{
+  position:absolute;top:24px;left:24px;
+  background:var(--crimson);color:#fff;
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 12px;
+}
+
+/* RIGHT: info */
+.product-info{
+  padding:48px;
+  display:flex;flex-direction:column;
+  background:var(--bg);
+}
+.product-type{
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:10px;
+}
+.product-name{
+  font-family:'Bebas Neue',cursive;
+  font-size:52px;line-height:.95;letter-spacing:.03em;
+  color:var(--ink);margin-bottom:8px;
+}
+.product-price{
+  font-family:'Bebas Neue',cursive;font-size:36px;letter-spacing:.04em;
+  color:var(--crimson);margin-bottom:6px;
+}
+.product-stock{
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  color:#8a8070;margin-bottom:32px;
+}
+.product-rule{height:1.5px;background:var(--mid);margin-bottom:28px}
+
+/* COLOR SELECTOR */
+.selector-label{
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink);margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.selector-label span{color:rgba(28,28,30,.4);font-weight:400}
+.colors{display:flex;gap:10px;margin-bottom:28px}
+.color-swatch{
+  width:32px;height:32px;border-radius:50%;
+  border:2px solid transparent;
+  outline:2px solid transparent;
+  transition:all .15s;cursor:pointer;
+  position:relative;
+}
+.color-swatch:hover{outline-color:var(--dim);outline-offset:3px}
+.color-swatch.on{border-color:#fff;outline-color:var(--ink);outline-offset:3px}
+/* tooltip */
+.color-swatch::after{
+  content:attr(data-name);
+  position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
+  background:var(--ink);color:var(--bg);
+  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 8px;white-space:nowrap;
+  opacity:0;transition:opacity .15s;pointer-events:none;
+}
+.color-swatch:hover::after{opacity:1}
+
+/* SIZE SELECTOR */
+.sizes{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+.size-btn{
+  min-width:52px;height:40px;padding:0 10px;
+  background:none;color:var(--ink);
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  border:1.5px solid var(--mid);
+  transition:all .15s;
+}
+.size-btn:hover{border-color:var(--ink)}
+.size-btn.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.size-btn.sold{color:rgba(28,28,30,.25);border-color:var(--mid);cursor:not-allowed;position:relative}
+.size-btn.sold::after{
+  content:'';position:absolute;top:50%;left:8%;right:8%;
+  height:1px;background:rgba(28,28,30,.2);transform:rotate(-15deg);
+}
+.size-guide{
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--dim);border-bottom:1px solid var(--dim);display:inline-block;padding-bottom:1px;
+  margin-bottom:32px;cursor:pointer;
+}
+
+/* ADD TO CART */
+.atc-row{display:flex;gap:12px;margin-bottom:24px}
+.qty{
+  display:flex;align-items:center;gap:0;
+  border:1.5px solid var(--mid);
+}
+.qty-btn{
+  width:36px;height:48px;
+  font-size:18px;color:var(--ink);
+  background:none;transition:background .15s;
+}
+.qty-btn:hover{background:var(--mid)}
+.qty-val{
+  width:40px;text-align:center;
+  font-weight:700;font-size:15px;color:var(--ink);
+  border-left:1.5px solid var(--mid);border-right:1.5px solid var(--mid);
+  line-height:48px;
+}
+.atc-btn{
+  flex:1;height:48px;
+  background:var(--ink);color:var(--bg);
+  font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:.1em;
+  transition:background .15s;
+}
+.atc-btn:hover{background:var(--crimson)}
+.wishlist-btn{
+  height:48px;width:48px;
+  border:1.5px solid var(--mid);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(28,28,30,.4);transition:all .15s;
+  flex-shrink:0;
+}
+.wishlist-btn:hover{border-color:var(--crimson);color:var(--crimson)}
+
+.product-desc{
+  font-size:13px;font-weight:400;color:rgba(28,28,30,.6);
+  line-height:1.75;margin-bottom:28px;
+}
+.product-meta{
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:rgba(28,28,30,.3);line-height:2;margin-top:auto;
+}
+
+/* ── YOU MIGHT ALSO LIKE ── */
+.recs{
+  padding:56px 40px;
+  background:var(--panel);
+  border-top:1.5px solid var(--mid);
+}
+.recs-hd{
+  font-family:'Bebas Neue',cursive;
+  font-size:40px;line-height:1;letter-spacing:.04em;color:var(--ink);
+  margin-bottom:28px;
+}
+.recs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{
+  background:var(--bg);border:1.5px solid #e8e0d4;
+  position:relative;transition:transform .15s,box-shadow .15s;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(176,26,20,.12)}
+.card-img{
+  width:100%;
+  background:#f0e8d8;
+  border-bottom:1.5px solid #e8e0d4;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.card-img.portrait{padding-top:120%}
+.card-img.square{padding-top:100%}
+.card-img-inner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.badge{
+  position:absolute;top:0;left:0;
+  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;
+  padding:5px 10px;z-index:2;font-weight:700;
+}
+.badge.limited{background:var(--crimson);color:#fff}
+.badge.gold{background:var(--gold);color:var(--ink)}
+.card-body{padding:16px}
+.card-type{
+  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:5px;
+}
+.card-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:12px;line-height:1.3}
+.card-foot{display:flex;align-items:center;justify-content:space-between}
+.card-price{font-family:'Bebas Neue',cursive;font-size:24px;letter-spacing:.05em;color:var(--ink)}
+.card-add{
+  background:var(--ink);color:var(--bg);
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  padding:7px 16px;transition:background .15s;
+}
+.card-add:hover{background:var(--crimson)}
+
+/* ── FOOTER ── */
+.footer{background:var(--ink);padding:48px 40px 32px;color:var(--bg)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:36px}
+.footer-logo{font-family:'Bebas Neue',cursive;font-size:32px;letter-spacing:.06em;color:var(--bg);margin-bottom:6px}
+.footer-logo span{color:var(--gold)}
+.footer-tagline{font-size:13px;font-weight:300;color:rgba(250,247,242,.3);line-height:1.7}
+.footer-hd{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.footer-links{display:flex;flex-direction:column;gap:9px;font-size:13px;color:rgba(250,247,242,.3)}
+.footer-links a:hover{color:var(--gold)}
+.footer-bottom{border-top:1px solid #2e2e32;padding-top:18px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.06em;color:rgba(250,247,242,.18)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">WM<span>.</span>SHOP</div>
+  <div class="nav-links">
+    <a>Prints</a><a>Apparel</a><a>Merch</a><a>Limited</a>
+    <a class="nav-adults">Adults Only</a>
+    <a>Portfolio ↗&#xFE0E;</a>
+  </div>
+  <button class="nav-cart">Cart (1)</button>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb">
+  <a href="wm-shop.html">Shop</a>
+  <span class="breadcrumb-sep">›</span>
+  <a>Apparel</a>
+  <span class="breadcrumb-sep">›</span>
+  <span class="breadcrumb-current">Concept Series Tee</span>
+</div>
+
+<!-- PRODUCT -->
+<div class="product">
+
+  <!-- LEFT: image -->
+  <div class="product-img-wrap">
+    <div class="product-img-badge">Best Seller</div>
+    <div class="product-img">
+      <!-- Shirt flat lay — more detailed SVG -->
+      <svg class="shirt-ph" viewBox="0 0 340 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- shadow -->
+        <path d="M60 78l60-48h28c0 22 16 38 52 38s52-16 52-38h28l60 48-40 36-22-14v260H122V100L82 114z"
+          fill="rgba(28,28,30,.07)" transform="translate(3,4)"/>
+        <!-- shirt body -->
+        <path d="M60 78l60-48h28c0 22 16 38 52 38s52-16 52-38h28l60 48-40 36-22-14v260H122V100L82 114z"
+          fill="#ffffff" stroke="#1c1c1e" stroke-width="2" stroke-linejoin="round"/>
+        <!-- collar seam -->
+        <path d="M148 30c0 22 16 38 52 38s52-16 52-38"
+          stroke="#c8bfb0" stroke-width="1.5" fill="none"/>
+        <!-- sleeve seam left -->
+        <line x1="82" y1="114" x2="122" y2="100" stroke="#c8bfb0" stroke-width="1"/>
+        <!-- sleeve seam right -->
+        <line x1="258" y1="114" x2="218" y2="100" stroke="#c8bfb0" stroke-width="1"/>
+        <!-- bottom hem -->
+        <line x1="122" y1="356" x2="218" y2="356" stroke="#c8bfb0" stroke-width="1"/>
+        <!-- chest graphic area — framed placeholder -->
+        <rect x="126" y="120" width="88" height="108" rx="1" fill="#f0e8d8" stroke="#ddd0b0" stroke-width="1"/>
+        <line x1="126" y1="120" x2="214" y2="228" stroke="#c8a46e" stroke-width=".6" opacity=".35"/>
+        <line x1="214" y1="120" x2="126" y2="228" stroke="#c8a46e" stroke-width=".6" opacity=".35"/>
+        <circle cx="170" cy="174" r="20" stroke="#c8a46e" stroke-width="1" fill="none" opacity=".4"/>
+        <text x="170" y="178" text-anchor="middle"
+          font-family="Space Mono, monospace" font-size="7" letter-spacing="1"
+          fill="rgba(110,88,48,.5)">ART HERE</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- RIGHT: info -->
+  <div class="product-info">
+    <div class="product-type">Apparel — Unisex Tee</div>
+    <h1 class="product-name">Concept<br>Series Tee</h1>
+    <div class="product-price">$36</div>
+    <div class="product-stock">In stock — ships in 5–7 days</div>
+
+    <div class="product-rule"></div>
+
+    <!-- COLOR -->
+    <div class="selector-label">Color <span id="color-name">Black</span></div>
+    <div class="colors">
+      <button class="color-swatch on" style="background:#1c1c1e" data-name="Black" title="Black"></button>
+      <button class="color-swatch" style="background:#ffffff;border-color:#e8e0d4" data-name="White" title="White"></button>
+      <button class="color-swatch" style="background:#8b1818" data-name="Crimson" title="Crimson"></button>
+      <button class="color-swatch" style="background:#1a2a4a" data-name="Navy" title="Navy"></button>
+      <button class="color-swatch" style="background:#c8a46e" data-name="Sand" title="Sand"></button>
+    </div>
+
+    <!-- SIZE -->
+    <div class="selector-label">Size <span id="size-name"></span></div>
+    <div class="sizes">
+      <button class="size-btn sold">XS</button>
+      <button class="size-btn">S</button>
+      <button class="size-btn on">M</button>
+      <button class="size-btn">L</button>
+      <button class="size-btn">XL</button>
+      <button class="size-btn">XXL</button>
+    </div>
+    <a class="size-guide">Size guide →</a>
+
+    <!-- ADD TO CART -->
+    <div class="atc-row">
+      <div class="qty">
+        <button class="qty-btn" id="qty-down">−</button>
+        <div class="qty-val" id="qty-val">1</div>
+        <button class="qty-btn" id="qty-up">+</button>
+      </div>
+      <button class="atc-btn">Add to Cart</button>
+      <button class="wishlist-btn" title="Save for later">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+        </svg>
+      </button>
+    </div>
+
+    <p class="product-desc">100% heavyweight cotton. Screen-printed graphic from the original artwork. Runs true to size — size up if between sizes. Washes well, holds its shape.</p>
+
+    <div class="product-meta">
+      Print · Original artwork by William McGuire<br>
+      Ships from Portland, OR<br>
+      Free returns within 30 days
+    </div>
+  </div>
+
+</div>
+
+<!-- YOU MIGHT ALSO LIKE -->
+<section class="recs">
+  <h2 class="recs-hd">You Might Also Like</h2>
+  <div class="recs-grid">
+
+    <a class="card" href="wm-product.html">
+      <div class="badge limited">Limited</div>
+      <div class="card-img portrait">
+        <div class="card-img-inner">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#b01a14" stroke-width="1.5" fill="none"/>
+            <circle cx="14" cy="14" r="3.5" fill="#b01a14"/>
+            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#b01a14" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-type">Art Print</div>
+        <div class="card-title">Lamprey Girl</div>
+        <div class="card-foot">
+          <span class="card-price">$38</span>
+          <button class="card-add">+ Add</button>
+        </div>
+      </div>
+    </a>
+
+    <a class="card" href="wm-product.html">
+      <div class="badge gold">Best Seller</div>
+      <div class="card-img portrait">
+        <div class="card-img-inner">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#b01a14" stroke-width="1.5" fill="none"/>
+            <circle cx="14" cy="14" r="3.5" fill="#b01a14"/>
+            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#b01a14" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-type">Art Print</div>
+        <div class="card-title">Spider-Gwen</div>
+        <div class="card-foot">
+          <span class="card-price">$32</span>
+          <button class="card-add">+ Add</button>
+        </div>
+      </div>
+    </a>
+
+    <a class="card" href="wm-product.html">
+      <div class="card-img square">
+        <div class="card-img-inner">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="6" y="10" width="22" height="20" rx="2" stroke="#b01a14" stroke-width="1.5" fill="none"/>
+            <path d="M28 15h4a3 3 0 0 1 0 6h-4" stroke="#b01a14" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-type">Mug</div>
+        <div class="card-title">ManMirror Mug</div>
+        <div class="card-foot">
+          <span class="card-price">$24</span>
+          <button class="card-add">+ Add</button>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">WM<span>.</span>SHOP</div>
+      <div class="footer-tagline">The official shop of illustrator and concept artist William McGuire. Prints, apparel &amp; merch — limited runs, real art.</div>
+    </div>
+    <div>
+      <div class="footer-hd">Shop</div>
+      <div class="footer-links"><a>All Products</a><a>Prints</a><a>Apparel</a><a>Merch</a><a>Limited</a></div>
+    </div>
+    <div>
+      <div class="footer-hd">Studio</div>
+      <div class="footer-links"><a>Portfolio</a><a>About</a><a>Contact</a><a>Instagram</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 William McGuire · wm.shop</span>
+    <span>Privacy · Terms · Returns</span>
+  </div>
+</footer>
+
+<script>
+// qty
+var qty = 1;
+document.getElementById('qty-up').addEventListener('click',function(){
+  qty = Math.min(qty+1,10);
+  document.getElementById('qty-val').textContent = qty;
+});
+document.getElementById('qty-down').addEventListener('click',function(){
+  qty = Math.max(qty-1,1);
+  document.getElementById('qty-val').textContent = qty;
+});
+
+// color swatches
+document.querySelectorAll('.color-swatch').forEach(function(s){
+  s.addEventListener('click',function(){
+    document.querySelectorAll('.color-swatch').forEach(function(x){x.classList.remove('on')});
+    s.classList.add('on');
+    document.getElementById('color-name').textContent = s.getAttribute('data-name');
+  });
+});
+
+// size buttons
+document.querySelectorAll('.size-btn:not(.sold)').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.size-btn').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+    document.getElementById('size-name').textContent = b.textContent;
+  });
+});
+</script>
+</body>
+</html>

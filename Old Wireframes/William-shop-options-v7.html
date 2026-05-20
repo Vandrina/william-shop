@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>William McGuire — Shop Concepts v3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Abril+Fatface&family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Nunito:ital,wght@0,600;0,700;0,900;1,700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+
+/* ════════════════════════════════════════════════════
+   T1 · KAPOW (refined)
+   ════════════════════════════════════════════════════ */
+.t1{
+  --ink:#1c1c1e; --cream:#faf5e8; --panel:#fffdf4;
+  --gold:#c8a46e; --dim:#6e5830; --red:#c8251e; --yellow:#f5d84e;
+  font-family:'Nunito',sans-serif;
+  background:var(--cream);color:var(--ink);
+}
+.t1-nav{
+  background:var(--ink);border-bottom:4px solid var(--gold);
+  padding:0 40px;display:flex;align-items:center;justify-content:space-between;
+  height:70px;position:sticky;top:0;z-index:100;gap:24px;
+}
+.t1-logo{line-height:1}
+.t1-logo-name{font-family:'Bangers',cursive;font-size:28px;letter-spacing:.08em;color:var(--cream)}
+.t1-logo-sub{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block;margin-top:-3px}
+.t1-nav-links{display:flex;gap:20px;flex:1;justify-content:center}
+.t1-nav-links a{font-size:11px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,245,232,.45);transition:color .15s;cursor:pointer}
+.t1-nav-links a:hover{color:var(--gold)}
+.t1-adults{color:rgba(220,90,85,.7);transition:color .15s;cursor:pointer}
+.t1-adults:hover{color:#e06560}
+.t1-cart{
+  background:var(--yellow);color:var(--ink);
+  font-family:'Bangers',cursive;font-size:19px;letter-spacing:.08em;
+  padding:8px 22px;border:3px solid var(--ink);box-shadow:3px 3px 0 var(--dim);
+  transition:all .1s;flex-shrink:0;
+}
+.t1-cart:hover{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--dim)}
+.t1-hero{
+  display:grid;grid-template-columns:1fr 1fr;min-height:520px;
+  border-bottom:4px solid var(--ink);position:relative;overflow:hidden;
+}
+.t1-hero-left{
+  padding:56px 48px;display:flex;flex-direction:column;justify-content:center;
+  border-right:4px solid var(--ink);position:relative;z-index:1;
+}
+.t1-eyebrow{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:14px}
+.t1-hero-title{
+  font-family:'Bangers',cursive;
+  font-size:88px;line-height:.9;letter-spacing:.04em;
+  color:var(--yellow);
+  -webkit-text-stroke:3.5px var(--ink);
+  text-shadow:5px 5px 0 rgba(28,28,30,.4);
+  transform:skewX(-8deg);
+  display:inline-block;
+  margin-bottom:8px;
+}
+.t1-hero-title .big{
+  color:var(--red);
+  -webkit-text-stroke:3px var(--ink);
+  text-shadow:6px 6px 0 rgba(28,28,30,.45);
+  display:block;font-size:112px;
+}
+.t1-hero-sub{font-size:14px;font-weight:700;color:#5a4f3a;max-width:360px;margin:18px 0 32px;line-height:1.6}
+.t1-hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.t1-btn-main{
+  background:var(--red);color:#fff;
+  font-family:'Bangers',cursive;font-size:21px;letter-spacing:.08em;
+  padding:10px 34px;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink);transition:all .1s;
+}
+.t1-btn-main:hover{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--ink)}
+.t1-btn-ghost{
+  background:none;color:var(--ink);
+  font-family:'Bangers',cursive;font-size:21px;letter-spacing:.08em;
+  padding:10px 34px;border:3px solid var(--ink);box-shadow:4px 4px 0 var(--gold);transition:all .1s;
+}
+.t1-btn-ghost:hover{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--gold)}
+.t1-hero-right{position:relative;background:var(--panel);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.t1-burst{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:380px;height:380px;background:var(--yellow);
+  clip-path:polygon(50% 0%,61% 20%,93% 6%,74% 33%,100% 38%,78% 56%,98% 73%,70% 72%,74% 100%,50% 83%,26% 100%,30% 72%,2% 73%,22% 56%,0% 38%,26% 33%,7% 6%,39% 20%);
+  z-index:0;
+}
+.t1-hero-card{
+  position:relative;z-index:1;
+  background:var(--cream);border:4px solid var(--ink);box-shadow:8px 8px 0 var(--ink);
+  width:210px;transform:rotate(-2.5deg);
+}
+.t1-hero-card-img{
+  width:100%;height:250px;
+  background:repeating-linear-gradient(45deg,#e8e0cc 0,#e8e0cc 5px,#ddd6c4 5px,#ddd6c4 6px);
+  display:flex;align-items:center;justify-content:center;
+  border-bottom:4px solid var(--ink);position:relative;
+}
+.t1-hero-card-label{
+  position:absolute;bottom:0;left:0;right:0;
+  background:var(--ink);color:var(--cream);
+  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  padding:5px 10px;text-align:center;
+}
+.t1-hero-card-body{padding:12px 14px}
+.t1-hero-card-title{font-weight:900;font-size:16px;margin-bottom:8px}
+.t1-speech{
+  display:inline-block;background:var(--yellow);color:var(--ink);
+  border:2.5px solid var(--ink);border-radius:50% 50% 50% 4px;
+  padding:3px 14px;font-family:'Bangers',cursive;font-size:19px;letter-spacing:.06em;
+}
+.t1-zz{
+  width:100%;height:28px;background:var(--ink);
+  clip-path:polygon(0 0,2.5% 100%,5% 0,7.5% 100%,10% 0,12.5% 100%,15% 0,17.5% 100%,20% 0,22.5% 100%,25% 0,27.5% 100%,30% 0,32.5% 100%,35% 0,37.5% 100%,40% 0,42.5% 100%,45% 0,47.5% 100%,50% 0,52.5% 100%,55% 0,57.5% 100%,60% 0,62.5% 100%,65% 0,67.5% 100%,70% 0,72.5% 100%,75% 0,77.5% 100%,80% 0,82.5% 100%,85% 0,87.5% 100%,90% 0,92.5% 100%,95% 0,97.5% 100%,100% 0,100% 100%,0 100%);
+}
+.t1-section{padding:56px 40px;background:var(--panel);position:relative}
+.t1-section-hd{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px}
+.t1-sh{
+  font-family:'Bangers',cursive;
+  font-size:72px;line-height:1;letter-spacing:.05em;
+  transform:skewX(-5deg);
+  display:inline-block;
+  text-shadow:3px 3px 0 rgba(28,28,30,.18);
+}
+.t1-sh em{font-style:normal;color:var(--red);-webkit-text-stroke:1px var(--ink)}
+.t1-see{font-family:'Bangers',cursive;font-size:20px;letter-spacing:.06em;color:var(--red);border-bottom:3px solid var(--red);padding-bottom:2px;cursor:pointer}
+
+/* ── Ben-Day corner dots (Silver Age halftone nod) ── */
+.t1-bd{
+  position:absolute;
+  width:180px;height:180px;
+  /* 12px cells, staggered offset rows — renders as clear circles not squares */
+  background-image:
+    radial-gradient(circle, rgba(200,164,110,.58) 38%, transparent 44%),
+    radial-gradient(circle, rgba(200,164,110,.58) 38%, transparent 44%);
+  background-size:12px 12px;
+  background-position:0 0, 6px 6px;
+  pointer-events:none;
+  z-index:2;
+}
+/* per-corner fade mask: solid at the corner, dissolves toward page center */
+.t1-bd.tl{
+  top:0;left:0;
+  -webkit-mask-image:radial-gradient(ellipse at 0% 0%, black 0%, transparent 70%);
+  mask-image:radial-gradient(ellipse at 0% 0%, black 0%, transparent 70%);
+}
+.t1-bd.tr{
+  top:0;right:0;
+  -webkit-mask-image:radial-gradient(ellipse at 100% 0%, black 0%, transparent 70%);
+  mask-image:radial-gradient(ellipse at 100% 0%, black 0%, transparent 70%);
+}
+.t1-bd.bl{
+  bottom:0;left:0;
+  -webkit-mask-image:radial-gradient(ellipse at 0% 100%, black 0%, transparent 70%);
+  mask-image:radial-gradient(ellipse at 0% 100%, black 0%, transparent 70%);
+}
+.t1-bd.br{
+  bottom:0;right:0;
+  -webkit-mask-image:radial-gradient(ellipse at 100% 100%, black 0%, transparent 70%);
+  mask-image:radial-gradient(ellipse at 100% 100%, black 0%, transparent 70%);
+}
+/* wider horizontal stretch for hero top edge */
+.t1-bd.wide{
+  width:280px;height:128px;
+}
+/* hero br — wider along the bottom edge, slightly less than top so they're not identical */
+.t1-bd.br.wide-alt{
+  width:248px;height:116px;
+}
+/* shop section dots — wider and bigger since that section has more room */
+.t1-bd.sm{
+  width:200px;height:118px;
+  background-size:10px 10px;
+  background-position:0 0, 5px 5px;
+}
+.t1-filters{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+.t1-filter{
+  background:none;color:var(--ink);font-weight:900;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  padding:6px 16px;border:2.5px solid var(--ink);box-shadow:2px 2px 0 var(--gold);transition:all .12s;
+}
+.t1-filter:hover,.t1-filter.on{background:var(--ink);color:var(--yellow);transform:translate(2px,2px);box-shadow:0 0 0 var(--gold)}
+.t1-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.t1-card{background:var(--cream);border:3px solid var(--ink);position:relative;transition:transform .15s,box-shadow .15s}
+.t1-card:nth-child(odd){transform:rotate(-.5deg)}
+.t1-card:nth-child(even){transform:rotate(.5deg)}
+.t1-card:hover{transform:rotate(0) translateY(-5px)!important;box-shadow:6px 6px 0 var(--ink)}
+.t1-card-img{
+  width:100%;
+  background:repeating-linear-gradient(45deg,#e8e0cc 0,#e8e0cc 5px,#ddd6c4 5px,#ddd6c4 6px);
+  border-bottom:3px solid var(--ink);display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.t1-card-img.portrait{padding-top:130%}
+.t1-card-img.square{padding-top:100%}
+.t1-card-img.landscape{padding-top:65%}
+.t1-img-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.28}
+.t1-badge{
+  position:absolute;top:-2px;right:12px;
+  font-family:'Bangers',cursive;font-size:14px;letter-spacing:.06em;
+  padding:3px 10px;border:2.5px solid var(--ink);border-top:none;z-index:2;
+  color:#fff;background:var(--red);
+}
+.t1-badge.gold{background:var(--gold);color:var(--ink)}
+.t1-badge.new{background:var(--yellow);color:var(--ink)}
+.t1-card-body{padding:12px 14px 16px}
+.t1-type{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.t1-title{font-weight:900;font-size:15px;margin-bottom:10px;line-height:1.2}
+.t1-foot{display:flex;align-items:center;justify-content:space-between}
+.t1-add{
+  background:var(--ink);color:var(--yellow);
+  font-family:'Bangers',cursive;font-size:15px;letter-spacing:.06em;
+  padding:5px 14px;border:2.5px solid var(--ink);box-shadow:2px 2px 0 var(--dim);transition:all .1s;
+}
+.t1-add:hover{transform:translate(1px,1px);box-shadow:0 0 0}
+.t1-nsfw-section{border-top:4px solid var(--ink)}
+.t1-nsfw-bg{
+  background:var(--ink);padding:60px 40px;
+  display:flex;align-items:center;justify-content:space-between;gap:40px;
+  position:relative;
+}
+.t1-nsfw-bg::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(-45deg,transparent 0,transparent 16px,rgba(200,164,110,.06) 16px,rgba(200,164,110,.06) 18px);
+}
+.t1-nsfw-left{position:relative;z-index:1}
+.t1-nsfw-eyebrow{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(200,80,70,.85);margin-bottom:12px;
+  border:1px solid rgba(200,80,70,.3);padding:3px 10px;
+}
+.t1-nsfw-eyebrow-bar{width:16px;height:1px;background:currentColor}
+.t1-nsfw-title{font-family:'Bangers',cursive;font-size:64px;line-height:.95;letter-spacing:.04em;color:var(--cream);margin-bottom:12px}
+.t1-nsfw-title span{color:var(--gold)}
+.t1-nsfw-sub{font-size:13px;font-weight:700;color:rgba(250,245,232,.45);max-width:420px;line-height:1.65;margin-bottom:28px}
+.t1-nsfw-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--red);color:#fff;
+  font-family:'Bangers',cursive;font-size:20px;letter-spacing:.08em;
+  padding:12px 32px;border:3px solid rgba(255,255,255,.15);box-shadow:4px 4px 0 rgba(140,20,14,.6);transition:all .1s;
+}
+.t1-nsfw-btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 rgba(140,20,14,.6)}
+.t1-nsfw-preview{position:relative;z-index:1;display:flex;gap:16px}
+.t1-nsfw-thumb{
+  width:140px;height:180px;background:#2a2a2c;border:3px solid #3a3a3e;
+  filter:blur(8px);position:relative;overflow:hidden;
+}
+.t1-nsfw-thumb::after{
+  content:'18+';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  font-family:'Bangers',cursive;font-size:40px;letter-spacing:.1em;
+  color:rgba(200,164,110,.4);filter:blur(0);
+}
+.t1-stripe{
+  background:var(--red);padding:32px 40px;
+  display:flex;align-items:center;justify-content:space-between;gap:32px;
+}
+.t1-stripe-text{font-family:'Bangers',cursive;font-size:48px;letter-spacing:.05em;color:var(--cream);line-height:1}
+.t1-stripe-text em{font-style:normal;color:var(--yellow)}
+.t1-stripe-bubble{
+  background:var(--yellow);color:var(--ink);font-family:'Bangers',cursive;font-size:24px;letter-spacing:.06em;
+  border:3px solid var(--ink);border-radius:50% 50% 50% 6px;padding:10px 24px;transform:rotate(5deg);flex-shrink:0;
+}
+.t1-stripe-sub{font-size:14px;font-weight:700;color:rgba(250,245,232,.6);max-width:340px;line-height:1.6}
+.t1-footer{background:var(--ink);border-top:4px solid var(--gold);padding:48px 40px 32px;color:var(--cream)}
+.t1-ft{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:36px}
+.t1-fl{font-family:'Bangers',cursive;font-size:36px;letter-spacing:.06em;color:var(--cream);margin-bottom:8px}
+.t1-ft-tag{font-size:13px;font-weight:700;color:rgba(250,245,232,.35);line-height:1.7}
+.t1-fh{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.t1-flinks{display:flex;flex-direction:column;gap:9px;font-size:13px;font-weight:700;color:rgba(250,245,232,.35)}
+.t1-flinks a:hover{color:var(--gold);cursor:pointer}
+.t1-fbot{border-top:1px solid #2e2e32;padding-top:18px;display:flex;justify-content:space-between;font-size:11px;font-weight:700;letter-spacing:.06em;color:rgba(250,245,232,.2)}
+
+
+/* ════════════════════════════════════════════════════
+   T2 · WM.SHOP (cleaned up)
+   ════════════════════════════════════════════════════ */
+.t2{
+  --bg:#faf7f2; --ink:#1c1c1e; --gold:#c8a46e; --dim:#6e5830;
+  --crimson:#b01a14; --ember:#d42010; --panel:#fff;
+  font-family:'Outfit',sans-serif;background:var(--bg);color:var(--ink);
+}
+.t2-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;background:var(--ink);height:64px;position:sticky;top:0;z-index:100;gap:24px;
+}
+.t2-logo{font-family:'Bebas Neue',cursive;font-size:30px;letter-spacing:.08em;color:var(--bg)}
+.t2-logo span{color:var(--gold)}
+.t2-links{display:flex;gap:24px}
+.t2-links a{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:rgba(250,247,242,.4);transition:color .15s;cursor:pointer}
+.t2-links a:hover{color:var(--gold)}
+.t2-adults{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:rgba(220,90,85,.7);transition:color .15s;cursor:pointer}
+.t2-adults:hover{color:#e06560}
+.t2-cart{
+  background:var(--crimson);color:#fff;
+  font-family:'Bebas Neue',cursive;font-size:18px;letter-spacing:.1em;
+  padding:9px 22px;flex-shrink:0;transition:background .15s;
+}
+.t2-cart:hover{background:var(--ember)}
+.t2-ticker{background:var(--crimson);color:#fff;padding:11px 0;overflow:hidden;white-space:nowrap}
+.t2-ticker-inner{
+  display:inline-block;font-family:'Bebas Neue',cursive;font-size:16px;letter-spacing:.22em;
+  animation:ticker 28s linear infinite;
+}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── HERO: clean left, product photos right ── */
+.t2-hero{display:grid;grid-template-columns:1fr 1fr;min-height:520px}
+.t2-hero-left{
+  background:var(--ink);padding:64px 48px;
+  display:flex;flex-direction:column;justify-content:center;
+  /* No rays, no background word — clean */
+}
+.t2-tag{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:22px}
+.t2-hero-title{
+  font-family:'Bebas Neue',cursive;
+  font-size:100px;line-height:.9;letter-spacing:.02em;
+  color:#fff; /* all white, no split colors */
+  margin-bottom:28px;
+}
+.t2-hero-sub{font-size:14px;font-weight:300;color:rgba(255,255,255,.45);max-width:360px;line-height:1.7;margin-bottom:40px}
+/* single centered button */
+.t2-hero-btn{
+  background:var(--crimson);color:#fff;
+  font-family:'Bebas Neue',cursive;font-size:20px;letter-spacing:.1em;
+  padding:13px 48px;transition:background .15s;
+  display:inline-block;align-self:flex-start;
+}
+.t2-hero-btn:hover{background:var(--ember)}
+
+/* ── HERO RIGHT: product photo panels ── */
+.t2-hero-right{display:grid;grid-template-rows:1fr 1fr}
+.t2-panel{display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.t2-panel-1{background:#f0e6d0;border-bottom:3px solid var(--ink)}
+.t2-panel-2{background:#e8f0f4}
+.t2-panel-tag{
+  position:absolute;bottom:14px;right:14px;
+  background:var(--ink);color:var(--bg);
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  padding:5px 12px;
+}
+
+/* ── SECTION ── */
+.t2-section{padding:56px 40px}
+.t2-sh-wrap{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:28px}
+.t2-sh{
+  font-family:'Bebas Neue',cursive;font-size:60px;line-height:1;letter-spacing:.04em;
+  color:var(--ink); /* single color, no split */
+}
+.t2-count{font-family:'Space Mono',monospace;font-size:10px;color:#8a8070;margin-bottom:4px;letter-spacing:.1em}
+.t2-see{font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--crimson);border-bottom:2px solid var(--crimson);padding-bottom:2px;cursor:pointer}
+.t2-filters{display:flex;gap:6px;margin-bottom:32px;flex-wrap:wrap}
+.t2-filter{
+  background:none;color:var(--ink);font-family:'Outfit',sans-serif;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  padding:6px 16px;border:1.5px solid #c8bfb0;transition:all .15s;
+}
+.t2-filter:hover,.t2-filter.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.t2-filter.on{background:var(--crimson);border-color:var(--crimson)}
+.t2-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.t2-card{background:var(--panel);border:1.5px solid #e8e0d4;position:relative;transition:transform .15s,box-shadow .15s}
+.t2-card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(176,26,20,.15)}
+.t2-card-img{
+  width:100%;
+  background:#f0eae0;
+  border-bottom:1.5px solid #e8e0d4;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.t2-card-img.portrait{padding-top:125%}
+.t2-card-img.square{padding-top:100%}
+.t2-card-img.landscape{padding-top:65%}
+.t2-img-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.t2-badge{
+  position:absolute;top:0;left:0;
+  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;
+  padding:5px 10px;z-index:2;font-weight:700;background:var(--crimson);color:#fff;
+}
+.t2-badge.gold{background:var(--gold);color:var(--ink)}
+.t2-badge.new{background:var(--ink);color:var(--bg)}
+.t2-card-body{padding:14px 16px}
+.t2-ctype{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:5px}
+.t2-ctitle{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:12px;line-height:1.3}
+.t2-cfoot{display:flex;align-items:center;justify-content:space-between}
+.t2-price{font-family:'Bebas Neue',cursive;font-size:26px;letter-spacing:.05em;color:var(--ink)}
+.t2-cadd{
+  background:var(--ink);color:var(--bg);
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  padding:7px 16px;transition:background .15s;
+}
+.t2-cadd:hover{background:var(--crimson)}
+.t2-nsfw-section{
+  background:var(--ink);padding:56px 40px;
+  display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;
+  border-top:3px solid var(--crimson);
+}
+.t2-nsfw-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(220,90,80,.85);margin-bottom:12px;
+  border:1px solid rgba(220,90,80,.3);padding:3px 10px;
+}
+.t2-nsfw-pill-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+.t2-nsfw-title{font-family:'Bebas Neue',cursive;font-size:56px;line-height:.95;letter-spacing:.04em;color:var(--bg);margin-bottom:12px}
+/* all one color */
+.t2-nsfw-sub{font-size:13px;font-weight:300;color:rgba(250,247,242,.4);max-width:440px;line-height:1.7;margin-bottom:24px}
+.t2-nsfw-enter{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--crimson);color:#fff;
+  font-family:'Bebas Neue',cursive;font-size:18px;letter-spacing:.1em;
+  padding:12px 28px;transition:background .15s;
+}
+.t2-nsfw-enter:hover{background:var(--ember)}
+.t2-nsfw-thumbs{display:flex;gap:12px}
+.t2-nth{width:110px;height:150px;background:#2a2a2c;border:2px solid #3a3a3c;filter:blur(8px);position:relative}
+.t2-nth::after{content:'18+';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',cursive;font-size:32px;letter-spacing:.1em;color:rgba(200,164,110,.3);filter:blur(0)}
+.t2-footer{background:var(--ink);padding:48px 40px 32px;color:var(--bg)}
+.t2-ft{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:36px}
+.t2-fl{font-family:'Bebas Neue',cursive;font-size:32px;letter-spacing:.06em;color:var(--bg);margin-bottom:6px}
+.t2-fl span{color:var(--gold)}
+.t2-ft-tag{font-size:13px;font-weight:300;color:rgba(250,247,242,.3);line-height:1.7}
+.t2-fh{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.t2-flinks{display:flex;flex-direction:column;gap:9px;font-size:13px;color:rgba(250,247,242,.3)}
+.t2-flinks a:hover{color:var(--gold);cursor:pointer}
+.t2-fbot{border-top:1px solid #2e2e32;padding-top:18px;display:flex;justify-content:space-between;font-size:11px;letter-spacing:.06em;color:rgba(250,247,242,.18)}
+
+
+/* ════════════════════════════════════════════════════
+   T3 · SIDESHOW  — ~10% more morbid
+   Key shifts:
+   - red deepened from #8b1818 → #5e1010 (dried blood)
+   - gold slightly more tarnished: #b8904a
+   - aged paper texture boosted
+   - decorative symbols → ✝ (gothic cross) instead of ✦
+   - language: "Curiosities" / "Cabinet" register
+   - NSFW section: more parlour than cheery
+   ════════════════════════════════════════════════════ */
+.t3{
+  --parch:#f2e8d2; --deep:#ecddc0; --ink:#1c1c1e;
+  --gold:#c8a46e; --dim:#6e5830;
+  --red:#8b1818; --bright:#b82020;
+  font-family:'Nunito',sans-serif;
+  background:var(--parch);color:var(--ink);
+}
+.t3-nav-outer{
+  background:var(--ink);
+  border-bottom:5px double var(--gold);
+  padding:0 40px;position:sticky;top:0;z-index:100;
+}
+.t3-nav{display:flex;align-items:center;justify-content:space-between;height:72px;gap:24px}
+.t3-logo{text-align:center;line-height:1}
+.t3-logo-pre{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);display:block}
+.t3-logo-name{font-family:'Abril Fatface',serif;font-size:24px;letter-spacing:.04em;color:var(--parch);display:block}
+.t3-links{display:flex;gap:20px}
+.t3-links a{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(242,232,210,.38);cursor:pointer;transition:color .15s}
+.t3-links a:hover{color:var(--gold)}
+.t3-adults-pill{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(180,60,60,.7);cursor:pointer;transition:color .15s}
+.t3-adults-pill:hover{color:#c06060}
+.t3-cart{
+  background:none;color:var(--gold);
+  font-family:'Abril Fatface',serif;font-size:15px;letter-spacing:.06em;
+  border:2px solid var(--gold);padding:8px 20px;transition:all .15s;flex-shrink:0;
+}
+.t3-cart:hover{background:var(--gold);color:var(--ink)}
+
+/* — HERO — */
+.t3-hero{
+  padding:64px 40px 56px;position:relative;overflow:hidden;
+  display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;
+  border-bottom:5px double var(--ink);
+}
+/* aged paper — deeper spots */
+.t3-hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 240px 180px at 8% 18%,rgba(94,16,16,.09) 0%,transparent 70%),
+    radial-gradient(ellipse 320px 220px at 88% 78%,rgba(110,88,48,.11) 0%,transparent 70%),
+    radial-gradient(ellipse 200px 140px at 55% 8%,rgba(94,16,16,.07) 0%,transparent 70%),
+    radial-gradient(ellipse 160px 200px at 20% 88%,rgba(110,88,48,.08) 0%,transparent 70%);
+  pointer-events:none;
+}
+/* thin worm-eaten edge sim */
+.t3-hero::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(circle 2px at 12% 35%,rgba(28,28,30,.12) 0%,transparent 100%),
+    radial-gradient(circle 1.5px at 88% 22%,rgba(28,28,30,.1) 0%,transparent 100%),
+    radial-gradient(circle 2px at 65% 70%,rgba(28,28,30,.08) 0%,transparent 100%);
+  pointer-events:none;
+}
+.t3-ribbon{
+  display:inline-block;
+  background:var(--red);color:var(--parch);
+  font-family:'Abril Fatface',serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 30px;position:relative;margin-bottom:18px;
+  clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 50%,calc(100% - 12px) 100%,12px 100%,0 50%);
+}
+.t3-hero-left{position:relative;z-index:1}
+.t3-hero-rule{width:56px;height:2px;background:linear-gradient(to right,var(--bright),var(--gold));margin:0 0 18px}
+.t3-hero-title{
+  font-family:'Abril Fatface',serif;
+  font-size:72px;line-height:.95;color:var(--ink);margin-bottom:16px;
+  text-shadow:2px 3px 0 rgba(94,16,16,.2);
+}
+.t3-hero-title em{font-style:italic;color:var(--red)}
+.t3-hero-sub{font-size:14px;font-weight:700;color:#4a3a20;line-height:1.65;max-width:380px;margin:16px 0 36px}
+.t3-hero-btns{display:flex;gap:16px;align-items:center}
+.t3-btn-main{
+  background:var(--red);color:var(--parch);
+  font-family:'Abril Fatface',serif;font-size:16px;letter-spacing:.06em;
+  padding:13px 36px;border:2.5px solid var(--ink);box-shadow:4px 4px 0 var(--dim);transition:all .12s;
+}
+.t3-btn-main:hover{transform:translate(3px,3px);box-shadow:1px 1px 0 var(--dim)}
+.t3-btn-link{font-family:'Abril Fatface',serif;font-size:16px;color:var(--dim);border-bottom:2px solid var(--dim);padding-bottom:2px;cursor:pointer}
+
+.t3-hero-right{position:relative;z-index:1}
+.t3-featured-frame{
+  border:4px solid var(--ink);
+  outline:2px solid var(--gold);outline-offset:5px;
+  background:var(--deep);position:relative;
+  /* slight aged shadow */
+  box-shadow:6px 8px 20px rgba(28,28,10,.25);
+}
+.t3-featured-img{
+  width:100%;height:340px;
+  background:repeating-linear-gradient(45deg,#e2d4ae 0,#e2d4ae 5px,#d8caa4 5px,#d8caa4 6px);
+  display:flex;align-items:center;justify-content:center;border-bottom:4px solid var(--ink);
+}
+.t3-featured-caption{padding:14px 18px;display:flex;align-items:center;justify-content:space-between}
+.t3-featured-title{font-family:'Abril Fatface',serif;font-size:17px;color:var(--ink)}
+.t3-featured-price{
+  background:var(--red);color:var(--parch);
+  font-family:'Abril Fatface',serif;font-size:18px;
+  padding:4px 16px;border:2px solid var(--ink);
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
+}
+.t3-star-row{
+  text-align:center;padding:9px;
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--dim);border-top:1px solid var(--dim);
+}
+
+/* — BANNER DIVIDER — */
+.t3-banner{
+  background:var(--ink);color:var(--parch);
+  text-align:center;padding:16px 40px;
+  border-top:4px double var(--gold);border-bottom:4px double var(--gold);
+  position:relative;
+}
+.t3-banner-text{
+  font-family:'Abril Fatface',serif;
+  font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);
+}
+.t3-banner::before{content:none}
+.t3-banner::after{content:none}
+
+/* — GRID — */
+.t3-section{padding:56px 40px;background:var(--parch)}
+.t3-sh-wrap{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px}
+.t3-sh{font-family:'Abril Fatface',serif;font-size:54px;line-height:1;color:var(--ink)}
+.t3-sh-line{width:60px;height:2px;background:linear-gradient(to right,var(--red),var(--gold));margin-top:8px}
+.t3-see{font-family:'Abril Fatface',serif;font-size:15px;color:var(--bright);border-bottom:2px solid var(--bright);padding-bottom:2px;cursor:pointer}
+.t3-filters{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+.t3-filter{
+  background:none;color:var(--ink);font-weight:900;font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+  padding:6px 18px;border:1.5px solid var(--dim);transition:all .15s;
+}
+.t3-filter:hover,.t3-filter.on{background:var(--red);color:var(--parch);border-color:var(--red)}
+.t3-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.t3-card{background:var(--deep);border:3px solid var(--ink);position:relative;transition:transform .15s,box-shadow .15s}
+.t3-card:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(28,28,10,.22)}
+.t3-card-frame{border:1.5px solid var(--gold);margin:6px;position:relative}
+.t3-card-img{
+  width:100%;
+  background:repeating-linear-gradient(45deg,#e2d4ae 0,#e2d4ae 5px,#d8caa4 5px,#d8caa4 6px);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;border-bottom:1.5px solid var(--gold);
+}
+.t3-card-img.portrait{padding-top:130%}
+.t3-card-img.square{padding-top:100%}
+.t3-card-img.landscape{padding-top:65%}
+.t3-img-icon{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:.26}
+.t3-badge{
+  position:absolute;top:0;left:0;
+  font-size:9px;font-weight:900;letter-spacing:.12em;text-transform:uppercase;
+  padding:4px 10px;z-index:2;background:var(--red);color:var(--parch);
+}
+.t3-badge.gold{background:var(--gold);color:var(--ink)}
+.t3-card-body{padding:12px 14px 14px}
+.t3-ctype{font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.t3-ctitle{font-family:'Abril Fatface',serif;font-size:16px;color:var(--ink);margin-bottom:10px;line-height:1.2}
+.t3-cfoot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--dim);padding-top:10px}
+.t3-price{font-family:'Abril Fatface',serif;font-size:19px;color:var(--ink)}
+.t3-cadd{background:var(--red);color:var(--parch);font-weight:900;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;transition:background .15s}
+.t3-cadd:hover{background:var(--ink)}
+
+/* — NSFW — parlour register, not cheerful — */
+.t3-nsfw{
+  background:var(--ink);padding:56px 40px;
+  position:relative;overflow:hidden;
+  border-top:5px double var(--gold);
+}
+/* faint gothic letterform watermark */
+.t3-nsfw::before{
+  content:'XVIII';
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-family:'Abril Fatface',serif;font-size:280px;letter-spacing:.1em;
+  color:rgba(94,16,16,.05);white-space:nowrap;user-select:none;line-height:1;
+}
+.t3-nsfw-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center}
+.t3-nsfw-ribbon{
+  display:inline-block;
+  background:var(--red);color:var(--parch);
+  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.24em;text-transform:uppercase;
+  padding:4px 22px;
+  clip-path:polygon(10px 0,calc(100% - 10px) 0,100% 50%,calc(100% - 10px) 100%,10px 100%,0 50%);
+  margin-bottom:16px;
+}
+.t3-nsfw-title{font-family:'Abril Fatface',serif;font-size:52px;line-height:.95;color:var(--parch);margin-bottom:12px}
+.t3-nsfw-title em{font-style:italic;color:var(--gold)}
+.t3-nsfw-sub{font-size:13px;font-weight:700;color:rgba(242,232,210,.38);max-width:460px;line-height:1.7;margin-bottom:24px}
+.t3-nsfw-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--red);color:var(--parch);
+  font-family:'Abril Fatface',serif;font-size:17px;letter-spacing:.04em;
+  padding:12px 32px;border:2px solid rgba(242,232,210,.12);box-shadow:4px 4px 0 rgba(94,16,16,.6);transition:all .12s;
+}
+.t3-nsfw-btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 rgba(94,16,16,.6)}
+.t3-nsfw-thumbs{display:flex;gap:12px}
+.t3-nth{width:120px;height:160px;background:#1e1c18;border:2px solid var(--dim);filter:blur(8px);position:relative}
+.t3-nth::after{content:'18+';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Abril Fatface',serif;font-size:26px;color:rgba(184,144,74,.3);filter:blur(0)}
+
+/* — FOOTER — */
+.t3-footer{background:var(--ink);border-top:4px solid var(--gold);padding:48px 40px 32px;color:var(--parch)}
+.t3-ft{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:36px}
+.t3-fl{font-family:'Abril Fatface',serif;font-size:28px;letter-spacing:.04em;color:var(--parch);margin-bottom:6px}
+.t3-fl-rule{width:36px;height:1px;background:var(--gold);margin-bottom:12px}
+.t3-ft-tag{font-size:13px;font-weight:700;color:rgba(242,232,210,.28);line-height:1.7}
+.t3-fh{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.t3-flinks{display:flex;flex-direction:column;gap:9px;font-size:13px;font-weight:700;color:rgba(242,232,210,.28)}
+.t3-flinks a:hover{color:var(--gold);cursor:pointer}
+.t3-fbot{border-top:1px solid #2e2e32;padding-top:18px;display:flex;justify-content:space-between;font-size:11px;font-weight:700;letter-spacing:.06em;color:rgba(242,232,210,.16)}
+
+
+/* ─── SWITCHER ─── */
+#switcher{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  z-index:9999;background:rgba(10,10,10,.94);
+  border:1px solid rgba(255,255,255,.1);padding:8px;
+  display:flex;gap:6px;
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-radius:48px;box-shadow:0 8px 40px rgba(0,0,0,.55);
+}
+.sw{
+  padding:8px 22px;border:none;background:transparent;
+  color:rgba(255,255,255,.4);font-family:'Nunito',sans-serif;font-size:12px;font-weight:700;
+  cursor:pointer;border-radius:32px;transition:all .2s;white-space:nowrap;letter-spacing:.04em;
+}
+.sw sub{display:block;font-size:9px;opacity:.55;margin-top:1px;font-weight:600}
+.sw.on{background:white;color:#0a0a0a}
+</style>
+</head>
+<body>
+
+<!-- shared SVG defs -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <g id="icon-print">
+      <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#c8a46e" stroke-width="1.5" fill="none"/>
+      <circle cx="14" cy="14" r="3.5" fill="#c8a46e"/>
+      <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#c8a46e" stroke-width="1.5" fill="none"/>
+    </g>
+    <g id="icon-print-dark">
+      <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#6e5830" stroke-width="1.5" fill="none"/>
+      <circle cx="14" cy="14" r="3.5" fill="#6e5830"/>
+      <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#6e5830" stroke-width="1.5" fill="none"/>
+    </g>
+    <g id="icon-print-cool">
+      <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#b01a14" stroke-width="1.5" fill="none"/>
+      <circle cx="14" cy="14" r="3.5" fill="#b01a14"/>
+      <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#b01a14" stroke-width="1.5" fill="none"/>
+    </g>
+    <g id="icon-shirt">
+      <path d="M10 6l4-2h12l4 2-4 4v22H14V10L10 6z" stroke="#c8a46e" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+    </g>
+    <g id="icon-shirt-cool">
+      <path d="M10 6l4-2h12l4 2-4 4v22H14V10L10 6z" stroke="#b01a14" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+    </g>
+    <g id="icon-mug">
+      <rect x="6" y="10" width="22" height="20" rx="2" stroke="#c8a46e" stroke-width="1.5" fill="none"/>
+      <path d="M28 15h4a3 3 0 0 1 0 6h-4" stroke="#c8a46e" stroke-width="1.5" fill="none"/>
+    </g>
+    <g id="icon-mug-dark">
+      <rect x="6" y="10" width="22" height="20" rx="2" stroke="#6e5830" stroke-width="1.5" fill="none"/>
+      <path d="M28 15h4a3 3 0 0 1 0 6h-4" stroke="#6e5830" stroke-width="1.5" fill="none"/>
+    </g>
+  </defs>
+</svg>
+
+
+<!-- ═══════════════════════════════════
+     T1  ·  KAPOW
+     ═══════════════════════════════════ -->
+<div id="t1" class="t1 theme">
+
+  <nav class="t1-nav">
+    <div class="t1-logo">
+      <span class="t1-logo-name">William McGuire</span>
+      <span class="t1-logo-sub">Official Shop</span>
+    </div>
+    <div class="t1-nav-links">
+      <a>Prints</a><a>Apparel</a><a>Merch</a><a>Limited</a>
+      <a class="t1-adults">Adults Only</a>
+      <a >Portfolio ↗&#xFE0E;</a>
+    </div>
+    <button class="t1-cart">Cart (0)</button>
+  </nav>
+
+  <section class="t1-hero">
+    <div class="t1-hero-left">
+      <div class="t1-bd tl wide"></div>
+      <div class="t1-eyebrow">// Just dropped</div>
+      <h1 class="t1-hero-title">Original<span class="big">Art.</span></h1>
+      <p class="t1-hero-sub">Prints, shirts, mugs and more — straight from the sketchbook. Horror icons, superheroes, and everything in between.</p>
+      <div class="t1-hero-btns">
+        <button class="t1-btn-main">Shop Now</button>
+      </div>
+    </div>
+    <div class="t1-hero-right">
+      <div class="t1-bd br wide-alt"></div>
+      <div class="t1-burst"></div>
+      <div class="t1-hero-card">
+        <div class="t1-hero-card-img">
+          <svg width="48" height="48" viewBox="0 0 40 40"><use href="#icon-print"/></svg>
+          <div class="t1-hero-card-label">Limited Edition Print</div>
+        </div>
+        <div class="t1-hero-card-body">
+          <div class="t1-hero-card-title">Lamprey Girl</div>
+          <span class="t1-speech">$38</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="t1-zz"></div>
+
+  <section class="t1-section">
+    <div class="t1-bd sm tr"></div>
+    <div class="t1-bd sm bl"></div>
+    <div class="t1-section-hd">
+      <h2 class="t1-sh">THE <em>SHOP</em></h2>
+      <a class="t1-see">View all →</a>
+    </div>
+    <div class="t1-filters">
+      <button class="t1-filter on">All</button>
+      <button class="t1-filter">Prints</button>
+      <button class="t1-filter">Apparel</button>
+      <button class="t1-filter">Merch</button>
+      <button class="t1-filter">Limited</button>
+    </div>
+    <div class="t1-grid">
+      <div class="t1-card">
+        <div class="t1-badge">Limited</div>
+        <div class="t1-card-img portrait"><div class="t1-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-print"/></svg></div></div>
+        <div class="t1-card-body">
+          <div class="t1-type">Art Print</div>
+          <div class="t1-title">Lamprey Girl</div>
+          <div class="t1-foot"><span class="t1-speech">$38</span><button class="t1-add">+ Add</button></div>
+        </div>
+      </div>
+      <div class="t1-card">
+        <div class="t1-badge gold">Best Seller</div>
+        <div class="t1-card-img portrait"><div class="t1-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-print"/></svg></div></div>
+        <div class="t1-card-body">
+          <div class="t1-type">Art Print</div>
+          <div class="t1-title">Spider-Gwen</div>
+          <div class="t1-foot"><span class="t1-speech">$32</span><button class="t1-add">+ Add</button></div>
+        </div>
+      </div>
+      <div class="t1-card">
+        <div class="t1-card-img portrait"><div class="t1-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-print"/></svg></div></div>
+        <div class="t1-card-body">
+          <div class="t1-type">Art Print</div>
+          <div class="t1-title">Dr. Doom</div>
+          <div class="t1-foot"><span class="t1-speech">$32</span><button class="t1-add">+ Add</button></div>
+        </div>
+      </div>
+      <div class="t1-card">
+        <div class="t1-badge new">New</div>
+        <div class="t1-card-img square"><div class="t1-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-shirt"/></svg></div></div>
+        <div class="t1-card-body">
+          <div class="t1-type">Apparel</div>
+          <div class="t1-title">Bert &amp; Ernie Tee</div>
+          <div class="t1-foot"><span class="t1-speech">$36</span><button class="t1-add">+ Add</button></div>
+        </div>
+      </div>
+      <div class="t1-card">
+        <div class="t1-badge">Limited</div>
+        <div class="t1-card-img landscape"><div class="t1-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-print"/></svg></div></div>
+        <div class="t1-card-body">
+          <div class="t1-type">Art Print</div>
+          <div class="t1-title">The Last Family Circus</div>
+          <div class="t1-foot"><span class="t1-speech">$45</span><button class="t1-add">+ Add</button></div>
+        </div>
+      </div>
+      <div class="t1-card">
+        <div class="t1-card-img square"><div class="t1-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-mug"/></svg></div></div>
+        <div class="t1-card-body">
+          <div class="t1-type">Mug</div>
+          <div class="t1-title">ManMirror Mug</div>
+          <div class="t1-foot"><span class="t1-speech">$24</span><button class="t1-add">+ Add</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="t1-nsfw-section">
+    <div class="t1-nsfw-bg">
+      <div class="t1-nsfw-left">
+        <div class="t1-nsfw-eyebrow"><span class="t1-nsfw-eyebrow-bar"></span> Age-Restricted Section <span class="t1-nsfw-eyebrow-bar"></span></div>
+        <h2 class="t1-nsfw-title">ADULTS<br><span>ONLY.</span></h2>
+        <p class="t1-nsfw-sub">Pinups and mature-themed illustration — a separate section of the shop for patrons 18 and older. Age verification required to enter.</p>
+        <button class="t1-nsfw-btn">Verify Age &amp; Enter →</button>
+      </div>
+      <div class="t1-nsfw-preview">
+        <div class="t1-nsfw-thumb"></div>
+        <div class="t1-nsfw-thumb"></div>
+        <div class="t1-nsfw-thumb"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="t1-zz" style="transform:scaleY(-1);margin-top:-1px"></div>
+
+  <section class="t1-stripe">
+    <div class="t1-stripe-text">PRINTED<br><em>IN THE USA.</em></div>
+    <p class="t1-stripe-sub">Every print made to order. Ships within a week. Signed copies available on select runs.</p>
+    <div class="t1-stripe-bubble">Free ship<br>over $75!</div>
+  </section>
+
+  <footer class="t1-footer">
+    <div class="t1-ft">
+      <div>
+        <div class="t1-fl">William McGuire</div>
+        <div class="t1-ft-tag">Illustrator &amp; concept artist. Prints, apparel and objects — made with care, shipped from Portland.</div>
+      </div>
+      <div>
+        <div class="t1-fh">Shop</div>
+        <div class="t1-flinks"><a>All Products</a><a>Prints</a><a>Apparel</a><a>Merch</a><a>Limited</a></div>
+      </div>
+      <div>
+        <div class="t1-fh">Studio</div>
+        <div class="t1-flinks"><a>Portfolio</a><a>About</a><a>Contact</a><a>Instagram</a></div>
+      </div>
+    </div>
+    <div class="t1-fbot">
+      <span>© 2026 William McGuire</span>
+      <span>Privacy · Terms · Returns</span>
+    </div>
+  </footer>
+</div><!-- /t1 -->
+
+
+<!-- ═══════════════════════════════════
+     T2  ·  WM.SHOP
+     ═══════════════════════════════════ -->
+<div id="t2" class="t2 theme" style="display:none">
+
+  <nav class="t2-nav">
+    <div class="t2-logo">WM<span>.</span>SHOP</div>
+    <div class="t2-links">
+      <a>Prints</a><a>Apparel</a><a>Merch</a><a>Limited</a>
+      <a class="t2-adults">Adults Only</a>
+      <a >Portfolio ↗&#xFE0E;</a>
+    </div>
+    <button class="t2-cart">Cart (0)</button>
+  </nav>
+
+  <div class="t2-ticker">
+    <span class="t2-ticker-inner">FREE SHIPPING OVER $75 &nbsp;·&nbsp; LIMITED EDITION RUNS &nbsp;·&nbsp; SIGNED PRINTS AVAILABLE &nbsp;·&nbsp; WOLVERINE &nbsp;·&nbsp; SPIDER-GWEN &nbsp;·&nbsp; DR DOOM &nbsp;·&nbsp; LAMPREY GIRL &nbsp;·&nbsp; THE LAST FAMILY CIRCUS &nbsp;·&nbsp; PRINTED IN USA &nbsp;·&nbsp; FREE SHIPPING OVER $75 &nbsp;·&nbsp; LIMITED EDITION RUNS &nbsp;·&nbsp; SIGNED PRINTS AVAILABLE &nbsp;·&nbsp; WOLVERINE &nbsp;·&nbsp; SPIDER-GWEN &nbsp;·&nbsp; DR DOOM &nbsp;·&nbsp; LAMPREY GIRL &nbsp;·&nbsp; THE LAST FAMILY CIRCUS &nbsp;·&nbsp; PRINTED IN USA &nbsp;·&nbsp;</span>
+  </div>
+
+  <section class="t2-hero">
+    <!-- CLEAN LEFT — no rays, single button, watermark restored -->
+    <div class="t2-hero-left">
+      <div class="t2-bg-word">ART</div>
+      <div class="t2-tag">// wm.shop — 2026 collection</div>
+      <h1 class="t2-hero-title">REAL WORK.</h1>
+      <p class="t2-hero-sub">Original prints, apparel and objects from the imagination of William McGuire. Horror icons, Marvel legends, original characters.</p>
+      <button class="t2-hero-btn">Shop Now</button>
+    </div>
+
+    <!-- PRODUCT PHOTO PANELS — SVG product silhouettes as photo standin -->
+    <div class="t2-hero-right">
+      <div class="t2-panel t2-panel-1">
+        <!-- Framed art print silhouette -->
+        <svg width="160" height="200" viewBox="0 0 160 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- wall shadow -->
+          <rect x="8" y="8" width="144" height="184" rx="2" fill="rgba(28,28,30,.08)"/>
+          <!-- frame outer -->
+          <rect x="4" y="4" width="144" height="184" rx="2" fill="#2a2218" stroke="#1c1c1e" stroke-width="1.5"/>
+          <!-- frame inner edge -->
+          <rect x="10" y="10" width="132" height="172" rx="1" fill="#362c1c"/>
+          <!-- mat board -->
+          <rect x="16" y="16" width="120" height="160" fill="#f5edda"/>
+          <!-- print area -->
+          <rect x="28" y="28" width="96" height="136" fill="#e2d4ae"/>
+          <!-- placeholder image lines -->
+          <line x1="28" y1="28" x2="124" y2="164" stroke="#c8a46e" stroke-width=".5" opacity=".3"/>
+          <line x1="124" y1="28" x2="28" y2="164" stroke="#c8a46e" stroke-width=".5" opacity=".3"/>
+          <circle cx="76" cy="96" r="16" stroke="#c8a46e" stroke-width="1" fill="none" opacity=".35"/>
+        </svg>
+        <div class="t2-panel-tag">Lamprey Girl — Art Print</div>
+      </div>
+      <div class="t2-panel t2-panel-2">
+        <!-- T-shirt flat lay silhouette -->
+        <svg width="180" height="160" viewBox="0 0 180 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- shirt shadow -->
+          <path d="M18 42l30-28h16c0 10 8 18 26 18s26-8 26-18h16l30 28-20 18-12-8v80H42V52L30 60z" fill="rgba(28,28,30,.06)" transform="translate(2,2)"/>
+          <!-- shirt body -->
+          <path d="M18 42l30-28h16c0 10 8 18 26 18s26-8 26-18h16l30 28-20 18-12-8v80H42V52L30 60z" fill="#ffffff" stroke="#1c1c1e" stroke-width="1.5" stroke-linejoin="round"/>
+          <!-- collar -->
+          <path d="M64 14c0 10 8 18 26 18s26-8 26-18" stroke="#c8bfb0" stroke-width="1.5" fill="none"/>
+          <!-- chest graphic area -->
+          <rect x="58" y="58" width="64" height="64" rx="2" fill="#f0e8d8" stroke="#d8cfc0" stroke-width="1"/>
+          <line x1="58" y1="58" x2="122" y2="122" stroke="#c8a46e" stroke-width=".6" opacity=".3"/>
+          <line x1="122" y1="58" x2="58" y2="122" stroke="#c8a46e" stroke-width=".6" opacity=".3"/>
+        </svg>
+        <div class="t2-panel-tag">Bert &amp; Ernie — Apparel</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="t2-section">
+    <div class="t2-sh-wrap">
+      <div>
+        <div class="t2-count">9 prints &amp; objects</div>
+        <!-- single color header -->
+        <h2 class="t2-sh">THE PRINTS</h2>
+      </div>
+      <a class="t2-see">View all →</a>
+    </div>
+    <div class="t2-filters">
+      <button class="t2-filter on">All</button>
+      <button class="t2-filter">Prints</button>
+      <button class="t2-filter">Apparel</button>
+      <button class="t2-filter">Merch</button>
+      <button class="t2-filter">Limited</button>
+    </div>
+    <div class="t2-grid">
+      <div class="t2-card">
+        <div class="t2-badge">Limited</div>
+        <div class="t2-card-img portrait"><div class="t2-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-print-cool"/></svg></div></div>
+        <div class="t2-card-body">
+          <div class="t2-ctype">Art Print</div>
+          <div class="t2-ctitle">Lamprey Girl</div>
+          <div class="t2-cfoot"><span class="t2-price">$38</span><button class="t2-cadd">+ Add</button></div>
+        </div>
+      </div>
+      <div class="t2-card">
+        <div class="t2-badge gold">Best Seller</div>
+        <div class="t2-card-img portrait"><div class="t2-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-print-cool"/></svg></div></div>
+        <div class="t2-card-body">
+          <div class="t2-ctype">Art Print</div>
+          <div class="t2-ctitle">Spider-Gwen</div>
+          <div class="t2-cfoot"><span class="t2-price">$32</span><button class="t2-cadd">+ Add</button></div>
+        </div>
+      </div>
+      <div class="t2-card">
+        <div class="t2-card-img portrait"><div class="t2-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-print-cool"/></svg></div></div>
+        <div class="t2-card-body">
+          <div class="t2-ctype">Art Print</div>
+          <div class="t2-ctitle">Wolverine</div>
+          <div class="t2-cfoot"><span class="t2-price">$32</span><button class="t2-cadd">+ Add</button></div>
+        </div>
+      </div>
+      <div class="t2-card">
+        <div class="t2-badge new">New</div>
+        <div class="t2-card-img square"><div class="t2-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-shirt-cool"/></svg></div></div>
+        <div class="t2-card-body">
+          <div class="t2-ctype">Apparel</div>
+          <div class="t2-ctitle">Bert &amp; Ernie Tee</div>
+          <div class="t2-cfoot"><span class="t2-price">$36</span><button class="t2-cadd">+ Add</button></div>
+        </div>
+      </div>
+      <div class="t2-card">
+        <div class="t2-badge">Limited</div>
+        <div class="t2-card-img landscape"><div class="t2-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-print-cool"/></svg></div></div>
+        <div class="t2-card-body">
+          <div class="t2-ctype">Art Print</div>
+          <div class="t2-ctitle">The Last Family Circus</div>
+          <div class="t2-cfoot"><span class="t2-price">$45</span><button class="t2-cadd">+ Add</button></div>
+        </div>
+      </div>
+      <div class="t2-card">
+        <div class="t2-card-img square"><div class="t2-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-mug"/></svg></div></div>
+        <div class="t2-card-body">
+          <div class="t2-ctype">Mug</div>
+          <div class="t2-ctitle">ManMirror Mug</div>
+          <div class="t2-cfoot"><span class="t2-price">$24</span><button class="t2-cadd">+ Add</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="t2-nsfw-section">
+    <div>
+      <div class="t2-nsfw-pill"><span class="t2-nsfw-pill-dot"></span> Age-Restricted Section</div>
+      <!-- single color title -->
+      <h2 class="t2-nsfw-title">ADULTS ONLY.</h2>
+      <p class="t2-nsfw-sub">Pinups and mature-themed illustration — a separate section of the shop. Age verification required to enter.</p>
+      <button class="t2-nsfw-enter">Verify Age &amp; Enter →</button>
+    </div>
+    <div class="t2-nsfw-thumbs">
+      <div class="t2-nth"></div>
+      <div class="t2-nth"></div>
+      <div class="t2-nth"></div>
+    </div>
+  </section>
+
+  <footer class="t2-footer">
+    <div class="t2-ft">
+      <div>
+        <div class="t2-fl">WM<span>.</span>SHOP</div>
+        <div class="t2-ft-tag">The official shop of illustrator and concept artist William McGuire. Prints, apparel &amp; objects — limited runs, real art.</div>
+      </div>
+      <div>
+        <div class="t2-fh">Shop</div>
+        <div class="t2-flinks"><a>All Products</a><a>Prints</a><a>Apparel</a><a>Merch</a><a>Limited</a></div>
+      </div>
+      <div>
+        <div class="t2-fh">Studio</div>
+        <div class="t2-flinks"><a>Portfolio</a><a>About</a><a>Contact</a><a>Instagram</a></div>
+      </div>
+    </div>
+    <div class="t2-fbot">
+      <span>© 2026 William McGuire · wm.shop</span>
+      <span>Privacy · Terms · Returns</span>
+    </div>
+  </footer>
+</div><!-- /t2 -->
+
+
+<!-- ═══════════════════════════════════
+     T3  ·  SIDESHOW  (~10% more morbid)
+     ═══════════════════════════════════ -->
+<div id="t3" class="t3 theme" style="display:none">
+
+  <div class="t3-nav-outer">
+    <nav class="t3-nav">
+      <div class="t3-links">
+        <a>Prints</a><a>Apparel</a><a>Merch</a><a>Limited Run</a>
+        <a class="t3-adults-pill">Adults Only</a>
+      </div>
+      <div class="t3-logo">
+        <span class="t3-logo-pre">The Official Shop of</span>
+        <span class="t3-logo-name">William McGuire</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:20px">
+        <div class="t3-links"><a >Portfolio ↗&#xFE0E;</a></div>
+        <button class="t3-cart">Bag (0)</button>
+      </div>
+    </nav>
+  </div>
+
+  <section class="t3-hero">
+    <div class="t3-hero-left">
+      <div class="t3-ribbon">Now Available</div>
+      <div class="t3-hero-rule"></div>
+      <h1 class="t3-hero-title">Art from<br>the <em>Edge.</em></h1>
+      <p class="t3-hero-sub">Original prints, apparel and objects from the imagination of William McGuire — horror, superheroes, and the beautiful strange.</p>
+      <div class="t3-hero-btns">
+        <button class="t3-btn-main">Enter the Shop</button>
+      </div>
+    </div>
+    <div class="t3-hero-right">
+      <div class="t3-featured-frame">
+        <div class="t3-featured-img">
+          <svg width="56" height="56" viewBox="0 0 40 40"><use href="#icon-print-dark"/></svg>
+        </div>
+        <div class="t3-featured-caption">
+          <div class="t3-featured-title">Lamprey Girl</div>
+          <div class="t3-featured-price">$38</div>
+        </div>
+        <div class="t3-star-row">— &nbsp; Limited Edition Print &nbsp; —</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="t3-banner">
+    <span class="t3-banner-text">Curiosities &amp; Dark Works — The Collection of William McGuire</span>
+  </div>
+
+  <section class="t3-section">
+    <div class="t3-sh-wrap">
+      <div>
+        <h2 class="t3-sh">Prints &amp; Merch</h2>
+        <div class="t3-sh-line"></div>
+      </div>
+      <a class="t3-see">View all →</a>
+    </div>
+    <div class="t3-filters">
+      <button class="t3-filter on">All Works</button>
+      <button class="t3-filter">Prints</button>
+      <button class="t3-filter">Apparel</button>
+      <button class="t3-filter">Merch</button>
+      <button class="t3-filter">Limited</button>
+    </div>
+    <div class="t3-grid">
+      <div class="t3-card">
+        <div class="t3-card-frame">
+          <div class="t3-badge">Limited</div>
+          <div class="t3-card-img portrait"><div class="t3-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-print-dark"/></svg></div></div>
+        </div>
+        <div class="t3-card-body">
+          <div class="t3-ctype">Art Print</div>
+          <div class="t3-ctitle">Lamprey Girl</div>
+          <div class="t3-cfoot"><span class="t3-price">$38</span><button class="t3-cadd">Add to Bag</button></div>
+        </div>
+      </div>
+      <div class="t3-card">
+        <div class="t3-card-frame">
+          <div class="t3-badge gold">Best Seller</div>
+          <div class="t3-card-img portrait"><div class="t3-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-print-dark"/></svg></div></div>
+        </div>
+        <div class="t3-card-body">
+          <div class="t3-ctype">Art Print</div>
+          <div class="t3-ctitle">Spider-Gwen</div>
+          <div class="t3-cfoot"><span class="t3-price">$32</span><button class="t3-cadd">Add to Bag</button></div>
+        </div>
+      </div>
+      <div class="t3-card">
+        <div class="t3-card-frame">
+          <div class="t3-card-img portrait"><div class="t3-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-print-dark"/></svg></div></div>
+        </div>
+        <div class="t3-card-body">
+          <div class="t3-ctype">Art Print</div>
+          <div class="t3-ctitle">The Last Family Circus</div>
+          <div class="t3-cfoot"><span class="t3-price">$45</span><button class="t3-cadd">Add to Bag</button></div>
+        </div>
+      </div>
+      <div class="t3-card">
+        <div class="t3-card-frame">
+          <div class="t3-badge">New</div>
+          <div class="t3-card-img square"><div class="t3-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-mug-dark"/></svg></div></div>
+        </div>
+        <div class="t3-card-body">
+          <div class="t3-ctype">Mug</div>
+          <div class="t3-ctitle">ManMirror Mug</div>
+          <div class="t3-cfoot"><span class="t3-price">$24</span><button class="t3-cadd">Add to Bag</button></div>
+        </div>
+      </div>
+      <div class="t3-card">
+        <div class="t3-card-frame">
+          <div class="t3-card-img portrait"><div class="t3-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-print-dark"/></svg></div></div>
+        </div>
+        <div class="t3-card-body">
+          <div class="t3-ctype">Art Print</div>
+          <div class="t3-ctitle">Dr. Doom</div>
+          <div class="t3-cfoot"><span class="t3-price">$32</span><button class="t3-cadd">Add to Bag</button></div>
+        </div>
+      </div>
+      <div class="t3-card">
+        <div class="t3-card-frame">
+          <div class="t3-badge gold">Best Seller</div>
+          <div class="t3-card-img portrait"><div class="t3-img-icon"><svg width="40" height="40" viewBox="0 0 40 40"><use href="#icon-print-dark"/></svg></div></div>
+        </div>
+        <div class="t3-card-body">
+          <div class="t3-ctype">Art Print</div>
+          <div class="t3-ctitle">Nick &amp; Tilly</div>
+          <div class="t3-cfoot"><span class="t3-price">$32</span><button class="t3-cadd">Add to Bag</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NSFW — parlour register -->
+  <section class="t3-nsfw">
+    <div class="t3-nsfw-inner">
+      <div>
+        <div class="t3-nsfw-ribbon">For Discerning Adults · Age Verification Required</div>
+        <h2 class="t3-nsfw-title">The <em>After Hours</em> Collection.</h2>
+        <p class="t3-nsfw-sub">Pinups, mature illustration, and work from the more private corners of the studio. A separate, locked section of the shop — enter only if you are 18 or older.</p>
+        <button class="t3-nsfw-btn">Verify Age &amp; Enter →</button>
+      </div>
+      <div class="t3-nsfw-thumbs">
+        <div class="t3-nth"></div>
+        <div class="t3-nth"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="t3-footer">
+    <div class="t3-ft">
+      <div>
+        <div class="t3-fl">William McGuire</div>
+        <div class="t3-fl-rule"></div>
+        <div class="t3-ft-tag">Illustrator &amp; concept artist. Prints, apparel and objects — made with care, shipped from Portland, OR.</div>
+      </div>
+      <div>
+        <div class="t3-fh">Shop</div>
+        <div class="t3-flinks"><a>All Products</a><a>Prints</a><a>Apparel</a><a>Merch</a><a>Limited</a></div>
+      </div>
+      <div>
+        <div class="t3-fh">Studio</div>
+        <div class="t3-flinks"><a>Portfolio</a><a>About</a><a>Contact</a><a>Instagram</a></div>
+      </div>
+    </div>
+    <div class="t3-fbot">
+      <span>© 2026 William McGuire</span>
+      <span>Privacy · Terms · Returns</span>
+    </div>
+  </footer>
+</div><!-- /t3 -->
+
+
+<!-- ─── SWITCHER ─── -->
+<div id="switcher">
+  <button class="sw on" data-t="t1">KAPOW (refined)<sub>Comic · Cream · Halftone</sub></button>
+  <button class="sw" data-t="t2">WM.SHOP<sub>Bold · Crimson · Clean hero</sub></button>
+  <button class="sw" data-t="t3">Sideshow<sub>Victorian poster · Morbid lean</sub></button>
+</div>
+
+<script>
+(function(){
+  document.querySelectorAll('.sw').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.theme').forEach(function(el){el.style.display='none'});
+      document.getElementById(b.getAttribute('data-t')).style.display='block';
+      document.querySelectorAll('.sw').forEach(function(x){x.classList.remove('on')});
+      b.classList.add('on');
+      window.scrollTo(0,0);
+    });
+  });
+  document.querySelectorAll('.t1-filter,.t2-filter,.t3-filter').forEach(function(f){
+    f.addEventListener('click',function(){
+      var all=this.parentElement.children;
+      for(var i=0;i<all.length;i++) all[i].classList.remove('on');
+      this.classList.add('on');
+    });
+  });
+})();
+</script>
+</body>
+</html>

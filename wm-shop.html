@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WM.SHOP — William McGuire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;display:flex;flex-direction:column}
+body{font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;font-family:'Outfit',sans-serif}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+a{text-decoration:none;color:inherit;cursor:pointer}
+
+:root{
+  --bg:#faf7f2;
+  --ink:#1c1c1e;
+  --gold:#c8a46e;
+  --dim:#6e5830;
+  --crimson:#b01a14;
+  --ember:#d42010;
+  --panel:#fff;
+  --mid:#e8e0d4;
+}
+
+/* ── NAV ── */
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;background:var(--ink);height:64px;
+  position:sticky;top:0;z-index:100;gap:24px;
+}
+.nav-logo{font-family:'Bebas Neue',cursive;font-size:30px;letter-spacing:.08em;color:var(--bg)}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:24px}
+.nav-links a{
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  color:rgba(250,247,242,.4);transition:color .15s;
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-adults{
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  color:rgba(220,90,85,.7);transition:color .15s;
+}
+.nav-adults:hover{color:#e06560}
+.nav-cart{
+  background:var(--crimson);color:#fff;
+  font-family:'Bebas Neue',cursive;font-size:18px;letter-spacing:.1em;
+  padding:9px 22px;flex-shrink:0;transition:background .15s;
+}
+.nav-cart:hover{background:var(--ember)}
+
+/* ── HERO ── */
+.hero{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:520px;
+  border-bottom:3px solid var(--ink);
+}
+.hero-left{
+  background:var(--ink);
+  padding:64px 48px;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.hero-bg-word{
+  position:absolute;top:-10px;left:-8px;
+  font-family:'Bebas Neue',cursive;font-size:220px;letter-spacing:-.02em;
+  color:rgba(200,164,110,.04);line-height:1;user-select:none;pointer-events:none;
+}
+.hero-tag{
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:22px;position:relative;z-index:1;
+}
+.hero-title{
+  font-family:'Bebas Neue',cursive;
+  font-size:96px;line-height:.9;letter-spacing:.02em;
+  color:#fff;position:relative;z-index:1;margin-bottom:24px;
+}
+.hero-sub{
+  font-size:14px;font-weight:300;color:rgba(255,255,255,.45);
+  max-width:340px;line-height:1.7;margin-bottom:40px;
+  position:relative;z-index:1;
+}
+.hero-btn{
+  background:var(--crimson);color:#fff;
+  font-family:'Bebas Neue',cursive;font-size:20px;letter-spacing:.1em;
+  padding:13px 48px;transition:background .15s;
+  align-self:flex-start;position:relative;z-index:1;
+}
+.hero-btn:hover{background:var(--ember)}
+
+/* single product image fills the right panel */
+.hero-right{
+  background:#f0e8d8;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+  border-left:3px solid var(--ink);
+}
+.hero-right-img{
+  width:100%;height:100%;
+  background:repeating-linear-gradient(135deg,#ece4cc 0,#ece4cc 5px,#e2d8be 5px,#e2d8be 6px);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+}
+.hero-product-label{
+  position:absolute;bottom:20px;right:20px;
+  background:var(--ink);color:var(--bg);
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  padding:6px 14px;
+}
+/* svg placeholder icon */
+.img-ph{opacity:.28}
+
+/* ── CATEGORY BAR ── */
+.cat-bar{
+  background:var(--ink);
+  border-bottom:3px solid var(--dim);
+  padding:0 40px;
+  display:flex;align-items:center;gap:8px;
+  height:52px;
+}
+.cat-label{
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(250,247,242,.3);margin-right:8px;flex-shrink:0;
+}
+.cat-btn{
+  background:none;
+  color:rgba(250,247,242,.55);
+  font-family:'Outfit',sans-serif;font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  padding:6px 18px;
+  border:1.5px solid rgba(250,247,242,.15);
+  transition:all .15s;flex-shrink:0;
+}
+.cat-btn:hover,.cat-btn.on{
+  background:var(--bg);color:var(--ink);border-color:var(--bg);
+}
+.cat-divider{width:1px;height:24px;background:rgba(250,247,242,.1);margin:0 4px;flex-shrink:0}
+
+/* ── FEATURED ── */
+.section{
+  padding:56px 40px;background:var(--bg);
+  flex:1;
+}
+.section-hd{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:32px;
+}
+.section-title{
+  font-family:'Bebas Neue',cursive;
+  font-size:56px;line-height:1;letter-spacing:.04em;color:var(--ink);
+}
+.section-count{
+  font-family:'Space Mono',monospace;font-size:10px;
+  color:#8a8070;margin-bottom:4px;letter-spacing:.1em;
+}
+.section-see{
+  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--crimson);border-bottom:2px solid var(--crimson);padding-bottom:2px;
+}
+
+/* ── 3-CARD GRID ── */
+.featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{
+  background:var(--panel);border:1.5px solid #e8e0d4;
+  position:relative;transition:transform .15s,box-shadow .15s;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(176,26,20,.13)}
+.card-img{
+  width:100%;
+  background:#f0e8d8;
+  border-bottom:1.5px solid #e8e0d4;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.card-img.portrait{padding-top:125%}
+.card-img.square{padding-top:100%}
+.card-img.landscape{padding-top:65%}
+.card-img-inner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.badge{
+  position:absolute;top:0;left:0;
+  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;
+  padding:5px 10px;z-index:2;font-weight:700;
+  background:var(--crimson);color:#fff;
+}
+.badge.gold{background:var(--gold);color:var(--ink)}
+.card-body{padding:16px}
+.card-type{
+  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dim);margin-bottom:5px;
+}
+.card-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:12px;line-height:1.3}
+.card-foot{display:flex;align-items:center;justify-content:space-between}
+.card-price{font-family:'Bebas Neue',cursive;font-size:26px;letter-spacing:.05em;color:var(--ink)}
+.card-add{
+  background:var(--ink);color:var(--bg);
+  font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  padding:7px 16px;transition:background .15s;
+}
+.card-add:hover{background:var(--crimson)}
+
+/* ── ADULTS / COMING SOON ── */
+.adults{
+  background:var(--ink);padding:48px 40px;
+  display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;
+  border-top:3px solid rgba(200,164,110,.3);
+}
+.adults-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(220,90,80,.7);margin-bottom:12px;
+  border:1px solid rgba(220,90,80,.25);padding:3px 10px;
+}
+.adults-title{
+  font-family:'Bebas Neue',cursive;font-size:48px;line-height:.95;letter-spacing:.04em;
+  color:var(--bg);margin-bottom:8px;
+}
+.adults-sub{
+  font-size:13px;font-weight:300;color:rgba(250,247,242,.4);
+  max-width:440px;line-height:1.7;margin-bottom:24px;
+}
+/* waitlist form inline */
+.adults-form{display:flex;gap:0;max-width:380px}
+.adults-input{
+  flex:1;padding:11px 16px;
+  background:rgba(255,255,255,.06);color:#fff;
+  border:1.5px solid rgba(255,255,255,.12);border-right:none;
+  font-family:'Outfit',sans-serif;font-size:13px;outline:none;
+}
+.adults-input::placeholder{color:rgba(255,255,255,.2)}
+.adults-btn{
+  background:var(--crimson);color:#fff;
+  font-family:'Bebas Neue',cursive;font-size:17px;letter-spacing:.1em;
+  padding:0 22px;border:1.5px solid var(--crimson);
+  transition:background .15s;flex-shrink:0;
+}
+.adults-btn:hover{background:var(--ember)}
+.adults-note{
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.1em;
+  color:rgba(250,247,242,.2);margin-top:10px;
+}
+.adults-thumbs{display:flex;gap:12px}
+.adults-thumb{
+  width:110px;height:150px;background:#2a2a2c;border:2px solid #3a3a3c;
+  filter:blur(8px);position:relative;
+}
+.adults-thumb::after{
+  content:'Soon';position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:.1em;
+  color:rgba(200,164,110,.3);filter:blur(0);
+}
+
+/* ── NEWSLETTER ── */
+.newsletter{
+  background:var(--ink);
+  border-top:3px solid var(--crimson);
+  padding:28px 40px;
+}
+.nl-inner{
+  max-width:600px;margin:0 auto;
+  display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;
+}
+.nl-title{
+  font-family:'Bebas Neue',cursive;font-size:36px;line-height:1;letter-spacing:.04em;
+  color:#fff;margin-bottom:3px;
+}
+.nl-sub{font-size:12px;font-weight:300;color:rgba(250,247,242,.4);letter-spacing:.06em}
+.nl-form{display:flex;gap:0}
+.nl-input{
+  flex:1;padding:11px 18px;
+  background:rgba(255,255,255,.06);color:#fff;
+  border:1.5px solid rgba(255,255,255,.15);border-right:none;
+  font-family:'Outfit',sans-serif;font-size:13px;outline:none;min-width:200px;
+}
+.nl-input::placeholder{color:rgba(255,255,255,.25)}
+.nl-btn{
+  background:var(--crimson);color:#fff;
+  font-family:'Bebas Neue',cursive;font-size:17px;letter-spacing:.1em;
+  padding:0 22px;border:1.5px solid var(--crimson);
+  transition:background .15s;flex-shrink:0;
+}
+.nl-btn:hover{background:var(--ember)}
+
+/* ── FOOTER ── */
+.footer{background:var(--ink);padding:48px 40px 32px;color:var(--bg)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:36px}
+.footer-logo{font-family:'Bebas Neue',cursive;font-size:32px;letter-spacing:.06em;color:var(--bg);margin-bottom:6px}
+.footer-logo span{color:var(--gold)}
+.footer-tagline{font-size:13px;font-weight:300;color:rgba(250,247,242,.3);line-height:1.7}
+.footer-hd{
+  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:14px;
+}
+.footer-links{display:flex;flex-direction:column;gap:9px;font-size:13px;color:rgba(250,247,242,.3)}
+.footer-links a:hover{color:var(--gold)}
+.footer-bottom{
+  border-top:1px solid #2e2e32;padding-top:18px;
+  display:flex;justify-content:space-between;
+  font-size:11px;letter-spacing:.06em;color:rgba(250,247,242,.18);
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">WM<span>.</span>SHOP</div>
+  <div class="nav-links">
+    <a>Prints</a>
+    <a>Apparel</a>
+    <a>Merch</a>
+    <a>Limited</a>
+    <a class="nav-adults">Adults Only</a>
+    <a>Portfolio ↗&#xFE0E;</a>
+  </div>
+  <button class="nav-cart">Cart (0)</button>
+</nav>
+
+<!-- HERO: single image -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-bg-word">ART</div>
+    <div class="hero-tag">// wm.shop — 2026 collection</div>
+    <h1 class="hero-title">REAL WORK.</h1>
+    <p class="hero-sub">Original prints, apparel and merch from the imagination of William McGuire.</p>
+    <button class="hero-btn" onclick="location.href='wm-product.html'">Shop Now</button>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-img">
+      <svg class="img-ph" width="64" height="64" viewBox="0 0 40 40" fill="none">
+        <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#6e5830" stroke-width="1.5" fill="none"/>
+        <circle cx="14" cy="14" r="3.5" fill="#6e5830"/>
+        <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#6e5830" stroke-width="1.5" fill="none"/>
+      </svg>
+      <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(110,88,48,.55)">Featured Product</span>
+    </div>
+    <div class="hero-product-label">Lamprey Girl — Limited Print</div>
+  </div>
+</section>
+
+<!-- CATEGORY BAR -->
+<div class="cat-bar">
+  <span class="cat-label">Browse:</span>
+  <button class="cat-btn on">All</button>
+  <div class="cat-divider"></div>
+  <button class="cat-btn">Prints</button>
+  <button class="cat-btn">T-Shirts</button>
+  <button class="cat-btn">Stickers</button>
+  <button class="cat-btn">Mugs</button>
+</div>
+
+<!-- FEATURED ITEMS: 3 cards -->
+<section class="section">
+  <div class="section-hd">
+    <div>
+      <div class="section-count">Featured picks</div>
+      <h2 class="section-title">THE PRINTS</h2>
+    </div>
+    <a class="section-see">View all →</a>
+  </div>
+  <div class="featured-grid">
+
+    <a class="card" href="wm-product.html">
+      <div class="badge">Limited</div>
+      <div class="card-img portrait">
+        <div class="card-img-inner">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#b01a14" stroke-width="1.5" fill="none"/>
+            <circle cx="14" cy="14" r="3.5" fill="#b01a14"/>
+            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#b01a14" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-type">Art Print</div>
+        <div class="card-title">Lamprey Girl</div>
+        <div class="card-foot">
+          <span class="card-price">$38</span>
+          <button class="card-add">+ Add</button>
+        </div>
+      </div>
+    </a>
+
+    <a class="card" href="wm-product.html">
+      <div class="badge gold">Best Seller</div>
+      <div class="card-img portrait">
+        <div class="card-img-inner">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#b01a14" stroke-width="1.5" fill="none"/>
+            <circle cx="14" cy="14" r="3.5" fill="#b01a14"/>
+            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#b01a14" stroke-width="1.5" fill="none"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-type">Art Print</div>
+        <div class="card-title">Spider-Gwen</div>
+        <div class="card-foot">
+          <span class="card-price">$32</span>
+          <button class="card-add">+ Add</button>
+        </div>
+      </div>
+    </a>
+
+    <a class="card" href="wm-product.html">
+      <div class="card-img square">
+        <div class="card-img-inner">
+          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+            <path d="M10 6l4-2h12l4 2-4 4v22H14V10L10 6z" stroke="#b01a14" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="card-type">Apparel</div>
+        <div class="card-title">Concept Series Tee</div>
+        <div class="card-foot">
+          <span class="card-price">$36</span>
+          <button class="card-add">+ Add</button>
+        </div>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ADULTS ONLY: waitlist CTA since prints not ready -->
+<section class="adults">
+  <div>
+    <div class="adults-pill">Adults Only — Coming Soon</div>
+    <h2 class="adults-title">THE AFTER HOURS<br>COLLECTION.</h2>
+    <p class="adults-sub">Pinups and mature illustration from the studio. Not quite ready — but it's coming. Join the waitlist and be the first through the door.</p>
+    <div class="adults-form">
+      <input class="adults-input" type="email" placeholder="your@email.com">
+      <button class="adults-btn">Join Waitlist</button>
+    </div>
+    <div class="adults-note">18+ only. Age verification required at entry.</div>
+  </div>
+  <div class="adults-thumbs">
+    <div class="adults-thumb"></div>
+    <div class="adults-thumb"></div>
+    <div class="adults-thumb"></div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter">
+  <div class="nl-inner">
+    <div>
+      <h2 class="nl-title">New drops. First.</h2>
+      <p class="nl-sub">Limited runs sell out fast — get on the list.</p>
+    </div>
+    <div class="nl-form">
+      <input class="nl-input" type="email" placeholder="your@email.com">
+      <button class="nl-btn">Subscribe</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">WM<span>.</span>SHOP</div>
+      <div class="footer-tagline">The official shop of illustrator and concept artist William McGuire. Prints, apparel &amp; merch — limited runs, real art.</div>
+    </div>
+    <div>
+      <div class="footer-hd">Shop</div>
+      <div class="footer-links">
+        <a>All Products</a><a>Prints</a><a>Apparel</a><a>Merch</a><a>Limited</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-hd">Studio</div>
+      <div class="footer-links">
+        <a>Portfolio</a><a>About</a><a>Contact</a><a>Instagram</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 William McGuire · wm.shop</span>
+    <span>Privacy · Terms · Returns</span>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.cat-btn').forEach(function(b){
+  b.addEventListener('click',function(){
+    document.querySelectorAll('.cat-btn').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+  });
+});
+</script>
+</body>
+</html>
