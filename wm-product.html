@@ -9,13 +9,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body class="fa product-page">
+<body class="fa">
 
 <nav class="nav">
-  <div class="nav-logo">
+  <a href="index.html" class="nav-logo">
     <span class="nav-logo-pre">Official Shop of</span>
     <span class="nav-logo-name">William McGuire</span>
-  </div>
+  </a>
   <div class="nav-links">
     <a>Prints</a><a>Apparel</a><a>Merch</a><a>Limited</a>
     <a class="nav-adults">Adults Only</a>
@@ -25,7 +25,7 @@
 </nav>
 
 <div class="breadcrumb">
-  <a href="wm-shop.html">Shop</a>
+  <a href="index.html">Shop</a>
   <span class="breadcrumb-sep">›</span>
   <a>Apparel</a>
   <span class="breadcrumb-sep">›</span>
@@ -50,9 +50,9 @@
   <!-- RIGHT: product info -->
   <div class="product-info">
     <div class="product-type">Apparel — Unisex Tee</div>
-    <h1 class="product-name">Concept<br>Series Tee</h1>
+    <h1 class="product-name">Product<br>Name</h1>
     <div class="product-price">$36</div>
-    <div class="product-stock">In stock — made in-house, ships from Seattle within two weeks</div>
+    <div class="product-stock">This is a cool item with this image on it, because apparently everything needs a description. It's exactly as rad as it looks.</div>
 
     <div class="rule"></div>
 
@@ -212,8 +212,7 @@ document.querySelectorAll('.size-btn:not(.sold)').forEach(function(b){
 });
 document.querySelectorAll('.fsw').forEach(function(b){
   b.addEventListener('click',function(){
-    var f=b.getAttribute('data-f');
-    document.body.className=f+' product-page'; /* preserve product-page class */
+    document.body.className=b.getAttribute('data-f');
     document.querySelectorAll('.fsw').forEach(function(x){x.classList.remove('on')});
     b.classList.add('on');
   });

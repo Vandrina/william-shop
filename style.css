@@ -47,7 +47,7 @@ body{font-family:var(--fb,'Outfit',sans-serif);background:var(--lt-1);color:var(
   padding:0 40px;background:var(--dk-1);border-bottom:1px solid var(--dk-6);
   height:64px;position:sticky;top:0;z-index:100;gap:24px;
 }
-.nav-logo{line-height:1.1;cursor:pointer}
+.nav-logo{line-height:1.1;cursor:pointer;text-decoration:none;display:block}
 .nav-logo-pre{
   font-family:var(--fm);font-size:7px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--gold);display:block;
@@ -96,7 +96,7 @@ body.fb .nav-cart{font-size:13px;font-weight:700;padding:10px 22px;text-transfor
   min-height:560px;border-bottom:1px solid var(--dk-5);
 }
 .hero-left{
-  background:var(--dk-1);padding:80px 56px;
+  background:var(--dk-1);padding:80px 64px 80px 80px;
   display:flex;flex-direction:column;justify-content:center;
   position:relative;overflow:hidden;
 }
@@ -175,6 +175,15 @@ body.fb .cat-heading{font-size:14px;font-weight:700;text-transform:uppercase;let
   background:var(--gold);color:var(--dk-1);border-color:var(--gold);
 }
 
+/* uniform square images in featured grid */
+.featured-grid .card-img,
+.featured-grid .card-img.portrait,
+.featured-grid .card-img.landscape,
+.featured-grid .card-img.square{padding-top:100%}
+
+/* hero-left inner content: left-aligned with breathing room, not edge-to-edge */
+.hero-left-inner{max-width:480px;padding-left:16px}
+
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FEATURED SECTION  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -199,9 +208,10 @@ body.fb .cat-heading{font-size:14px;font-weight:700;text-transform:uppercase;let
   display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
 }
-.card-img.portrait{padding-top:125%}
-.card-img.square{padding-top:100%}
-.card-img.landscape{padding-top:65%}
+.card-img,
+.card-img.portrait,
+.card-img.square,
+.card-img.landscape{padding-top:100%}
 .card-img-inner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
 .badge{
   position:absolute;top:0;left:0;
@@ -291,16 +301,17 @@ body.fb .adults-btn{font-size:12px;font-weight:700;text-transform:uppercase;lett
   font-family:var(--fm);font-size:9px;letter-spacing:.1em;
   color:rgba(238,238,242,.2);margin-top:8px;
 }
-/* thumbs: lt-2 fill so they read as lighter blurred shapes on dark bg */
+/* thumbs: crosshatch stripes — blur(8px) reads as genuine photo texture */
 .adults-thumbs{display:flex;gap:10px;align-items:center;flex-shrink:0}
 .adults-thumb{
   width:96px;height:130px;
-  /* warm dark gradient — blur renders as smeared colour, suggests actual content */
-  background:linear-gradient(135deg,#1c1c1e 0%,#2e2e32 20%,#6e5830 42%,#3a3a3e 62%,#242426 80%,#52525a 100%);
-  border:1px solid var(--dk-6);
-  filter:blur(8px);position:relative;flex-shrink:0;
+  background:
+    repeating-linear-gradient(45deg,  #3a3a3e 0, #3a3a3e 4px, #52525a 4px, #52525a 5px),
+    repeating-linear-gradient(-45deg, transparent 0, transparent 4px, rgba(110,88,48,.25) 4px, rgba(110,88,48,.25) 5px);
+  border:1px solid var(--gold-lo);
+  filter:blur(8px);flex-shrink:0;
 }
-.adults-thumb::after{content:''/* no text — let the blur do the work */}
+.adults-thumb::after{content:''}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    NEWSLETTER  (shop)
@@ -343,15 +354,16 @@ body.fb .nl-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-s
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    PRODUCT LAYOUT  (product)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.product{display:grid;grid-template-columns:1fr 1fr;flex:1}
+.product{display:grid;grid-template-columns:1fr 1fr;flex:1;align-items:start}
 .product-img-wrap{
   background:var(--lt-1);
   border-right:1px solid var(--lt-2);
-  position:sticky;top:64px;
+  position:sticky;
+  top:64px;
   height:calc(100vh - 64px);
   max-height:560px;
   display:flex;align-items:center;justify-content:center;
-  align-self:start;position:relative;
+  /* no position:relative override here — sticky must not be overridden */
 }
 .product-img-ph{
   width:100%;height:100%;min-height:480px;
@@ -376,7 +388,7 @@ body.fb .product-name{font-size:36px;font-weight:700;line-height:1;letter-spacin
 .product-price{font-family:var(--fh);color:var(--gold-lo);margin-bottom:6px}
 body.fa .product-price{font-size:34px;letter-spacing:.04em}
 body.fb .product-price{font-size:24px;font-weight:700}
-.product-stock{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--md-2);margin-bottom:28px}
+.product-stock{font-family:var(--fb);font-size:13px;font-weight:300;color:var(--md-1);line-height:1.65;margin-bottom:28px}
 .rule{height:1px;background:var(--lt-2);margin-bottom:28px}
 
 /* ── SELECTORS ── */
@@ -470,25 +482,11 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em;t
 .footer-links a:hover{color:var(--gold)}
 .footer-bottom{border-top:1px solid var(--dk-5);padding-top:18px;display:flex;justify-content:space-between;font-family:var(--fm);font-size:9px;letter-spacing:.06em;color:rgba(238,238,242,.16)}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   PRODUCT PAGE OVERRIDES
-   lt-2 as bg — less bright than lt-1
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-body.product-page{background:var(--lt-2)}
-body.product-page .breadcrumb{background:var(--lt-2);border-bottom-color:var(--md-2)}
-body.product-page .product-info{background:var(--lt-2)}
-body.product-page .product-img-wrap{background:var(--lt-2)}
-body.product-page .product-img-ph{
-  background:repeating-linear-gradient(135deg,
-    var(--lt-2) 0,var(--lt-2) 8px,
-    var(--md-2) 8px,var(--md-2) 9px);
-}
-
-/* uniform image height across all rec cards — portrait ratio for everyone */
+/* recs images already handled globally but keeping specificity for safety */
 .recs .card-img,
 .recs .card-img.portrait,
 .recs .card-img.square,
-.recs .card-img.landscape{padding-top:115%}
+.recs .card-img.landscape{padding-top:100%}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FONT SWITCHER  (shared)
