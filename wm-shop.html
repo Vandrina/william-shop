@@ -3,63 +3,90 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WM.SHOP — William McGuire</title>
+<title>Official Shop of William McGuire — williammcguire.shop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{min-height:100%;display:flex;flex-direction:column}
-body{font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased;font-family:'Outfit',sans-serif}
+body{font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
 button{cursor:pointer;border:none;background:none;font-family:inherit}
 a{text-decoration:none;color:inherit;cursor:pointer}
 
+/* ── PORTFOLIO-MATCHED VARS ── */
 :root{
-  --bg:#faf7f2;
-  --ink:#1c1c1e;
-  --gold:#c8a46e;
-  --dim:#6e5830;
-  --crimson:#b01a14;
-  --ember:#d42010;
-  --panel:#fff;
-  --mid:#e8e0d4;
+  /* dark scale — from portfolio stylesheet */
+  --ink:    #1c1c1e;
+  --surface:#242426;
+  --border: #2e2e32;
+  --border-mid:#3a3a3e;
+  --mid:    #7a7a84;
+  /* gold — portfolio --accent */
+  --gold:   #c8a46e;
+  --gold-light:#d4b580;
+  --gold-dim: #6e5830;
+  /* shop light scale */
+  --bg:     #faf7f2;
+  --bg-2:   #f2ece0;
+  --bg-3:   #e8e0d0;
+  --panel:  #ffffff;
+  --text-dim:rgba(28,28,30,.45);
 }
+
+/* ── FONT SYSTEMS ── */
+/* Font A: Bebas Neue + Outfit (industrial bold) */
+body.fa{--fh:'Bebas Neue',cursive;--fb:'Outfit',system-ui,sans-serif;--fm:'Space Mono',monospace}
+/* Font B: Outfit throughout (matches portfolio exactly) */
+body.fb{--fh:'Outfit',system-ui,sans-serif;--fb:'Inter',system-ui,sans-serif;--fm:'Space Mono',monospace}
+
+body{font-family:var(--fb,'Outfit',sans-serif);background:var(--bg);color:var(--ink)}
 
 /* ── NAV ── */
 .nav{
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 40px;background:var(--ink);height:64px;
-  position:sticky;top:0;z-index:100;gap:24px;
+  padding:0 40px;background:var(--ink);
+  border-bottom:1px solid var(--border-mid);
+  height:64px;position:sticky;top:0;z-index:100;gap:24px;
 }
-.nav-logo{font-family:'Bebas Neue',cursive;font-size:30px;letter-spacing:.08em;color:var(--bg)}
-.nav-logo span{color:var(--gold)}
-.nav-links{display:flex;gap:24px}
+/* stylized logo */
+.nav-logo{line-height:1.1;cursor:pointer}
+.nav-logo-pre{
+  font-family:var(--fm);font-size:7px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);display:block;
+}
+.nav-logo-name{
+  font-family:var(--fh);
+  display:block;color:#eeeef2;
+}
+body.fa .nav-logo-name{font-size:24px;letter-spacing:.06em}
+body.fb .nav-logo-name{font-size:16px;font-weight:700;letter-spacing:-.01em}
+
+.nav-links{display:flex;gap:22px}
 .nav-links a{
-  font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
-  color:rgba(250,247,242,.4);transition:color .15s;
+  font-family:var(--fb);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  color:rgba(238,238,242,.38);transition:color .15s;
 }
 .nav-links a:hover{color:var(--gold)}
-.nav-adults{
-  font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
-  color:rgba(220,90,85,.7);transition:color .15s;
-}
-.nav-adults:hover{color:#e06560}
+.nav-adults{color:rgba(220,90,85,.65)!important}
+.nav-adults:hover{color:#e06560!important}
 .nav-cart{
-  background:var(--crimson);color:#fff;
-  font-family:'Bebas Neue',cursive;font-size:18px;letter-spacing:.1em;
-  padding:9px 22px;flex-shrink:0;transition:background .15s;
+  background:var(--gold);color:var(--ink);
+  font-family:var(--fh);letter-spacing:.08em;
+  transition:background .15s;flex-shrink:0;
 }
-.nav-cart:hover{background:var(--ember)}
+body.fa .nav-cart{font-size:18px;padding:9px 22px}
+body.fb .nav-cart{font-size:13px;font-weight:700;padding:10px 22px;text-transform:uppercase}
+.nav-cart:hover{background:var(--gold-light)}
 
 /* ── HERO ── */
 .hero{
   display:grid;grid-template-columns:1fr 1fr;
-  min-height:520px;
-  border-bottom:3px solid var(--ink);
+  min-height:560px; /* more breathing room */
+  border-bottom:1px solid var(--border-mid);
 }
 .hero-left{
-  background:var(--ink);
-  padding:64px 48px;
+  background:var(--ink);padding:80px 56px; /* wider padding = more air */
   display:flex;flex-direction:column;justify-content:center;
   position:relative;overflow:hidden;
 }
@@ -69,106 +96,115 @@ a{text-decoration:none;color:inherit;cursor:pointer}
   color:rgba(200,164,110,.04);line-height:1;user-select:none;pointer-events:none;
 }
 .hero-tag{
-  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--gold);margin-bottom:22px;position:relative;z-index:1;
+  font-family:var(--fm);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:24px;position:relative;z-index:1;
+  /* no "//" */
 }
 .hero-title{
-  font-family:'Bebas Neue',cursive;
-  font-size:96px;line-height:.9;letter-spacing:.02em;
-  color:#fff;position:relative;z-index:1;margin-bottom:24px;
+  font-family:var(--fh);
+  color:#eeeef2;position:relative;z-index:1;margin-bottom:20px;
 }
+body.fa .hero-title{font-size:96px;line-height:.9;letter-spacing:.02em}
+body.fb .hero-title{font-size:64px;line-height:1;letter-spacing:-.03em;font-weight:700}
+
 .hero-sub{
-  font-size:14px;font-weight:300;color:rgba(255,255,255,.45);
-  max-width:340px;line-height:1.7;margin-bottom:40px;
+  font-family:var(--fb);font-size:14px;font-weight:300;
+  color:rgba(238,238,242,.45);
+  max-width:340px;line-height:1.75;margin-bottom:44px;
   position:relative;z-index:1;
 }
 .hero-btn{
-  background:var(--crimson);color:#fff;
-  font-family:'Bebas Neue',cursive;font-size:20px;letter-spacing:.1em;
-  padding:13px 48px;transition:background .15s;
-  align-self:flex-start;position:relative;z-index:1;
+  background:var(--gold);color:var(--ink);
+  font-family:var(--fh);letter-spacing:.08em;
+  transition:background .15s;align-self:flex-start;position:relative;z-index:1;
 }
-.hero-btn:hover{background:var(--ember)}
+body.fa .hero-btn{font-size:20px;padding:13px 48px}
+body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transform:uppercase;letter-spacing:.12em}
+.hero-btn:hover{background:var(--gold-light)}
 
-/* single product image fills the right panel */
 .hero-right{
-  background:#f0e8d8;
+  background:var(--bg-2);
   display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
-  border-left:3px solid var(--ink);
+  border-left:1px solid var(--border-mid);
 }
-.hero-right-img{
-  width:100%;height:100%;
+.hero-img-ph{
+  width:100%;height:100%;position:absolute;inset:0;
   background:repeating-linear-gradient(135deg,#ece4cc 0,#ece4cc 5px,#e2d8be 5px,#e2d8be 6px);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+}
+.hero-img-ph svg{opacity:.25}
+.hero-img-ph span{
+  font-family:var(--fm);font-size:9px;letter-spacing:.15em;text-transform:uppercase;
+  color:rgba(110,88,48,.5);
 }
 .hero-product-label{
   position:absolute;bottom:20px;right:20px;
   background:var(--ink);color:var(--bg);
-  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
   padding:6px 14px;
 }
-/* svg placeholder icon */
-.img-ph{opacity:.28}
 
-/* ── CATEGORY BAR ── */
-.cat-bar{
-  background:var(--ink);
-  border-bottom:3px solid var(--dim);
-  padding:0 40px;
-  display:flex;align-items:center;gap:8px;
-  height:52px;
+/* ── SHOP CTA BAR ── */
+/* Separated section — light bg, NOT attached to hero */
+.cat-section{
+  background:var(--bg-2);
+  border-bottom:1px solid var(--bg-3);
+  padding:40px 40px;
+  text-align:center;
 }
-.cat-label{
-  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(250,247,242,.3);margin-right:8px;flex-shrink:0;
+.cat-heading{
+  font-family:var(--fh);color:var(--ink);margin-bottom:24px;
+  letter-spacing:.06em;
 }
+body.fa .cat-heading{font-size:32px}
+body.fb .cat-heading{font-size:20px;font-weight:700;text-transform:uppercase;letter-spacing:.14em}
+
+.cat-buttons{
+  display:flex;align-items:center;justify-content:center;
+  gap:12px;flex-wrap:wrap;
+}
+/* ghost/gold style — portfolio-adjacent */
 .cat-btn{
-  background:none;
-  color:rgba(250,247,242,.55);
-  font-family:'Outfit',sans-serif;font-weight:600;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
-  padding:6px 18px;
-  border:1.5px solid rgba(250,247,242,.15);
-  transition:all .15s;flex-shrink:0;
+  font-family:var(--fb);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  padding:12px 28px;
+  background:none;color:var(--ink);
+  border:1.5px solid var(--gold-dim);
+  transition:all .18s;
 }
 .cat-btn:hover,.cat-btn.on{
-  background:var(--bg);color:var(--ink);border-color:var(--bg);
+  background:var(--ink);color:var(--gold);
+  border-color:var(--ink);
 }
-.cat-divider{width:1px;height:24px;background:rgba(250,247,242,.1);margin:0 4px;flex-shrink:0}
+/* View All gets a filled gold treatment */
+.cat-btn-primary{
+  font-family:var(--fb);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  padding:12px 28px;
+  background:var(--gold);color:var(--ink);
+  border:1.5px solid var(--gold);
+  transition:all .18s;
+}
+.cat-btn-primary:hover{background:var(--gold-light);border-color:var(--gold-light)}
 
 /* ── FEATURED ── */
-.section{
-  padding:56px 40px;background:var(--bg);
-  flex:1;
-}
-.section-hd{
-  display:flex;align-items:flex-end;justify-content:space-between;
-  margin-bottom:32px;
-}
+.section{padding:56px 40px;background:var(--bg);flex:1}
+.section-hd{margin-bottom:32px}
 .section-title{
-  font-family:'Bebas Neue',cursive;
-  font-size:56px;line-height:1;letter-spacing:.04em;color:var(--ink);
+  font-family:var(--fh);color:var(--ink);
 }
-.section-count{
-  font-family:'Space Mono',monospace;font-size:10px;
-  color:#8a8070;margin-bottom:4px;letter-spacing:.1em;
-}
-.section-see{
-  font-family:'Space Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--crimson);border-bottom:2px solid var(--crimson);padding-bottom:2px;
-}
+body.fa .section-title{font-size:56px;line-height:1;letter-spacing:.04em}
+body.fb .section-title{font-size:36px;font-weight:700;letter-spacing:-.02em}
 
-/* ── 3-CARD GRID ── */
+/* 3-card grid */
 .featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
 .card{
-  background:var(--panel);border:1.5px solid #e8e0d4;
-  position:relative;transition:transform .15s,box-shadow .15s;
+  background:var(--panel);border:1px solid var(--bg-3);
+  position:relative;transition:transform .15s,box-shadow .15s;display:block;
 }
-.card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(176,26,20,.13)}
+.card:hover{transform:translateY(-4px);box-shadow:0 8px 28px rgba(28,28,30,.12)}
 .card-img{
-  width:100%;
-  background:#f0e8d8;
-  border-bottom:1.5px solid #e8e0d4;
+  width:100%;background:var(--bg-2);
+  border-bottom:1px solid var(--bg-3);
   display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
 }
@@ -178,82 +214,123 @@ a{text-decoration:none;color:inherit;cursor:pointer}
 .card-img-inner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
 .badge{
   position:absolute;top:0;left:0;
-  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.12em;text-transform:uppercase;
+  font-family:var(--fm);font-size:8px;letter-spacing:.12em;text-transform:uppercase;
   padding:5px 10px;z-index:2;font-weight:700;
-  background:var(--crimson);color:#fff;
+  background:var(--gold);color:var(--ink);
 }
-.badge.gold{background:var(--gold);color:var(--ink)}
+.badge.new{background:var(--ink);color:var(--bg)}
 .card-body{padding:16px}
 .card-type{
-  font-family:'Space Mono',monospace;font-size:8px;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--dim);margin-bottom:5px;
+  font-family:var(--fm);font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold-dim);margin-bottom:5px;
 }
-.card-title{font-size:15px;font-weight:600;color:var(--ink);margin-bottom:12px;line-height:1.3}
+.card-title{
+  font-family:var(--fb);font-size:15px;font-weight:600;
+  color:var(--ink);margin-bottom:12px;line-height:1.3;
+}
 .card-foot{display:flex;align-items:center;justify-content:space-between}
-.card-price{font-family:'Bebas Neue',cursive;font-size:26px;letter-spacing:.05em;color:var(--ink)}
+.card-price{
+  font-family:var(--fh);color:var(--ink);
+}
+body.fa .card-price{font-size:26px;letter-spacing:.05em}
+body.fb .card-price{font-size:20px;font-weight:700}
 .card-add{
   background:var(--ink);color:var(--bg);
-  font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  font-family:var(--fb);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
   padding:7px 16px;transition:background .15s;
 }
-.card-add:hover{background:var(--crimson)}
+.card-add:hover{background:var(--gold);color:var(--ink)}
 
-/* ── ADULTS / COMING SOON ── */
-.adults{
-  background:var(--ink);padding:48px 40px;
-  display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;
-  border-top:3px solid rgba(200,164,110,.3);
+/* ── FULL SHOP CTA ── */
+.shop-cta{
+  background:var(--bg-2);
+  border-top:1px solid var(--bg-3);
+  border-bottom:1px solid var(--bg-3);
+  padding:48px 40px;text-align:center;
 }
-.adults-pill{
-  display:inline-flex;align-items:center;gap:6px;
-  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(220,90,80,.7);margin-bottom:12px;
-  border:1px solid rgba(220,90,80,.25);padding:3px 10px;
+.shop-cta-title{
+  font-family:var(--fh);color:var(--ink);margin-bottom:8px;
+}
+body.fa .shop-cta-title{font-size:40px;letter-spacing:.04em}
+body.fb .shop-cta-title{font-size:26px;font-weight:700;letter-spacing:-.01em}
+.shop-cta-sub{
+  font-family:var(--fb);font-size:13px;font-weight:300;
+  color:rgba(28,28,30,.5);margin-bottom:28px;
+}
+.shop-cta-btn{
+  display:inline-block;
+  font-family:var(--fb);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  padding:14px 48px;
+  background:none;color:var(--ink);
+  border:1.5px solid var(--gold-dim);
+  transition:all .18s;
+}
+.shop-cta-btn:hover{background:var(--ink);color:var(--gold);border-color:var(--ink)}
+
+/* ── ADULTS / AFTER HOURS  — newsletter overlaid on blurred images ── */
+.adults{
+  background:var(--bg-3);
+  border-top:1px solid var(--bg-3);
+  padding:56px 40px;
+  position:relative;overflow:hidden;
+}
+/* blurred thumbs float in background */
+.adults-bg-thumbs{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:flex-end;
+  gap:20px;padding:0 40px;
+  pointer-events:none;
+}
+.adults-bg-thumb{
+  width:160px;height:220px;
+  background:var(--ink);
+  filter:blur(10px);
+  opacity:.18;
+  flex-shrink:0;
+}
+/* form content on top */
+.adults-inner{
+  position:relative;z-index:1;
+  max-width:560px;
+}
+.adults-eyebrow{
+  font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(28,28,30,.45);margin-bottom:12px;
 }
 .adults-title{
-  font-family:'Bebas Neue',cursive;font-size:48px;line-height:.95;letter-spacing:.04em;
-  color:var(--bg);margin-bottom:8px;
+  font-family:var(--fh);color:var(--ink);margin-bottom:8px;
 }
+body.fa .adults-title{font-size:44px;line-height:.95;letter-spacing:.04em}
+body.fb .adults-title{font-size:30px;font-weight:700;letter-spacing:-.02em}
 .adults-sub{
-  font-size:13px;font-weight:300;color:rgba(250,247,242,.4);
-  max-width:440px;line-height:1.7;margin-bottom:24px;
+  font-family:var(--fb);font-size:13px;font-weight:300;
+  color:rgba(28,28,30,.5);max-width:420px;line-height:1.7;margin-bottom:24px;
 }
-/* waitlist form inline */
 .adults-form{display:flex;gap:0;max-width:380px}
 .adults-input{
   flex:1;padding:11px 16px;
-  background:rgba(255,255,255,.06);color:#fff;
-  border:1.5px solid rgba(255,255,255,.12);border-right:none;
-  font-family:'Outfit',sans-serif;font-size:13px;outline:none;
+  background:var(--panel);color:var(--ink);
+  border:1.5px solid var(--bg-3);border-right:none;
+  font-family:var(--fb);font-size:13px;outline:none;
 }
-.adults-input::placeholder{color:rgba(255,255,255,.2)}
+.adults-input::placeholder{color:rgba(28,28,30,.3)}
 .adults-btn{
-  background:var(--crimson);color:#fff;
-  font-family:'Bebas Neue',cursive;font-size:17px;letter-spacing:.1em;
-  padding:0 22px;border:1.5px solid var(--crimson);
+  background:var(--ink);color:var(--bg);
+  font-family:var(--fh);letter-spacing:.08em;
   transition:background .15s;flex-shrink:0;
 }
-.adults-btn:hover{background:var(--ember)}
+body.fa .adults-btn{font-size:16px;padding:0 22px}
+body.fb .adults-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:0 22px}
+.adults-btn:hover{background:var(--gold-dim)}
 .adults-note{
-  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.1em;
-  color:rgba(250,247,242,.2);margin-top:10px;
-}
-.adults-thumbs{display:flex;gap:12px}
-.adults-thumb{
-  width:110px;height:150px;background:#2a2a2c;border:2px solid #3a3a3c;
-  filter:blur(8px);position:relative;
-}
-.adults-thumb::after{
-  content:'Soon';position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Bebas Neue',cursive;font-size:22px;letter-spacing:.1em;
-  color:rgba(200,164,110,.3);filter:blur(0);
+  font-family:var(--fm);font-size:9px;letter-spacing:.1em;
+  color:rgba(28,28,30,.3);margin-top:10px;
 }
 
 /* ── NEWSLETTER ── */
 .newsletter{
-  background:var(--ink);
-  border-top:3px solid var(--crimson);
+  background:var(--bg-2); /* alternating from adults */
+  border-top:1px solid var(--bg-3);
   padding:28px 40px;
 }
 .nl-inner{
@@ -261,101 +338,126 @@ a{text-decoration:none;color:inherit;cursor:pointer}
   display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;
 }
 .nl-title{
-  font-family:'Bebas Neue',cursive;font-size:36px;line-height:1;letter-spacing:.04em;
-  color:#fff;margin-bottom:3px;
+  font-family:var(--fh);color:var(--ink);margin-bottom:3px;
 }
-.nl-sub{font-size:12px;font-weight:300;color:rgba(250,247,242,.4);letter-spacing:.06em}
+body.fa .nl-title{font-size:32px;letter-spacing:.04em}
+body.fb .nl-title{font-size:22px;font-weight:700;letter-spacing:-.01em}
+.nl-sub{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,28,30,.35)}
 .nl-form{display:flex;gap:0}
 .nl-input{
   flex:1;padding:11px 18px;
-  background:rgba(255,255,255,.06);color:#fff;
-  border:1.5px solid rgba(255,255,255,.15);border-right:none;
-  font-family:'Outfit',sans-serif;font-size:13px;outline:none;min-width:200px;
+  background:var(--panel);color:var(--ink);
+  border:1.5px solid var(--bg-3);border-right:none;
+  font-family:var(--fb);font-size:13px;outline:none;min-width:200px;
 }
-.nl-input::placeholder{color:rgba(255,255,255,.25)}
+.nl-input::placeholder{color:rgba(28,28,30,.28)}
 .nl-btn{
-  background:var(--crimson);color:#fff;
-  font-family:'Bebas Neue',cursive;font-size:17px;letter-spacing:.1em;
-  padding:0 22px;border:1.5px solid var(--crimson);
+  background:var(--ink);color:var(--bg);
+  font-family:var(--fh);letter-spacing:.08em;
   transition:background .15s;flex-shrink:0;
 }
-.nl-btn:hover{background:var(--ember)}
+body.fa .nl-btn{font-size:17px;padding:0 22px}
+body.fb .nl-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:0 22px}
+.nl-btn:hover{background:var(--gold);color:var(--ink)}
 
 /* ── FOOTER ── */
 .footer{background:var(--ink);padding:48px 40px 32px;color:var(--bg)}
 .footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:36px}
-.footer-logo{font-family:'Bebas Neue',cursive;font-size:32px;letter-spacing:.06em;color:var(--bg);margin-bottom:6px}
-.footer-logo span{color:var(--gold)}
-.footer-tagline{font-size:13px;font-weight:300;color:rgba(250,247,242,.3);line-height:1.7}
+.footer-logo{line-height:1.15;margin-bottom:12px}
+.footer-logo-pre{
+  font-family:var(--fm);font-size:7px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);display:block;
+}
+.footer-logo-name{
+  font-family:var(--fh);color:#eeeef2;display:block;
+}
+body.fa .footer-logo-name{font-size:28px;letter-spacing:.04em}
+body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
+.footer-tagline{font-family:var(--fb);font-size:13px;font-weight:300;color:rgba(238,238,242,.28);line-height:1.7}
 .footer-hd{
-  font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
   color:var(--gold);margin-bottom:14px;
 }
-.footer-links{display:flex;flex-direction:column;gap:9px;font-size:13px;color:rgba(250,247,242,.3)}
+.footer-links{display:flex;flex-direction:column;gap:9px;font-family:var(--fb);font-size:13px;color:rgba(238,238,242,.28)}
 .footer-links a:hover{color:var(--gold)}
 .footer-bottom{
-  border-top:1px solid #2e2e32;padding-top:18px;
+  border-top:1px solid var(--border);padding-top:18px;
   display:flex;justify-content:space-between;
-  font-size:11px;letter-spacing:.06em;color:rgba(250,247,242,.18);
+  font-family:var(--fm);font-size:9px;letter-spacing:.06em;color:rgba(238,238,242,.16);
 }
+
+/* ── FONT SWITCHER ── */
+#fswitcher{
+  position:fixed;bottom:20px;right:20px;z-index:9999;
+  background:rgba(28,28,30,.94);
+  border:1px solid rgba(255,255,255,.1);
+  padding:6px;display:flex;gap:4px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-radius:40px;
+  box-shadow:0 6px 28px rgba(0,0,0,.45);
+}
+.fsw{
+  padding:7px 18px;border:none;background:transparent;
+  color:rgba(255,255,255,.4);font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;
+  cursor:pointer;border-radius:28px;transition:all .2s;white-space:nowrap;
+}
+.fsw sub{display:block;font-size:8px;opacity:.5;margin-top:1px}
+.fsw.on{background:white;color:#1c1c1e}
 </style>
 </head>
-<body>
+<body class="fa">
 
 <nav class="nav">
-  <div class="nav-logo">WM<span>.</span>SHOP</div>
+  <div class="nav-logo">
+    <span class="nav-logo-pre">Official Shop of</span>
+    <span class="nav-logo-name">William McGuire</span>
+  </div>
   <div class="nav-links">
-    <a>Prints</a>
-    <a>Apparel</a>
-    <a>Merch</a>
-    <a>Limited</a>
+    <a>Prints</a><a>Apparel</a><a>Merch</a><a>Limited</a>
     <a class="nav-adults">Adults Only</a>
     <a>Portfolio ↗&#xFE0E;</a>
   </div>
   <button class="nav-cart">Cart (0)</button>
 </nav>
 
-<!-- HERO: single image -->
+<!-- HERO: single image, more breathing room -->
 <section class="hero">
   <div class="hero-left">
     <div class="hero-bg-word">ART</div>
-    <div class="hero-tag">// wm.shop — 2026 collection</div>
+    <div class="hero-tag">wm.shop — 2026 collection</div>
     <h1 class="hero-title">REAL WORK.</h1>
-    <p class="hero-sub">Original prints, apparel and merch from the imagination of William McGuire.</p>
+    <p class="hero-sub">Prints, shirts and assorted nonsense. Some of it will haunt your bathroom wall. All of it ships in 5–7 days.</p>
     <button class="hero-btn" onclick="location.href='wm-product.html'">Shop Now</button>
   </div>
   <div class="hero-right">
-    <div class="hero-right-img">
-      <svg class="img-ph" width="64" height="64" viewBox="0 0 40 40" fill="none">
+    <div class="hero-img-ph">
+      <svg width="64" height="64" viewBox="0 0 40 40" fill="none">
         <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#6e5830" stroke-width="1.5" fill="none"/>
         <circle cx="14" cy="14" r="3.5" fill="#6e5830"/>
         <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#6e5830" stroke-width="1.5" fill="none"/>
       </svg>
-      <span style="font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:rgba(110,88,48,.55)">Featured Product</span>
+      <span>Featured Product</span>
     </div>
     <div class="hero-product-label">Lamprey Girl — Limited Print</div>
   </div>
 </section>
 
-<!-- CATEGORY BAR -->
-<div class="cat-bar">
-  <span class="cat-label">Browse:</span>
-  <button class="cat-btn on">All</button>
-  <div class="cat-divider"></div>
-  <button class="cat-btn">Prints</button>
-  <button class="cat-btn">T-Shirts</button>
-  <button class="cat-btn">Stickers</button>
-  <button class="cat-btn">Mugs</button>
+<!-- SHOP CTA BAR: separated, centered, large portfolio-style ghost buttons -->
+<div class="cat-section">
+  <div class="cat-heading">SHOP</div>
+  <div class="cat-buttons">
+    <button class="cat-btn on">Prints</button>
+    <button class="cat-btn">T-Shirts</button>
+    <button class="cat-btn">Stickers</button>
+    <button class="cat-btn">Mugs</button>
+    <button class="cat-btn-primary" onclick="location.href='#'">View All →</button>
+  </div>
 </div>
 
-<!-- FEATURED ITEMS: 3 cards -->
+<!-- FEATURED: just "Featured" -->
 <section class="section">
   <div class="section-hd">
-    <div>
-      <div class="section-count">Featured picks</div>
-      <h2 class="section-title">THE PRINTS</h2>
-    </div>
-    <a class="section-see">View all →</a>
+    <h2 class="section-title">Featured</h2>
   </div>
   <div class="featured-grid">
 
@@ -364,84 +466,85 @@ a{text-decoration:none;color:inherit;cursor:pointer}
       <div class="card-img portrait">
         <div class="card-img-inner">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#b01a14" stroke-width="1.5" fill="none"/>
-            <circle cx="14" cy="14" r="3.5" fill="#b01a14"/>
-            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#b01a14" stroke-width="1.5" fill="none"/>
+            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#6e5830" stroke-width="1.5" fill="none"/>
+            <circle cx="14" cy="14" r="3.5" fill="#6e5830"/>
+            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#6e5830" stroke-width="1.5" fill="none"/>
           </svg>
         </div>
       </div>
       <div class="card-body">
         <div class="card-type">Art Print</div>
         <div class="card-title">Lamprey Girl</div>
-        <div class="card-foot">
-          <span class="card-price">$38</span>
-          <button class="card-add">+ Add</button>
-        </div>
+        <div class="card-foot"><span class="card-price">$38</span><button class="card-add">+ Add</button></div>
       </div>
     </a>
 
     <a class="card" href="wm-product.html">
-      <div class="badge gold">Best Seller</div>
+      <div class="badge">Best Seller</div>
       <div class="card-img portrait">
         <div class="card-img-inner">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#b01a14" stroke-width="1.5" fill="none"/>
-            <circle cx="14" cy="14" r="3.5" fill="#b01a14"/>
-            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#b01a14" stroke-width="1.5" fill="none"/>
+            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#6e5830" stroke-width="1.5" fill="none"/>
+            <circle cx="14" cy="14" r="3.5" fill="#6e5830"/>
+            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#6e5830" stroke-width="1.5" fill="none"/>
           </svg>
         </div>
       </div>
       <div class="card-body">
         <div class="card-type">Art Print</div>
         <div class="card-title">Spider-Gwen</div>
-        <div class="card-foot">
-          <span class="card-price">$32</span>
-          <button class="card-add">+ Add</button>
-        </div>
+        <div class="card-foot"><span class="card-price">$32</span><button class="card-add">+ Add</button></div>
       </div>
     </a>
 
     <a class="card" href="wm-product.html">
+      <div class="badge new">New</div>
       <div class="card-img square">
         <div class="card-img-inner">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <path d="M10 6l4-2h12l4 2-4 4v22H14V10L10 6z" stroke="#b01a14" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+            <path d="M10 6l4-2h12l4 2-4 4v22H14V10L10 6z" stroke="#6e5830" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
           </svg>
         </div>
       </div>
       <div class="card-body">
         <div class="card-type">Apparel</div>
         <div class="card-title">Concept Series Tee</div>
-        <div class="card-foot">
-          <span class="card-price">$36</span>
-          <button class="card-add">+ Add</button>
-        </div>
+        <div class="card-foot"><span class="card-price">$36</span><button class="card-add">+ Add</button></div>
       </div>
     </a>
 
   </div>
 </section>
 
-<!-- ADULTS ONLY: waitlist CTA since prints not ready -->
+<!-- FULL SHOP CTA -->
+<div class="shop-cta">
+  <h2 class="shop-cta-title">More Where That Came From</h2>
+  <p class="shop-cta-sub">Prints, shirts, stickers, mugs — everything in one place.</p>
+  <button class="shop-cta-btn">Browse the Full Shop →</button>
+</div>
+
+<!-- ADULTS / AFTER HOURS: newsletter overlaid on blurred bg images -->
 <section class="adults">
-  <div>
-    <div class="adults-pill">Adults Only — Coming Soon</div>
-    <h2 class="adults-title">THE AFTER HOURS<br>COLLECTION.</h2>
-    <p class="adults-sub">Pinups and mature illustration from the studio. Not quite ready — but it's coming. Join the waitlist and be the first through the door.</p>
+  <!-- blurred bg thumbs -->
+  <div class="adults-bg-thumbs">
+    <div class="adults-bg-thumb"></div>
+    <div class="adults-bg-thumb"></div>
+    <div class="adults-bg-thumb"></div>
+  </div>
+  <!-- form content on top -->
+  <div class="adults-inner">
+    <div class="adults-eyebrow">Age-Restricted — Coming Soon</div>
+    <h2 class="adults-title">The After Hours Collection.</h2>
+    <p class="adults-sub">Pinups and mature illustration from the studio. Not ready yet — but it's getting there. Join the waitlist and you'll be the first through the door when it opens.</p>
     <div class="adults-form">
       <input class="adults-input" type="email" placeholder="your@email.com">
       <button class="adults-btn">Join Waitlist</button>
     </div>
     <div class="adults-note">18+ only. Age verification required at entry.</div>
   </div>
-  <div class="adults-thumbs">
-    <div class="adults-thumb"></div>
-    <div class="adults-thumb"></div>
-    <div class="adults-thumb"></div>
-  </div>
 </section>
 
-<!-- NEWSLETTER -->
+<!-- NEWSLETTER: alternating bg from adults section -->
 <section class="newsletter">
   <div class="nl-inner">
     <div>
@@ -459,8 +562,11 @@ a{text-decoration:none;color:inherit;cursor:pointer}
 <footer class="footer">
   <div class="footer-top">
     <div>
-      <div class="footer-logo">WM<span>.</span>SHOP</div>
-      <div class="footer-tagline">The official shop of illustrator and concept artist William McGuire. Prints, apparel &amp; merch — limited runs, real art.</div>
+      <div class="footer-logo">
+        <span class="footer-logo-pre">Official Shop of</span>
+        <span class="footer-logo-name">William McGuire</span>
+      </div>
+      <div class="footer-tagline">Prints, apparel &amp; merch — limited runs, real art. Ships from Seattle.</div>
     </div>
     <div>
       <div class="footer-hd">Shop</div>
@@ -476,15 +582,37 @@ a{text-decoration:none;color:inherit;cursor:pointer}
     </div>
   </div>
   <div class="footer-bottom">
-    <span>© 2026 William McGuire · wm.shop</span>
+    <span>© 2026 William McGuire · williammcguire.shop</span>
     <span>Privacy · Terms · Returns</span>
   </div>
 </footer>
 
+<!-- FONT SWITCHER -->
+<div id="fswitcher">
+  <button class="fsw on" data-f="fa">
+    Font A
+    <sub>Bebas Neue · Industrial</sub>
+  </button>
+  <button class="fsw" data-f="fb">
+    Font B
+    <sub>Outfit · Portfolio-match</sub>
+  </button>
+</div>
+
 <script>
+// cat buttons
 document.querySelectorAll('.cat-btn').forEach(function(b){
   b.addEventListener('click',function(){
     document.querySelectorAll('.cat-btn').forEach(function(x){x.classList.remove('on')});
+    b.classList.add('on');
+  });
+});
+// font switcher
+document.querySelectorAll('.fsw').forEach(function(b){
+  b.addEventListener('click',function(){
+    var f = b.getAttribute('data-f');
+    document.body.className = f;
+    document.querySelectorAll('.fsw').forEach(function(x){x.classList.remove('on')});
     b.classList.add('on');
   });
 });
