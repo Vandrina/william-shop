@@ -92,7 +92,7 @@ body.fb .nav-cart{font-size:13px;font-weight:700;padding:10px 22px;text-transfor
    HERO  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 /* hero is a standard full-width section — no special frame or padding */
-.hero-frame{background:var(--lt-1)}
+.hero-frame{background:var(--lt-1);padding:28px 32px 0}
 .hero{
   display:grid;grid-template-columns:1fr 1fr;
   min-height:560px;
@@ -503,8 +503,13 @@ body.fb .atc-btn{font-size:13px;font-weight:700;text-transform:uppercase;letter-
 .recs-hd{font-family:var(--fh);color:var(--lt-1);margin-bottom:16px}
 body.fa .recs-hd{font-size:22px;letter-spacing:.04em}
 body.fb .recs-hd{font-size:15px;font-weight:700;letter-spacing:-.01em}
-.recs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-/* thumbnail — portrait ratio, small text */
+.recs-grid{
+  display:grid;
+  /* three small fixed-width columns — cards are genuinely thumbnail-sized */
+  grid-template-columns:repeat(3,120px);
+  gap:10px;
+}
+/* portrait ratio on the fixed-width columns */
 .recs .card-img,
 .recs .card-img.portrait,
 .recs .card-img.square,
