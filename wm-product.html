@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body class="fa">
+<body class="fa product-page">
 
 <nav class="nav">
   <div class="nav-logo">
@@ -212,7 +212,8 @@ document.querySelectorAll('.size-btn:not(.sold)').forEach(function(b){
 });
 document.querySelectorAll('.fsw').forEach(function(b){
   b.addEventListener('click',function(){
-    document.body.className=b.getAttribute('data-f');
+    var f=b.getAttribute('data-f');
+    document.body.className=f+' product-page'; /* preserve product-page class */
     document.querySelectorAll('.fsw').forEach(function(x){x.classList.remove('on')});
     b.classList.add('on');
   });

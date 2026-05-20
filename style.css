@@ -161,7 +161,7 @@ body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transfor
   padding:32px 40px;text-align:center;
 }
 .cat-heading{
-  font-family:var(--fh);color:var(--lt-1);margin-bottom:18px;letter-spacing:.08em;
+  font-family:var(--fh);color:var(--gold);margin-bottom:18px;letter-spacing:.08em;
 }
 body.fa .cat-heading{font-size:22px}
 body.fb .cat-heading{font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:.18em}
@@ -295,15 +295,12 @@ body.fb .adults-btn{font-size:12px;font-weight:700;text-transform:uppercase;lett
 .adults-thumbs{display:flex;gap:10px;align-items:center;flex-shrink:0}
 .adults-thumb{
   width:96px;height:130px;
-  background:var(--lt-2); /* light grey → visible against dark section */
-  border:1px solid var(--md-2);
+  /* warm dark gradient — blur renders as smeared colour, suggests actual content */
+  background:linear-gradient(135deg,#1c1c1e 0%,#2e2e32 20%,#6e5830 42%,#3a3a3e 62%,#242426 80%,#52525a 100%);
+  border:1px solid var(--dk-6);
   filter:blur(8px);position:relative;flex-shrink:0;
 }
-.adults-thumb::after{
-  content:'Soon';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-family:'Bebas Neue',cursive;font-size:16px;letter-spacing:.1em;
-  color:rgba(28,28,30,.4);filter:blur(0);
-}
+.adults-thumb::after{content:''/* no text — let the blur do the work */}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    NEWSLETTER  (shop)
@@ -472,6 +469,26 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em;t
 .footer-links{display:flex;flex-direction:column;gap:9px;font-family:var(--fb);font-size:13px;color:rgba(238,238,242,.28)}
 .footer-links a:hover{color:var(--gold)}
 .footer-bottom{border-top:1px solid var(--dk-5);padding-top:18px;display:flex;justify-content:space-between;font-family:var(--fm);font-size:9px;letter-spacing:.06em;color:rgba(238,238,242,.16)}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PRODUCT PAGE OVERRIDES
+   lt-2 as bg — less bright than lt-1
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+body.product-page{background:var(--lt-2)}
+body.product-page .breadcrumb{background:var(--lt-2);border-bottom-color:var(--md-2)}
+body.product-page .product-info{background:var(--lt-2)}
+body.product-page .product-img-wrap{background:var(--lt-2)}
+body.product-page .product-img-ph{
+  background:repeating-linear-gradient(135deg,
+    var(--lt-2) 0,var(--lt-2) 8px,
+    var(--md-2) 8px,var(--md-2) 9px);
+}
+
+/* uniform image height across all rec cards — portrait ratio for everyone */
+.recs .card-img,
+.recs .card-img.portrait,
+.recs .card-img.square,
+.recs .card-img.landscape{padding-top:115%}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FONT SWITCHER  (shared)
