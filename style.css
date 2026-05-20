@@ -136,20 +136,20 @@ body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transfor
 
 /* ── HERO RIGHT: product showcase ── */
 .hero-right{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:center;
   border-left:1px solid var(--dk-5);
-  background:var(--lt-2); /* matches product image bg — unified panel */
-  padding:32px 48px;
+  background:var(--dk-1); /* dark bg — space to the right of image is dark */
+  padding:40px 40px 40px 48px;
   gap:0;
 }
-/* image: square, fills most of the panel, bg matches panel so it reads as one area */
+/* image: square, left-aligned, dark space shows to the right */
 .hero-product-img{
-  width:100%;
-  max-width:420px; /* big enough to feel featured, not tiny */
-  aspect-ratio:1/1;
-  background:var(--lt-2); /* same as hero-right — no contrast difference */
+  width:280px;
+  height:280px; /* square */
+  background:var(--lt-2);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
   position:relative;
+  flex-shrink:0;
 }
 .hero-product-img svg{opacity:.28}
 .hero-product-img span{
@@ -163,12 +163,11 @@ body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transfor
   font-family:var(--fm);font-size:8px;letter-spacing:.16em;text-transform:uppercase;
   padding:5px 14px;
 }
-/* caption strip: same width as square image, sits flush below */
+/* caption strip: same width as square image */
 .hero-caption{
   flex-shrink:0;
-  width:100%;
-  max-width:420px;
-  background:var(--dk-1);
+  width:280px;
+  background:var(--dk-2);
   border-top:1px solid var(--dk-5);
   padding:14px 18px;
   display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;
@@ -232,8 +231,8 @@ body.fb .cat-heading{font-size:14px;font-weight:700;text-transform:uppercase;let
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FEATURED SECTION  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.section{padding:48px 56px;background:var(--lt-1);flex:1}
-.featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.section{padding:48px 72px;background:var(--lt-1);flex:1} /* wider padding shrinks cards ~20% */
+.featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    CARDS  (shared: featured + recs)
@@ -400,17 +399,14 @@ body.fb .nl-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-s
 .product-img-wrap{
   background:var(--lt-1);
   border-right:1px solid var(--lt-2);
-  position:sticky;
-  top:64px;
-  height:calc(100vh - 64px);
-  max-height:560px;
-  display:flex;align-items:center;justify-content:center;
-  padding:24px; /* breathing room around image */
+  /* no sticky — sits in normal flow, no overlap */
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:40px 32px;
 }
 .product-img-ph{
-  width:100%;
-  aspect-ratio:1/1; /* square */
-  background:var(--lt-2); /* flat fill, no texture */
+  width:60%; /* 40% smaller than the column width */
+  aspect-ratio:1/1;
+  background:var(--lt-2);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
 }
 .product-img-ph svg{opacity:.28}
@@ -478,7 +474,8 @@ body.fb .product-price{font-size:24px;font-weight:700}
 .qty-btn:hover{background:var(--lt-2)}
 .qty-val{width:40px;text-align:center;font-weight:700;font-size:15px;color:var(--dk-1);border-left:1px solid var(--lt-2);border-right:1px solid var(--lt-2);line-height:48px}
 .atc-btn{
-  flex:1;height:48px;padding:0 16px;
+  flex:none;
+  padding:14px 20px; /* equal all four sides */
   background:var(--dk-1);color:var(--lt-1);
   font-family:var(--fh);letter-spacing:.1em;transition:background .15s;
 }
