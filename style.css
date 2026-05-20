@@ -138,6 +138,7 @@ body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transfor
   display:flex;flex-direction:column;
   border-left:1px solid var(--dk-5);
   overflow:hidden;
+  padding:32px 40px 32px 32px; /* breathing room, right side especially */
 }
 /* image area — fills the top portion */
 .hero-product-img{
@@ -304,7 +305,7 @@ body.fb .shop-cta-title{font-size:24px;font-weight:700;letter-spacing:-.01em}
   background:var(--dk-2);
   border-top:1px solid var(--dk-5);
   border-bottom:2px solid var(--gold);
-  padding:48px 40px;
+  padding:56px 80px;
   display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;
 }
 /* inner-wrap is just a passthrough — layout handled on .adults itself */
@@ -505,10 +506,9 @@ body.fa .recs-hd{font-size:22px;letter-spacing:.04em}
 body.fb .recs-hd{font-size:15px;font-weight:700;letter-spacing:-.01em}
 .recs-grid{
   display:grid;
-  grid-template-columns:repeat(3,138px);
+  grid-template-columns:repeat(3,159px);
   justify-content:center;
-  gap:0;
-  column-gap:clamp(16px,3vw,48px); /* space-between feel that scales */
+  column-gap:clamp(16px,3vw,48px);
 }
 /* portrait ratio on the fixed-width columns */
 .recs .card-img,
