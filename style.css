@@ -156,8 +156,8 @@ body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transfor
    SHOP CTA BAR  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .cat-section{
-  background:var(--dk-1); /* dark band — separates hero from content */
-  border-bottom:1px solid var(--dk-6);
+  background:var(--dk-4); /* #282828 — "the dark grey currently on newsletter" */
+  border-bottom:1px solid var(--dk-5);
   padding:32px 40px;text-align:center;
 }
 .cat-heading{
@@ -168,7 +168,7 @@ body.fb .cat-heading{font-size:14px;font-weight:700;text-transform:uppercase;let
 .cat-buttons{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
 .cat-btn{
   font-family:var(--fb);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
-  padding:11px 26px;background:none;color:rgba(238,238,242,.6);
+  padding:11px 26px;background:none;color:rgba(238,238,242,.55);
   border:1px solid var(--dk-6);transition:all .18s;
 }
 .cat-btn:hover,.cat-btn.on{
@@ -231,20 +231,20 @@ body.fb .card-price{font-size:20px;font-weight:700}
    SHOP FULL CTA  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .shop-cta{
-  background:var(--lt-1);
-  border-top:1px solid var(--md-2);
+  background:var(--dk-4); /* #282828 — matches cat section */
+  border-top:1px solid var(--dk-5);
   border-bottom:1px solid var(--dk-5);
   padding:44px 40px;text-align:center;
 }
-.shop-cta-title{font-family:var(--fh);color:var(--dk-1);margin-bottom:8px}
+.shop-cta-title{font-family:var(--fh);color:var(--lt-1);margin-bottom:8px}
 body.fa .shop-cta-title{font-size:36px;letter-spacing:.04em}
 body.fb .shop-cta-title{font-size:24px;font-weight:700;letter-spacing:-.01em}
-.shop-cta-sub{font-family:var(--fb);font-size:13px;font-weight:300;color:var(--md-1);margin-bottom:24px}
+.shop-cta-sub{font-family:var(--fb);font-size:13px;font-weight:300;color:rgba(238,238,242,.4);margin-bottom:24px}
 .shop-cta-btn{
   display:inline-block;font-family:var(--fb);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-  padding:12px 44px;background:none;color:var(--dk-1);border:1px solid var(--gold-lo);transition:all .18s;
+  padding:12px 44px;background:none;color:rgba(238,238,242,.7);border:1px solid var(--dk-6);transition:all .18s;
 }
-.shop-cta-btn:hover{background:var(--dk-1);color:var(--gold);border-color:var(--dk-1)}
+.shop-cta-btn:hover{background:var(--gold);color:var(--dk-1);border-color:var(--gold)}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    ADULTS / AFTER HOURS  (shop)
@@ -252,7 +252,13 @@ body.fb .shop-cta-title{font-size:24px;font-weight:700;letter-spacing:-.01em}
 .adults{
   background:var(--dk-2);
   border-top:1px solid var(--dk-5);
+  border-bottom:2px solid var(--gold); /* gold divider beneath NSFW section */
   padding:48px 40px;
+}
+/* max-width wrapper so content doesn't stretch on wide screens */
+.adults-inner-wrap{
+  max-width:1140px;
+  margin:0 auto;
   display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;
 }
 .adults-eyebrow{
@@ -302,7 +308,7 @@ body.fb .adults-btn{font-size:12px;font-weight:700;text-transform:uppercase;lett
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    NEWSLETTER  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.newsletter{background:var(--dk-4);border-top:1px solid var(--dk-5);padding:28px 40px}
+.newsletter{background:var(--dk-1);border-top:1px solid var(--dk-5);padding:28px 40px}
 .nl-inner{max-width:600px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
 .nl-title{font-family:var(--fh);color:var(--lt-1);margin-bottom:3px}
 body.fa .nl-title{font-size:30px;letter-spacing:.04em}
@@ -444,7 +450,7 @@ body.fb .atc-btn{font-size:13px;font-weight:700;text-transform:uppercase;letter-
    RECS / "ALSO LIKE"  (product)
    Dark section so it doesn't compete with product info
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.recs{padding:48px 40px;background:var(--dk-1);border-top:1px solid var(--dk-5)}
+.recs{padding:48px 40px;background:var(--dk-4);border-top:1px solid var(--dk-5)}
 .recs-hd{font-family:var(--fh);color:var(--lt-1);margin-bottom:24px}
 body.fa .recs-hd{font-size:36px;letter-spacing:.04em}
 body.fb .recs-hd{font-size:24px;font-weight:700;letter-spacing:-.01em}
