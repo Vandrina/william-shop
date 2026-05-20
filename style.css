@@ -133,26 +133,21 @@ body.fa .hero-btn{font-size:20px;padding:13px 48px}
 body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transform:uppercase;letter-spacing:.12em}
 .hero-btn:hover{background:var(--gold-hi)}
 
+
 /* ── HERO RIGHT: product showcase ── */
-.hero-right{
-  display:flex;flex-direction:column;
-  border-left:1px solid var(--dk-5);
-  overflow:hidden;
-}
-/* hero right: product showcase — section bg shows around portrait image */
 .hero-right{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
   border-left:1px solid var(--dk-5);
-  padding:32px 48px; /* section bg visible on all sides, especially right */
+  background:var(--lt-2); /* matches product image bg — unified panel */
+  padding:32px 48px;
   gap:0;
 }
-/* image: portrait orientation, max-width so it doesn't stretch to fill panel */
+/* image: square, fills most of the panel, bg matches panel so it reads as one area */
 .hero-product-img{
   width:100%;
-  max-width:300px;
-  flex:0 0 auto;
-  height:380px; /* taller than wide = portrait */
-  background:var(--lt-2);
+  max-width:420px; /* big enough to feel featured, not tiny */
+  aspect-ratio:1/1;
+  background:var(--lt-2); /* same as hero-right — no contrast difference */
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
   position:relative;
 }
@@ -168,11 +163,11 @@ body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transfor
   font-family:var(--fm);font-size:8px;letter-spacing:.16em;text-transform:uppercase;
   padding:5px 14px;
 }
-/* caption strip: same width as portrait image, sits flush below */
+/* caption strip: same width as square image, sits flush below */
 .hero-caption{
   flex-shrink:0;
   width:100%;
-  max-width:300px;
+  max-width:420px;
   background:var(--dk-1);
   border-top:1px solid var(--dk-5);
   padding:14px 18px;
@@ -413,10 +408,9 @@ body.fb .nl-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-s
   padding:24px; /* breathing room around image */
 }
 .product-img-ph{
-  width:100%;height:100%;min-height:480px;
-  background:repeating-linear-gradient(135deg,
-    var(--lt-1) 0,var(--lt-1) 8px,
-    var(--lt-2) 8px,var(--lt-2) 9px);
+  width:100%;
+  aspect-ratio:1/1; /* square */
+  background:var(--lt-2); /* flat fill, no texture */
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
 }
 .product-img-ph svg{opacity:.28}
@@ -484,7 +478,8 @@ body.fb .product-price{font-size:24px;font-weight:700}
 .qty-btn:hover{background:var(--lt-2)}
 .qty-val{width:40px;text-align:center;font-weight:700;font-size:15px;color:var(--dk-1);border-left:1px solid var(--lt-2);border-right:1px solid var(--lt-2);line-height:48px}
 .atc-btn{
-  flex:1;height:48px;background:var(--dk-1);color:var(--lt-1);
+  flex:1;height:48px;padding:0 16px;
+  background:var(--dk-1);color:var(--lt-1);
   font-family:var(--fh);letter-spacing:.1em;transition:background .15s;
 }
 body.fa .atc-btn{font-size:22px}
@@ -543,6 +538,34 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em;t
 .footer-links{display:flex;flex-direction:column;gap:9px;font-family:var(--fb);font-size:13px;color:rgba(238,238,242,.28)}
 .footer-links a:hover{color:var(--gold)}
 .footer-bottom{border-top:1px solid var(--dk-5);padding-top:18px;display:flex;justify-content:space-between;font-family:var(--fm);font-size:9px;letter-spacing:.06em;color:rgba(238,238,242,.16)}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FONT B OVERRIDES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Polaroid card style — Font B only */
+body.fb .card{
+  background:var(--lt-1); /* white polaroid base */
+  padding:8px 8px 0; /* equal frame on sides/top */
+  border:none;
+  box-shadow:0 2px 8px rgba(28,28,30,.12);
+}
+body.fb .card-img{
+  border:none; /* remove card-img bottom border — polaroid doesn't have one */
+  width:100%;
+}
+body.fb .card-body{
+  background:var(--lt-1);
+  padding:14px 8px 12px; /* wider bottom = classic polaroid thick base */
+}
+body.fb .card:hover{
+  transform:translateY(-3px) rotate(.5deg); /* slight tilt on hover — tactile feel */
+  box-shadow:0 8px 20px rgba(28,28,30,.18);
+}
+
+/* Gold ticker — Font B only */
+body.fb .ticker{background:var(--gold)}
+body.fb .ticker-inner{color:var(--dk-1)}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FONT SWITCHER  (shared)
