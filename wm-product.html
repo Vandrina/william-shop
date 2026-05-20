@@ -16,6 +16,8 @@ a{text-decoration:none;color:inherit;cursor:pointer}
 
 :root{
   --ink:    #1c1c1e;
+  --ink-2:  #222224;
+  --ink-3:  #282828;
   --surface:#242426;
   --border: #2e2e32;
   --border-mid:#3a3a3e;
@@ -23,9 +25,9 @@ a{text-decoration:none;color:inherit;cursor:pointer}
   --gold:   #c8a46e;
   --gold-light:#d4b580;
   --gold-dim: #6e5830;
-  --bg:     #faf7f2;
-  --bg-2:   #f2ece0;
-  --bg-3:   #e8e0d0;
+  --bg:     #f8f8fa;
+  --bg-2:   #eeeef2;
+  --bg-3:   #e4e4e6;
   --panel:  #ffffff;
 }
 
@@ -48,8 +50,7 @@ body.fb .nav-logo-name{font-size:16px;font-weight:700;letter-spacing:-.01em}
 .nav-links{display:flex;gap:22px}
 .nav-links a{font-family:var(--fb);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:rgba(238,238,242,.38);transition:color .15s}
 .nav-links a:hover{color:var(--gold)}
-.nav-adults{color:rgba(220,90,85,.65)!important}
-.nav-adults:hover{color:#e06560!important}
+.nav-adults{opacity:.6}
 .nav-cart{
   background:var(--gold);color:var(--ink);
   font-family:var(--fh);letter-spacing:.08em;transition:background .15s;flex-shrink:0;
@@ -81,7 +82,7 @@ body.fb .nav-cart{font-size:13px;font-weight:700;padding:10px 22px;text-transfor
 }
 .product-img-ph{
   width:100%;height:100%;position:absolute;inset:0;
-  background:repeating-linear-gradient(135deg,#ece4cc 0,#ece4cc 5px,#e2d8be 5px,#e2d8be 6px);
+  background:repeating-linear-gradient(135deg,#e0e0e2 0,#e0e0e2 5px,#d4d4d6 5px,#d4d4d6 6px);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
 }
 .product-img-ph svg{opacity:.22}

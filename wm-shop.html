@@ -17,7 +17,9 @@ a{text-decoration:none;color:inherit;cursor:pointer}
 /* ── PORTFOLIO-MATCHED VARS ── */
 :root{
   /* dark scale — from portfolio stylesheet */
-  --ink:    #1c1c1e;
+  --ink:    #1c1c1e;   /* portfolio --bg   */
+  --ink-2:  #222224;   /* portfolio --bg-2 */
+  --ink-3:  #282828;   /* portfolio --bg-3 */
   --surface:#242426;
   --border: #2e2e32;
   --border-mid:#3a3a3e;
@@ -27,9 +29,9 @@ a{text-decoration:none;color:inherit;cursor:pointer}
   --gold-light:#d4b580;
   --gold-dim: #6e5830;
   /* shop light scale */
-  --bg:     #faf7f2;
-  --bg-2:   #f2ece0;
-  --bg-3:   #e8e0d0;
+  --bg:     #f8f8fa;
+  --bg-2:   #eeeef2;
+  --bg-3:   #e4e4e6;
   --panel:  #ffffff;
   --text-dim:rgba(28,28,30,.45);
 }
@@ -68,8 +70,7 @@ body.fb .nav-logo-name{font-size:16px;font-weight:700;letter-spacing:-.01em}
   color:rgba(238,238,242,.38);transition:color .15s;
 }
 .nav-links a:hover{color:var(--gold)}
-.nav-adults{color:rgba(220,90,85,.65)!important}
-.nav-adults:hover{color:#e06560!important}
+.nav-adults{opacity:.6}
 .nav-cart{
   background:var(--gold);color:var(--ink);
   font-family:var(--fh);letter-spacing:.08em;
@@ -130,7 +131,7 @@ body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transfor
 }
 .hero-img-ph{
   width:100%;height:100%;position:absolute;inset:0;
-  background:repeating-linear-gradient(135deg,#ece4cc 0,#ece4cc 5px,#e2d8be 5px,#e2d8be 6px);
+  background:repeating-linear-gradient(135deg,#e0e0e2 0,#e0e0e2 5px,#d4d4d6 5px,#d4d4d6 6px);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
 }
 .hero-img-ph svg{opacity:.25}
@@ -267,70 +268,66 @@ body.fb .shop-cta-title{font-size:26px;font-weight:700;letter-spacing:-.01em}
 }
 .shop-cta-btn:hover{background:var(--ink);color:var(--gold);border-color:var(--ink)}
 
-/* ── ADULTS / AFTER HOURS  — newsletter overlaid on blurred images ── */
+/* ── ADULTS / AFTER HOURS ── */
 .adults{
-  background:var(--bg-3);
-  border-top:1px solid var(--bg-3);
-  padding:56px 40px;
-  position:relative;overflow:hidden;
+  background:var(--ink-2);
+  border-top:1px solid var(--border);
+  padding:48px 40px;
+  display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;
 }
-/* blurred thumbs float in background */
-.adults-bg-thumbs{
-  position:absolute;inset:0;
-  display:flex;align-items:center;justify-content:flex-end;
-  gap:20px;padding:0 40px;
-  pointer-events:none;
+/* blurred thumbs — contained column, no absolute overflow */
+.adults-thumbs{display:flex;gap:12px;align-items:center;flex-shrink:0}
+.adults-thumb{
+  width:100px;height:140px;
+  background:var(--surface);border:1px solid var(--border-mid);
+  filter:blur(8px);position:relative;flex-shrink:0;
 }
-.adults-bg-thumb{
-  width:160px;height:220px;
-  background:var(--ink);
-  filter:blur(10px);
-  opacity:.18;
-  flex-shrink:0;
+.adults-thumb::after{
+  content:'Soon';position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--fh);font-size:18px;letter-spacing:.1em;
+  color:rgba(200,164,110,.3);filter:blur(0);
 }
-/* form content on top */
-.adults-inner{
-  position:relative;z-index:1;
-  max-width:560px;
-}
+/* form content */
+.adults-inner{min-width:0}
 .adults-eyebrow{
   font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(28,28,30,.45);margin-bottom:12px;
+  color:rgba(238,238,242,.4);margin-bottom:12px;
 }
 .adults-title{
-  font-family:var(--fh);color:var(--ink);margin-bottom:8px;
+  font-family:var(--fh);color:#eeeef2;margin-bottom:8px;
 }
 body.fa .adults-title{font-size:44px;line-height:.95;letter-spacing:.04em}
 body.fb .adults-title{font-size:30px;font-weight:700;letter-spacing:-.02em}
 .adults-sub{
   font-family:var(--fb);font-size:13px;font-weight:300;
-  color:rgba(28,28,30,.5);max-width:420px;line-height:1.7;margin-bottom:24px;
+  color:rgba(238,238,242,.45);max-width:420px;line-height:1.7;margin-bottom:24px;
 }
 .adults-form{display:flex;gap:0;max-width:380px}
 .adults-input{
   flex:1;padding:11px 16px;
-  background:var(--panel);color:var(--ink);
-  border:1.5px solid var(--bg-3);border-right:none;
+  background:rgba(255,255,255,.07);color:#eeeef2;
+  border:1px solid var(--border-mid);border-right:none;
   font-family:var(--fb);font-size:13px;outline:none;
 }
-.adults-input::placeholder{color:rgba(28,28,30,.3)}
+.adults-input::placeholder{color:rgba(238,238,242,.22)}
 .adults-btn{
-  background:var(--ink);color:var(--bg);
+  background:var(--gold);color:var(--ink);
   font-family:var(--fh);letter-spacing:.08em;
   transition:background .15s;flex-shrink:0;
 }
 body.fa .adults-btn{font-size:16px;padding:0 22px}
 body.fb .adults-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:0 22px}
-.adults-btn:hover{background:var(--gold-dim)}
+.adults-btn:hover{background:var(--gold-light)}
 .adults-note{
   font-family:var(--fm);font-size:9px;letter-spacing:.1em;
-  color:rgba(28,28,30,.3);margin-top:10px;
+  color:rgba(238,238,242,.22);margin-top:10px;
 }
 
 /* ── NEWSLETTER ── */
 .newsletter{
-  background:var(--bg-2); /* alternating from adults */
-  border-top:1px solid var(--bg-3);
+  background:var(--ink-3);
+  border-top:1px solid var(--border);
   padding:28px 40px;
 }
 .nl-inner{
@@ -338,27 +335,27 @@ body.fb .adults-btn{font-size:12px;font-weight:700;text-transform:uppercase;lett
   display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;
 }
 .nl-title{
-  font-family:var(--fh);color:var(--ink);margin-bottom:3px;
+  font-family:var(--fh);color:#eeeef2;margin-bottom:3px;
 }
 body.fa .nl-title{font-size:32px;letter-spacing:.04em}
 body.fb .nl-title{font-size:22px;font-weight:700;letter-spacing:-.01em}
-.nl-sub{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(28,28,30,.35)}
+.nl-sub{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,238,242,.35)}
 .nl-form{display:flex;gap:0}
 .nl-input{
   flex:1;padding:11px 18px;
-  background:var(--panel);color:var(--ink);
-  border:1.5px solid var(--bg-3);border-right:none;
+  background:rgba(255,255,255,.07);color:#eeeef2;
+  border:1px solid var(--border-mid);border-right:none;
   font-family:var(--fb);font-size:13px;outline:none;min-width:200px;
 }
-.nl-input::placeholder{color:rgba(28,28,30,.28)}
+.nl-input::placeholder{color:rgba(238,238,242,.25)}
 .nl-btn{
-  background:var(--ink);color:var(--bg);
+  background:var(--gold);color:var(--ink);
   font-family:var(--fh);letter-spacing:.08em;
   transition:background .15s;flex-shrink:0;
 }
 body.fa .nl-btn{font-size:17px;padding:0 22px}
 body.fb .nl-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.12em;padding:0 22px}
-.nl-btn:hover{background:var(--gold);color:var(--ink)}
+.nl-btn:hover{background:var(--gold-light)}
 
 /* ── FOOTER ── */
 .footer{background:var(--ink);padding:48px 40px 32px;color:var(--bg)}
@@ -446,7 +443,7 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
 <div class="cat-section">
   <div class="cat-heading">SHOP</div>
   <div class="cat-buttons">
-    <button class="cat-btn on">Prints</button>
+    <button class="cat-btn">Prints</button>
     <button class="cat-btn">T-Shirts</button>
     <button class="cat-btn">Stickers</button>
     <button class="cat-btn">Mugs</button>
@@ -456,9 +453,6 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
 
 <!-- FEATURED: just "Featured" -->
 <section class="section">
-  <div class="section-hd">
-    <h2 class="section-title">Featured</h2>
-  </div>
   <div class="featured-grid">
 
     <a class="card" href="wm-product.html">
@@ -523,15 +517,8 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
   <button class="shop-cta-btn">Browse the Full Shop →</button>
 </div>
 
-<!-- ADULTS / AFTER HOURS: newsletter overlaid on blurred bg images -->
+<!-- ADULTS / AFTER HOURS: side-by-side, thumbs contained in right column -->
 <section class="adults">
-  <!-- blurred bg thumbs -->
-  <div class="adults-bg-thumbs">
-    <div class="adults-bg-thumb"></div>
-    <div class="adults-bg-thumb"></div>
-    <div class="adults-bg-thumb"></div>
-  </div>
-  <!-- form content on top -->
   <div class="adults-inner">
     <div class="adults-eyebrow">Age-Restricted — Coming Soon</div>
     <h2 class="adults-title">The After Hours Collection.</h2>
@@ -541,6 +528,11 @@ body.fb .footer-logo-name{font-size:18px;font-weight:700;letter-spacing:-.01em}
       <button class="adults-btn">Join Waitlist</button>
     </div>
     <div class="adults-note">18+ only. Age verification required at entry.</div>
+  </div>
+  <div class="adults-thumbs">
+    <div class="adults-thumb"></div>
+    <div class="adults-thumb"></div>
+    <div class="adults-thumb"></div>
   </div>
 </section>
 
