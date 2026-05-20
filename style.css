@@ -138,17 +138,23 @@ body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transfor
   display:flex;flex-direction:column;
   border-left:1px solid var(--dk-5);
   overflow:hidden;
-  padding:32px 40px 32px 32px; /* breathing room, right side especially */
 }
-/* image area — fills the top portion */
+/* hero right: product showcase — section bg shows around portrait image */
+.hero-right{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border-left:1px solid var(--dk-5);
+  padding:32px 48px; /* section bg visible on all sides, especially right */
+  gap:0;
+}
+/* image: portrait orientation, max-width so it doesn't stretch to fill panel */
 .hero-product-img{
-  flex:1;
-  background:repeating-linear-gradient(135deg,
-    var(--lt-1) 0,var(--lt-1) 8px,
-    var(--lt-2) 8px,var(--lt-2) 9px);
+  width:100%;
+  max-width:300px;
+  flex:0 0 auto;
+  height:380px; /* taller than wide = portrait */
+  background:var(--lt-2);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
   position:relative;
-  min-height:0;
 }
 .hero-product-img svg{opacity:.28}
 .hero-product-img span{
@@ -162,13 +168,15 @@ body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transfor
   font-family:var(--fm);font-size:8px;letter-spacing:.16em;text-transform:uppercase;
   padding:5px 14px;
 }
-/* caption strip at bottom — dark, product info, clean horizontal layout */
+/* caption strip: same width as portrait image, sits flush below */
 .hero-caption{
   flex-shrink:0;
+  width:100%;
+  max-width:300px;
   background:var(--dk-1);
   border-top:1px solid var(--dk-5);
-  padding:18px 24px;
-  display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px;
+  padding:14px 18px;
+  display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;
 }
 .hero-caption-type{
   font-family:var(--fm);font-size:8px;letter-spacing:.18em;text-transform:uppercase;
@@ -229,8 +237,8 @@ body.fb .cat-heading{font-size:14px;font-weight:700;text-transform:uppercase;let
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FEATURED SECTION  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.section{padding:48px 40px;background:var(--lt-1);flex:1}
-.featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.section{padding:48px 56px;background:var(--lt-1);flex:1}
+.featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    CARDS  (shared: featured + recs)
@@ -243,9 +251,7 @@ body.fb .cat-heading{font-size:14px;font-weight:700;text-transform:uppercase;let
 .card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(28,28,30,.15)}
 .card-img{
   width:100%;
-  background:repeating-linear-gradient(135deg,
-    var(--lt-2) 0,var(--lt-2) 5px,
-    var(--md-2) 5px,var(--md-2) 6px);
+  background:var(--lt-2); /* flat fill — no texture */
   border-bottom:1px solid var(--md-2);
   display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
@@ -253,7 +259,7 @@ body.fb .cat-heading{font-size:14px;font-weight:700;text-transform:uppercase;let
 .card-img,
 .card-img.portrait,
 .card-img.square,
-.card-img.landscape{padding-top:100%}
+.card-img.landscape{padding-top:100%} /* all square */
 .card-img-inner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
 .badge{
   position:absolute;top:0;left:0;
