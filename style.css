@@ -91,9 +91,16 @@ body.fb .nav-cart{font-size:13px;font-weight:700;padding:10px 22px;text-transfor
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    HERO  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* outer frame — breathing room so hero doesn't bleed full-width */
+.hero-frame{
+  padding:28px 32px 0;
+  background:var(--lt-1);
+}
 .hero{
   display:grid;grid-template-columns:1fr 1fr;
-  min-height:560px;border-bottom:1px solid var(--dk-5);
+  min-height:560px;
+  border:1px solid var(--dk-5);
+  overflow:hidden;
 }
 .hero-left{
   background:var(--dk-1);padding:80px 64px 80px 80px;
@@ -101,7 +108,8 @@ body.fb .nav-cart{font-size:13px;font-weight:700;padding:10px 22px;text-transfor
   position:relative;overflow:hidden;
 }
 .hero-bg-word{
-  position:absolute;top:-20px;left:-8px;
+  position:absolute;top:-20px;
+  left:48px; /* halfway between edge and h1 indent */
   font-family:'Bebas Neue',cursive;font-size:200px;letter-spacing:-.02em;
   color:rgba(200,164,110,.04);line-height:1;user-select:none;pointer-events:none;
 }
@@ -127,30 +135,66 @@ body.fb .hero-title{font-size:64px;line-height:1;letter-spacing:-.03em;font-weig
 body.fa .hero-btn{font-size:20px;padding:13px 48px}
 body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transform:uppercase;letter-spacing:.12em}
 .hero-btn:hover{background:var(--gold-hi)}
+
+/* ── HERO RIGHT: product showcase ── */
 .hero-right{
-  background:var(--lt-1); /* lightest bg — clean and open */
-  display:flex;align-items:center;justify-content:center;
-  position:relative;overflow:hidden;border-left:1px solid var(--dk-5);
+  display:flex;flex-direction:column;
+  border-left:1px solid var(--dk-5);
+  overflow:hidden;
 }
-.hero-img-ph{
-  width:100%;height:100%;position:absolute;inset:0;
-  /* diagonal stripe with lt-2 (darker of the two lights) on lt-1 bg */
+/* image area — fills the top portion */
+.hero-product-img{
+  flex:1;
   background:repeating-linear-gradient(135deg,
     var(--lt-1) 0,var(--lt-1) 8px,
     var(--lt-2) 8px,var(--lt-2) 9px);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  position:relative;
+  min-height:0;
 }
-.hero-img-ph svg{opacity:.3}
-.hero-img-ph span{
+.hero-product-img svg{opacity:.28}
+.hero-product-img span{
   font-family:var(--fm);font-size:9px;letter-spacing:.15em;text-transform:uppercase;
   color:var(--md-2);
 }
-.hero-product-label{
-  position:absolute;bottom:20px;right:20px;
-  background:var(--dk-1);color:var(--lt-1);
-  font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
-  padding:6px 14px;
+/* featured badge top-left */
+.hero-featured-badge{
+  position:absolute;top:0;left:0;
+  background:var(--gold);color:var(--dk-1);
+  font-family:var(--fm);font-size:8px;letter-spacing:.16em;text-transform:uppercase;
+  padding:5px 14px;
 }
+/* caption strip at bottom — dark, product info, clean horizontal layout */
+.hero-caption{
+  flex-shrink:0;
+  background:var(--dk-1);
+  border-top:1px solid var(--dk-5);
+  padding:18px 24px;
+  display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px;
+}
+.hero-caption-type{
+  font-family:var(--fm);font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold-lo);margin-bottom:4px;
+}
+.hero-caption-name{
+  font-family:var(--fh);color:var(--lt-1);line-height:1;
+}
+body.fa .hero-caption-name{font-size:22px;letter-spacing:.04em}
+body.fb .hero-caption-name{font-size:16px;font-weight:700;text-transform:uppercase}
+.hero-caption-right{
+  display:flex;flex-direction:column;align-items:flex-end;gap:6px;
+}
+.hero-caption-price{
+  font-family:var(--fh);color:var(--lt-1);line-height:1;
+}
+body.fa .hero-caption-price{font-size:28px;letter-spacing:.04em}
+body.fb .hero-caption-price{font-size:20px;font-weight:700}
+.hero-caption-cta{
+  font-family:var(--fm);font-size:8px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);border-bottom:1px solid var(--gold-lo);
+  padding-bottom:1px;cursor:pointer;transition:color .15s;white-space:nowrap;
+}
+.hero-caption-cta:hover{color:var(--gold-hi)}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    SHOP CTA BAR  (shop)
@@ -459,12 +503,24 @@ body.fb .atc-btn{font-size:13px;font-weight:700;text-transform:uppercase;letter-
    RECS / "ALSO LIKE"  (product)
    Dark section so it doesn't compete with product info
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.recs{padding:48px 40px;background:var(--dk-4);border-top:1px solid var(--dk-5)}
-.recs-hd{font-family:var(--fh);color:var(--lt-1);margin-bottom:24px}
-body.fa .recs-hd{font-size:36px;letter-spacing:.04em}
-body.fb .recs-hd{font-size:24px;font-weight:700;letter-spacing:-.01em}
-.recs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-/* cards in recs inherit .card — same styles, dark bg makes lt-2 cards pop */
+.recs{padding:32px 40px;background:var(--dk-4);border-top:1px solid var(--dk-5)}
+.recs-hd{
+  font-family:var(--fh);color:var(--lt-1);margin-bottom:16px;
+}
+body.fa .recs-hd{font-size:22px;letter-spacing:.04em}
+body.fb .recs-hd{font-size:15px;font-weight:700;letter-spacing:-.01em}
+.recs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+/* recs cards: compact — tighter text, smaller price, shorter image */
+.recs .card-img,
+.recs .card-img.portrait,
+.recs .card-img.square,
+.recs .card-img.landscape{padding-top:80%}
+.recs .card-body{padding:10px 12px}
+.recs .card-title{font-size:13px;margin-bottom:8px}
+.recs .card-type{font-size:7px;margin-bottom:3px}
+.recs .card-price{font-size:18px}
+body.fb .recs .card-price{font-size:15px}
+.recs .card-add{font-size:10px;padding:5px 10px}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FOOTER  (shared)
