@@ -414,15 +414,16 @@ body.fb .nl-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-s
   align-self:start;
 }
 .product-img-ph{
-  width:60%; /* 40% smaller than the column width */
+  width:60%;
   aspect-ratio:1/1;
   background:var(--lt-2);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  position:relative; /* badge positions relative to this */
 }
 .product-img-ph svg{opacity:.28}
 .product-img-ph span{font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--md-2)}
 .product-img-badge{
-  position:absolute;top:20px;left:20px;
+  position:absolute;top:0;left:0; /* top-left of the image square */
   background:var(--gold);color:var(--dk-1);
   font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
   padding:5px 12px;z-index:2;
@@ -514,10 +515,11 @@ body.fa .recs-hd{font-size:22px;letter-spacing:.04em}
 body.fb .recs-hd{font-size:15px;font-weight:700;letter-spacing:-.01em}
 .recs-grid{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:24px;
+  grid-template-columns:repeat(4,190px); /* ~15% smaller than auto 1fr at 80% width */
+  justify-content:space-evenly; /* spread evenly across the 80% container */
   width:80%;
   margin:0 auto;
+  row-gap:20px;
 }
 .recs .card-img,
 .recs .card-img.portrait,
@@ -558,6 +560,8 @@ body.fb .recs .card-price{font-size:12px}
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .footer{background:var(--dk-1);border-top:1px solid var(--dk-5);padding:48px 40px 32px;color:var(--lt-1)}
 .footer-top{display:grid;grid-template-columns:1fr 1fr 2fr;gap:32px;margin-bottom:36px}
+/* brand/tagline column: left-aligned text, pushed to right within footer */
+.footer-top > div:last-child{justify-self:end;text-align:left}
 .footer-logo{line-height:1.15;margin-bottom:12px}
 .footer-logo-pre{font-family:var(--fm);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block}
 .footer-logo-name{font-family:var(--fh);color:var(--lt-1);display:block}
@@ -567,8 +571,8 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em;t
 .footer-hd{font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
 .footer-links{
   display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px 6px; /* tight column gap so links clearly belong to same category */
+  grid-template-columns:max-content max-content; /* columns size to content — no gap stretching */
+  gap:8px 14px;
   font-family:var(--fb);font-size:13px;color:rgba(238,238,242,.28);
 }
 .footer-links a:hover{color:var(--gold)}
