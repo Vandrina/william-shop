@@ -37,7 +37,7 @@ a{text-decoration:none;color:inherit;cursor:pointer}
 body.fa{--fh:'Bebas Neue',cursive;--fb:'Outfit',sans-serif;--fm:'Space Mono',monospace}
 /* B: Outfit throughout (matches portfolio exactly) */
 body.fb{--fh:'Outfit',sans-serif;--fb:'Inter',sans-serif;--fm:'Space Mono',monospace}
-body{font-family:var(--fb,'Outfit',sans-serif);background:var(--lt-1);color:var(--dk-1)}
+body{font-family:var(--fb,'Outfit',sans-serif);background:var(--dk-2);color:var(--dk-1)}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    NAV  (shared)
@@ -91,15 +91,15 @@ body.fb .nav-cart{font-size:13px;font-weight:700;padding:10px 22px;text-transfor
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    HERO  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* outer frame — breathing room so hero doesn't bleed full-width */
+/* outer frame — dark page bg shows as breathing room around hero */
 .hero-frame{
-  padding:28px 32px 0;
-  background:var(--lt-1);
+  padding:28px 32px 24px; /* bottom pad = dark gap before ticker */
+  background:var(--dk-2); /* same as body — seamless */
 }
 .hero{
   display:grid;grid-template-columns:1fr 1fr;
   min-height:560px;
-  border:1px solid var(--dk-5);
+  /* no border — frame shows through as dark space */
   overflow:hidden;
 }
 .hero-left{
@@ -424,7 +424,7 @@ body.fb .nl-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-s
   font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
   padding:5px 12px;z-index:2;
 }
-.product-info{padding:48px;display:flex;flex-direction:column;background:var(--lt-1)}
+.product-info{padding:48px 56px;display:flex;flex-direction:column;background:var(--lt-1)}
 .product-type{font-family:var(--fm);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-lo);margin-bottom:10px}
 .product-name{font-family:var(--fh);color:var(--dk-1);margin-bottom:8px}
 body.fa .product-name{font-size:52px;line-height:.95;letter-spacing:.03em}
@@ -504,23 +504,21 @@ body.fb .atc-btn{font-size:13px;font-weight:700;text-transform:uppercase;letter-
    Dark section so it doesn't compete with product info
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .recs{padding:32px 40px;background:var(--dk-4);border-top:1px solid var(--dk-5)}
-.recs-hd{
-  font-family:var(--fh);color:var(--lt-1);margin-bottom:16px;
-}
+.recs-hd{font-family:var(--fh);color:var(--lt-1);margin-bottom:16px}
 body.fa .recs-hd{font-size:22px;letter-spacing:.04em}
 body.fb .recs-hd{font-size:15px;font-weight:700;letter-spacing:-.01em}
 .recs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-/* recs cards: compact — tighter text, smaller price, shorter image */
+/* thumbnail images — small fixed ratio */
 .recs .card-img,
 .recs .card-img.portrait,
 .recs .card-img.square,
-.recs .card-img.landscape{padding-top:80%}
-.recs .card-body{padding:10px 12px}
-.recs .card-title{font-size:13px;margin-bottom:8px}
-.recs .card-type{font-size:7px;margin-bottom:3px}
-.recs .card-price{font-size:18px}
-body.fb .recs .card-price{font-size:15px}
-.recs .card-add{font-size:10px;padding:5px 10px}
+.recs .card-img.landscape{padding-top:55% !important}
+.recs .card-body{padding:8px 10px}
+.recs .card-title{font-size:12px;margin-bottom:6px;line-height:1.2}
+.recs .card-type{font-size:7px;margin-bottom:2px}
+.recs .card-price{font-size:16px}
+body.fb .recs .card-price{font-size:13px}
+.recs .card-add{font-size:10px;padding:4px 10px}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FOOTER  (shared)
@@ -537,12 +535,6 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em;t
 .footer-links{display:flex;flex-direction:column;gap:9px;font-family:var(--fb);font-size:13px;color:rgba(238,238,242,.28)}
 .footer-links a:hover{color:var(--gold)}
 .footer-bottom{border-top:1px solid var(--dk-5);padding-top:18px;display:flex;justify-content:space-between;font-family:var(--fm);font-size:9px;letter-spacing:.06em;color:rgba(238,238,242,.16)}
-
-/* recs images already handled globally but keeping specificity for safety */
-.recs .card-img,
-.recs .card-img.portrait,
-.recs .card-img.square,
-.recs .card-img.landscape{padding-top:100%}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FONT SWITCHER  (shared)
