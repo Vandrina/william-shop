@@ -7,229 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100%;display:flex;flex-direction:column}
-body{font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
-button{cursor:pointer;border:none;background:none;font-family:inherit}
-a{text-decoration:none;color:inherit;cursor:pointer}
-
-/* portfolio palette only */
-:root{
-  --dk-1:#1c1c1e; --dk-2:#222224; --dk-3:#242426;
-  --dk-4:#282828; --dk-5:#2e2e32; --dk-6:#3a3a3e;
-  --md-1:#52525a; --md-2:#7a7a84;
-  --lt-1:#eeeef2; --lt-2:#d0d0d8;
-  --gold:#c8a46e; --gold-hi:#d4b580; --gold-lo:#6e5830;
-}
-body.fa{--fh:'Bebas Neue',cursive;--fb:'Outfit',sans-serif;--fm:'Space Mono',monospace}
-body.fb{--fh:'Outfit',sans-serif;--fb:'Inter',sans-serif;--fm:'Space Mono',monospace}
-body{font-family:var(--fb,'Outfit',sans-serif);background:var(--lt-1);color:var(--dk-1)}
-
-/* ── NAV ── */
-.nav{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 40px;background:var(--dk-1);border-bottom:1px solid var(--dk-6);
-  height:64px;position:sticky;top:0;z-index:100;gap:24px;
-}
-.nav-logo{line-height:1.1;cursor:pointer}
-.nav-logo-pre{font-family:var(--fm);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block}
-.nav-logo-name{font-family:var(--fh);color:var(--lt-1);display:block}
-body.fa .nav-logo-name{font-size:24px;letter-spacing:.06em}
-body.fb .nav-logo-name{font-size:16px;font-weight:700;letter-spacing:-.01em}
-.nav-links{display:flex;gap:22px}
-.nav-links a{font-family:var(--fb);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:rgba(238,238,242,.38);transition:color .15s}
-.nav-links a:hover{color:var(--gold)}
-.nav-adults{opacity:.55}
-.nav-cart{
-  background:var(--gold);color:var(--dk-1);font-family:var(--fh);letter-spacing:.08em;transition:background .15s;flex-shrink:0;
-}
-body.fa .nav-cart{font-size:18px;padding:9px 22px}
-body.fb .nav-cart{font-size:13px;font-weight:700;padding:10px 22px;text-transform:uppercase;letter-spacing:.12em}
-.nav-cart:hover{background:var(--gold-hi)}
-
-/* ── BREADCRUMB ── */
-.breadcrumb{
-  background:var(--lt-1);border-bottom:1px solid var(--lt-2);
-  padding:12px 40px;display:flex;align-items:center;gap:8px;
-  font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--md-1);
-}
-.breadcrumb a:hover{color:var(--gold-lo)}
-.breadcrumb-sep{opacity:.35}
-.breadcrumb-current{color:var(--dk-1);font-weight:700}
-
-/* ── PRODUCT LAYOUT ── */
-.product{display:grid;grid-template-columns:1fr 1fr;flex:1}
-
-/* LEFT: image — not too tall */
-.product-img-wrap{
-  background:var(--lt-2);
-  border-right:1px solid var(--md-2);
-  position:sticky;top:64px; /* sticks while info scrolls */
-  height:calc(100vh - 64px);
-  max-height:560px; /* cap so it doesn't go crazy tall */
-  display:flex;align-items:center;justify-content:center;
-  align-self:start;
-}
-.product-img-ph{
-  width:100%;height:100%;
-  background:repeating-linear-gradient(135deg,
-    var(--lt-2) 0,var(--lt-2) 5px,
-    var(--md-2) 5px,var(--md-2) 6px);
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
-}
-.product-img-ph svg{opacity:.28}
-.product-img-ph span{font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--md-1)}
-.product-img-badge{
-  position:absolute;top:20px;left:20px;
-  background:var(--gold);color:var(--dk-1);
-  font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
-  padding:5px 12px;z-index:2;
-}
-
-/* RIGHT: info */
-.product-info{padding:48px;display:flex;flex-direction:column;background:var(--lt-1)}
-.product-type{font-family:var(--fm);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-lo);margin-bottom:10px}
-.product-name{font-family:var(--fh);color:var(--dk-1);margin-bottom:8px}
-body.fa .product-name{font-size:52px;line-height:.95;letter-spacing:.03em}
-body.fb .product-name{font-size:36px;font-weight:700;line-height:1;letter-spacing:-.02em}
-.product-price{font-family:var(--fh);color:var(--gold-lo);margin-bottom:6px}
-body.fa .product-price{font-size:34px;letter-spacing:.04em}
-body.fb .product-price{font-size:24px;font-weight:700}
-.product-stock{font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--md-2);margin-bottom:28px}
-.rule{height:1px;background:var(--lt-2);margin-bottom:28px}
-
-/* COLOR SELECTOR */
-.sel-label{font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--dk-1);margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.sel-label span{color:var(--md-2);font-weight:400}
-.colors{display:flex;gap:10px;margin-bottom:28px}
-.swatch{
-  width:28px;height:28px;border-radius:50%;
-  border:2px solid transparent;outline:2px solid transparent;
-  transition:all .15s;cursor:pointer;position:relative;
-}
-.swatch:hover{outline-color:var(--gold-lo);outline-offset:3px}
-.swatch.on{border-color:var(--lt-1);outline-color:var(--dk-1);outline-offset:3px}
-.swatch::after{
-  content:attr(data-name);
-  position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);
-  background:var(--dk-1);color:var(--lt-1);
-  font-family:var(--fm);font-size:8px;letter-spacing:.1em;text-transform:uppercase;
-  padding:3px 8px;white-space:nowrap;opacity:0;transition:opacity .15s;pointer-events:none;
-}
-.swatch:hover::after{opacity:1}
-
-/* SIZE */
-.sizes{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
-.size-btn{
-  min-width:48px;height:40px;padding:0 10px;
-  background:none;color:var(--dk-1);
-  font-family:var(--fb);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
-  border:1px solid var(--lt-2);transition:all .15s;
-}
-.size-btn:hover{border-color:var(--dk-1)}
-.size-btn.on{background:var(--dk-1);color:var(--lt-1);border-color:var(--dk-1)}
-.size-btn.sold{color:rgba(28,28,30,.22);border-color:var(--lt-2);cursor:not-allowed;position:relative}
-.size-btn.sold::after{content:'';position:absolute;top:50%;left:8%;right:8%;height:1px;background:rgba(28,28,30,.18);transform:rotate(-15deg)}
-.size-guide{
-  font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--gold-lo);border-bottom:1px solid var(--gold-lo);
-  display:inline-block;padding-bottom:1px;margin-bottom:28px;cursor:pointer;
-}
-
-/* ADD TO CART */
-.atc-row{display:flex;gap:10px;margin-bottom:20px}
-.qty{display:flex;align-items:center;border:1px solid var(--lt-2)}
-.qty-btn{width:36px;height:48px;font-size:18px;color:var(--dk-1);background:none;transition:background .15s}
-.qty-btn:hover{background:var(--lt-2)}
-.qty-val{width:40px;text-align:center;font-weight:700;font-size:15px;color:var(--dk-1);border-left:1px solid var(--lt-2);border-right:1px solid var(--lt-2);line-height:48px}
-.atc-btn{
-  flex:1;height:48px;background:var(--dk-1);color:var(--lt-1);
-  font-family:var(--fh);letter-spacing:.1em;transition:background .15s;
-}
-body.fa .atc-btn{font-size:22px}
-body.fb .atc-btn{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
-.atc-btn:hover{background:var(--gold-lo)}
-
-.product-desc{font-family:var(--fb);font-size:13px;font-weight:400;color:var(--md-1);line-height:1.75;margin-bottom:24px}
-.product-meta{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--md-2);line-height:2.2}
-.product-meta a{color:var(--gold-lo);border-bottom:1px solid var(--gold-lo)}
-.product-meta a:hover{color:var(--gold)}
-
-/* LOYALTY */
-.loyalty{
-  margin-top:20px;background:var(--lt-2);border:1px solid var(--md-2);padding:14px 16px;
-}
-.loyalty-hd{font-family:var(--fm);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-lo);margin-bottom:6px}
-.loyalty-body{font-family:var(--fb);font-size:12px;color:var(--md-1);line-height:1.6}
-.loyalty-body a{color:var(--gold-lo);border-bottom:1px solid var(--gold-lo)}
-.loyalty-body a:hover{color:var(--gold)}
-
-/* ── ALSO LIKE ── */
-.recs{padding:48px 40px;background:var(--lt-2);border-top:1px solid var(--md-2)}
-.recs-hd{font-family:var(--fh);color:var(--dk-1);margin-bottom:24px}
-body.fa .recs-hd{font-size:36px;letter-spacing:.04em}
-body.fb .recs-hd{font-size:24px;font-weight:700;letter-spacing:-.01em}
-.recs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.card{
-  background:var(--lt-1);border:1px solid var(--md-2);
-  position:relative;transition:transform .15s,box-shadow .15s;display:block;
-}
-.card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(28,28,30,.12)}
-.card-img{
-  width:100%;
-  background:repeating-linear-gradient(135deg,var(--lt-2) 0,var(--lt-2) 5px,var(--md-2) 5px,var(--md-2) 6px);
-  border-bottom:1px solid var(--md-2);
-  display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
-}
-.card-img.portrait{padding-top:120%}
-.card-img.square{padding-top:100%}
-.card-img-inner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
-.badge{
-  position:absolute;top:0;left:0;
-  font-family:var(--fm);font-size:8px;letter-spacing:.12em;text-transform:uppercase;
-  padding:5px 10px;z-index:2;font-weight:700;background:var(--gold);color:var(--dk-1);
-}
-.badge.new{background:var(--dk-1);color:var(--lt-1)}
-.card-body{padding:14px}
-.card-type{font-family:var(--fm);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-lo);margin-bottom:4px}
-.card-title{font-family:var(--fb);font-size:15px;font-weight:600;color:var(--dk-1);margin-bottom:12px;line-height:1.3}
-.card-foot{display:flex;align-items:center;justify-content:space-between}
-.card-price{font-family:var(--fh);color:var(--dk-1)}
-body.fa .card-price{font-size:24px;letter-spacing:.05em}
-body.fb .card-price{font-size:18px;font-weight:700}
-.card-add{
-  background:var(--dk-1);color:var(--lt-1);
-  font-family:var(--fb);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
-  padding:6px 14px;transition:background .15s;
-}
-.card-add:hover{background:var(--gold);color:var(--dk-1)}
-
-/* ── FOOTER ── */
-.footer{background:var(--dk-1);border-top:1px solid var(--dk-5);padding:48px 40px 32px;color:var(--lt-1)}
-.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:36px}
-.footer-logo{line-height:1.15;margin-bottom:12px}
-.footer-logo-pre{font-family:var(--fm);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block}
-.footer-logo-name{font-family:var(--fh);color:var(--lt-1);display:block}
-body.fa .footer-logo-name{font-size:26px;letter-spacing:.04em}
-body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em}
-.footer-tagline{font-family:var(--fb);font-size:13px;font-weight:300;color:rgba(238,238,242,.28);line-height:1.7}
-.footer-hd{font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
-.footer-links{display:flex;flex-direction:column;gap:9px;font-family:var(--fb);font-size:13px;color:rgba(238,238,242,.28)}
-.footer-links a:hover{color:var(--gold)}
-.footer-bottom{border-top:1px solid var(--dk-5);padding-top:18px;display:flex;justify-content:space-between;font-family:var(--fm);font-size:9px;letter-spacing:.06em;color:rgba(238,238,242,.16)}
-
-/* FONT SWITCHER */
-#fswitcher{
-  position:fixed;bottom:20px;right:20px;z-index:9999;
-  background:rgba(28,28,30,.94);border:1px solid var(--dk-6);padding:6px;display:flex;gap:4px;
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:40px;box-shadow:0 6px 28px rgba(0,0,0,.4);
-}
-.fsw{padding:7px 18px;border:none;background:transparent;color:rgba(238,238,242,.38);font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;cursor:pointer;border-radius:28px;transition:all .2s;white-space:nowrap}
-.fsw sub{display:block;font-size:8px;opacity:.5;margin-top:1px}
-.fsw.on{background:var(--lt-1);color:var(--dk-1)}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body class="fa">
 
@@ -256,23 +34,25 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em}
 
 <div class="product">
 
+  <!-- LEFT: sticky image placeholder -->
   <div class="product-img-wrap">
     <div class="product-img-badge">Best Seller</div>
     <div class="product-img-ph">
       <svg width="64" height="64" viewBox="0 0 40 40" fill="none">
-        <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#52525a" stroke-width="1.5" fill="none"/>
-        <circle cx="14" cy="14" r="3.5" fill="#52525a"/>
-        <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#52525a" stroke-width="1.5" fill="none"/>
+        <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#7a7a84" stroke-width="1.5" fill="none"/>
+        <circle cx="14" cy="14" r="3.5" fill="#7a7a84"/>
+        <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#7a7a84" stroke-width="1.5" fill="none"/>
       </svg>
       <span>Product Image</span>
     </div>
   </div>
 
+  <!-- RIGHT: product info -->
   <div class="product-info">
     <div class="product-type">Apparel — Unisex Tee</div>
     <h1 class="product-name">Concept<br>Series Tee</h1>
     <div class="product-price">$36</div>
-    <div class="product-stock">In stock — ships from Seattle in 5–7 days</div>
+    <div class="product-stock">In stock — made in-house, ships from Seattle within two weeks</div>
 
     <div class="rule"></div>
 
@@ -309,7 +89,7 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em}
 
     <div class="product-meta">
       Original artwork by William McGuire<br>
-      Ships from Seattle<br>
+      Made in-house · Ships from Seattle<br>
       <a href="#">Refund policy →</a>
     </div>
 
@@ -325,6 +105,7 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em}
   </div>
 </div>
 
+<!-- RECS: dark section -->
 <section class="recs">
   <h2 class="recs-hd">More Shit To Haunt Your Walls</h2>
   <div class="recs-grid">
@@ -334,9 +115,9 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em}
       <div class="card-img portrait">
         <div class="card-img-inner">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#52525a" stroke-width="1.5" fill="none"/>
-            <circle cx="14" cy="14" r="3.5" fill="#52525a"/>
-            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#52525a" stroke-width="1.5" fill="none"/>
+            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#7a7a84" stroke-width="1.5" fill="none"/>
+            <circle cx="14" cy="14" r="3.5" fill="#7a7a84"/>
+            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#7a7a84" stroke-width="1.5" fill="none"/>
           </svg>
         </div>
       </div>
@@ -352,9 +133,9 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em}
       <div class="card-img portrait">
         <div class="card-img-inner">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#52525a" stroke-width="1.5" fill="none"/>
-            <circle cx="14" cy="14" r="3.5" fill="#52525a"/>
-            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#52525a" stroke-width="1.5" fill="none"/>
+            <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#7a7a84" stroke-width="1.5" fill="none"/>
+            <circle cx="14" cy="14" r="3.5" fill="#7a7a84"/>
+            <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#7a7a84" stroke-width="1.5" fill="none"/>
           </svg>
         </div>
       </div>
@@ -369,8 +150,8 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em}
       <div class="card-img square">
         <div class="card-img-inner">
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <rect x="6" y="10" width="22" height="20" rx="2" stroke="#52525a" stroke-width="1.5" fill="none"/>
-            <path d="M28 15h4a3 3 0 0 1 0 6h-4" stroke="#52525a" stroke-width="1.5" fill="none"/>
+            <rect x="6" y="10" width="22" height="20" rx="2" stroke="#7a7a84" stroke-width="1.5" fill="none"/>
+            <path d="M28 15h4a3 3 0 0 1 0 6h-4" stroke="#7a7a84" stroke-width="1.5" fill="none"/>
           </svg>
         </div>
       </div>
@@ -391,7 +172,7 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em}
         <span class="footer-logo-pre">Official Shop of</span>
         <span class="footer-logo-name">William McGuire</span>
       </div>
-      <div class="footer-tagline">Prints, apparel &amp; merch — limited runs, real art. Ships from Seattle.</div>
+      <div class="footer-tagline">Prints, apparel &amp; merch — made in-house, limited runs. Ships from Seattle within two weeks.</div>
     </div>
     <div>
       <div class="footer-hd">Shop</div>
