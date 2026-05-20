@@ -142,10 +142,13 @@ body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transfor
   padding:40px 40px 40px 48px;
   gap:0;
 }
-/* image: square, left-aligned, dark space shows to the right */
+/* image: flex:1 fills available column height, aspect-ratio keeps it square */
 .hero-product-img{
-  width:280px;
-  height:280px; /* square */
+  flex:1;
+  min-height:0;
+  aspect-ratio:1/1;
+  width:auto;
+  max-width:100%; /* never overflow panel width */
   background:var(--lt-2);
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
   position:relative;
@@ -163,10 +166,11 @@ body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transfor
   font-family:var(--fm);font-size:8px;letter-spacing:.16em;text-transform:uppercase;
   padding:5px 14px;
 }
-/* caption strip: same width as square image */
+/* caption strip: auto width matches the square image above it */
 .hero-caption{
   flex-shrink:0;
-  width:280px;
+  width:auto;
+  align-self:stretch; /* matches the image width since both are flex items */
   background:var(--dk-2);
   border-top:1px solid var(--dk-5);
   padding:14px 18px;
@@ -231,8 +235,15 @@ body.fb .cat-heading{font-size:14px;font-weight:700;text-transform:uppercase;let
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FEATURED SECTION  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.section{padding:48px 72px;background:var(--lt-1);flex:1} /* wider padding shrinks cards ~20% */
+.section{padding:48px 72px;background:var(--lt-1);flex:1}
 .featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+/* scale down featured cards ~20% via text and padding */
+.section .card-body{padding:10px 12px}
+.section .card-title{font-size:12px;margin-bottom:8px}
+.section .card-type{font-size:7px}
+.section .card-price{font-size:20px}
+body.fb .section .card-price{font-size:16px}
+.section .card-add{font-size:10px;padding:5px 11px}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    CARDS  (shared: featured + recs)
@@ -504,21 +515,43 @@ body.fa .recs-hd{font-size:22px;letter-spacing:.04em}
 body.fb .recs-hd{font-size:15px;font-weight:700;letter-spacing:-.01em}
 .recs-grid{
   display:grid;
-  grid-template-columns:repeat(3,159px);
+  grid-template-columns:repeat(4,159px); /* 4 across */
   justify-content:center;
-  column-gap:clamp(16px,3vw,48px);
+  column-gap:clamp(10px,2vw,24px);
 }
-/* portrait ratio on the fixed-width columns */
+/* square images in recs */
 .recs .card-img,
 .recs .card-img.portrait,
 .recs .card-img.square,
-.recs .card-img.landscape{padding-top:110% !important}
+.recs .card-img.landscape{padding-top:100% !important}
 .recs .card-body{padding:8px 10px}
 .recs .card-title{font-size:11px;margin-bottom:6px;line-height:1.2}
 .recs .card-type{font-size:7px;margin-bottom:2px;letter-spacing:.12em}
 .recs .card-price{font-size:15px}
 body.fb .recs .card-price{font-size:12px}
 .recs .card-add{font-size:9px;padding:4px 9px}
+
+/* ── FOOTER INLINE NEWSLETTER (product page + future pages) ── */
+.footer-nl{margin-bottom:20px}
+.footer-nl-label{
+  font-family:var(--fm);font-size:8px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(238,238,242,.35);margin-bottom:8px;
+}
+.footer-nl-form{display:flex;gap:0}
+.footer-nl-input{
+  flex:1;padding:8px 12px;
+  background:var(--dk-3);color:var(--lt-1);
+  border:1px solid var(--dk-6);border-right:none;
+  font-family:var(--fb);font-size:12px;outline:none;
+  min-width:0; /* allows flex shrink */
+}
+.footer-nl-input::placeholder{color:rgba(238,238,242,.18)}
+.footer-nl-btn{
+  background:var(--gold);color:var(--dk-1);
+  font-family:var(--fh);font-size:14px;letter-spacing:.06em;
+  padding:0 14px;transition:background .15s;flex-shrink:0;
+}
+.footer-nl-btn:hover{background:var(--gold-hi)}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FOOTER  (shared)
