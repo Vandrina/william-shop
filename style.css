@@ -233,12 +233,15 @@ body.fb .cat-heading{font-size:14px;font-weight:700;text-transform:uppercase;let
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FEATURED SECTION  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.section{padding:48px 56px;background:var(--lt-1);flex:1}
-.featured-grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:24px;
-}
+.section{padding:48px 88px;background:var(--lt-1);flex:1}
+.featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+/* card overrides for featured grid — smaller text and spacing */
+.section .card-body{padding:8px 10px}
+.section .card-title{font-size:11px;margin-bottom:6px;line-height:1.2}
+.section .card-type{font-size:7px}
+.section .card-price{font-size:18px}
+body.fb .section .card-price{font-size:14px}
+.section .card-add{font-size:9px;padding:4px 10px}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    CARDS  (shared: featured + recs)
@@ -577,6 +580,34 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em;t
 }
 .footer-links a:hover{color:var(--gold)}
 .footer-bottom{border-top:1px solid var(--dk-5);padding-top:18px;display:flex;justify-content:space-between;font-family:var(--fm);font-size:9px;letter-spacing:.06em;color:rgba(238,238,242,.16)}
+
+/* product page footer: newsletter in the middle */
+.footer-top-product{grid-template-columns:3fr 5fr 2fr}
+/* newsletter column centered */
+.footer-nl-col{display:flex;flex-direction:column;justify-content:center}
+.footer-nl-col .footer-nl-label{
+  font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  color:rgba(238,238,242,.4);margin-bottom:10px;
+}
+.footer-nl-col .footer-nl-form{display:flex;gap:0;max-width:280px}
+.footer-nl-col .footer-nl-input{
+  flex:1;padding:10px 14px;
+  background:var(--dk-3);color:var(--lt-1);
+  border:1px solid var(--dk-6);border-right:none;
+  font-family:var(--fb);font-size:13px;outline:none;
+}
+.footer-nl-col .footer-nl-input::placeholder{color:rgba(238,238,242,.2)}
+.footer-nl-col .footer-nl-btn{
+  background:var(--gold);color:var(--dk-1);
+  font-family:var(--fh);font-size:16px;letter-spacing:.06em;
+  padding:0 18px;transition:background .15s;flex-shrink:0;
+}
+.footer-nl-col .footer-nl-btn:hover{background:var(--gold-hi)}
+.footer-nl-col .footer-nl-title{
+  font-family:var(--fh);color:var(--lt-1);margin-bottom:4px;
+}
+body.fa .footer-nl-col .footer-nl-title{font-size:24px;letter-spacing:.04em}
+body.fb .footer-nl-col .footer-nl-title{font-size:16px;font-weight:700}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FONT B OVERRIDES
