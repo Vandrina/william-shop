@@ -96,7 +96,6 @@ body.fb .nav-cart{font-size:13px;font-weight:700;padding:10px 22px;text-transfor
 .hero{
   display:grid;grid-template-columns:1fr 1fr;
   min-height:560px;
-  border-bottom:1px solid var(--dk-5);
   overflow:hidden;
 }
 .hero-left{
@@ -137,7 +136,6 @@ body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transfor
 /* ── HERO RIGHT: product showcase ── */
 .hero-right{
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  border-left:1px solid var(--dk-5);
   background:var(--dk-1);
   padding:32px;
 }
@@ -235,13 +233,11 @@ body.fb .cat-heading{font-size:14px;font-weight:700;text-transform:uppercase;let
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FEATURED SECTION  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.section{padding:48px 40px;background:var(--lt-1);flex:1}
+.section{padding:48px 56px;background:var(--lt-1);flex:1}
 .featured-grid{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:24px;
-  max-width:75%; /* 25% smaller than full-width */
-  margin:0 auto;
 }
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -409,9 +405,13 @@ body.fb .nl-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-s
 .product-img-wrap{
   background:var(--lt-1);
   border-right:1px solid var(--lt-2);
-  /* no sticky — sits in normal flow, no overlap */
+  position:sticky;
+  top:64px;
+  height:calc(100vh - 64px);
+  max-height:560px;
   display:flex;align-items:flex-start;justify-content:center;
   padding:40px 32px;
+  align-self:start;
 }
 .product-img-ph{
   width:60%; /* 40% smaller than the column width */
@@ -514,15 +514,15 @@ body.fa .recs-hd{font-size:22px;letter-spacing:.04em}
 body.fb .recs-hd{font-size:15px;font-weight:700;letter-spacing:-.01em}
 .recs-grid{
   display:grid;
-  grid-template-columns:repeat(4,159px); /* 4 across */
-  justify-content:center;
-  column-gap:clamp(10px,2vw,24px);
+  grid-template-columns:repeat(4,1fr);
+  gap:24px;
+  width:80%;
+  margin:0 auto;
 }
-/* images 15% taller so product description bar doesn't get squished */
 .recs .card-img,
 .recs .card-img.portrait,
 .recs .card-img.square,
-.recs .card-img.landscape{padding-top:115% !important}
+.recs .card-img.landscape{padding-top:100% !important}
 .recs .card-body{padding:8px 10px}
 .recs .card-title{font-size:11px;margin-bottom:6px;line-height:1.2}
 .recs .card-type{font-size:7px;margin-bottom:2px;letter-spacing:.12em}
@@ -557,7 +557,7 @@ body.fb .recs .card-price{font-size:12px}
    FOOTER  (shared)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .footer{background:var(--dk-1);border-top:1px solid var(--dk-5);padding:48px 40px 32px;color:var(--lt-1)}
-.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px;margin-bottom:36px}
+.footer-top{display:grid;grid-template-columns:1fr 1fr 2fr;gap:32px;margin-bottom:36px}
 .footer-logo{line-height:1.15;margin-bottom:12px}
 .footer-logo-pre{font-family:var(--fm);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block}
 .footer-logo-name{font-family:var(--fh);color:var(--lt-1);display:block}
@@ -567,8 +567,8 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em;t
 .footer-hd{font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
 .footer-links{
   display:grid;
-  grid-template-columns:1fr 1fr; /* two columns */
-  gap:8px 12px;
+  grid-template-columns:1fr 1fr;
+  gap:8px 6px; /* tight column gap so links clearly belong to same category */
   font-family:var(--fb);font-size:13px;color:rgba(238,238,242,.28);
 }
 .footer-links a:hover{color:var(--gold)}
