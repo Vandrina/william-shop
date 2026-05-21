@@ -577,6 +577,10 @@ body.fb .recs .card-price{font-size:12px}
    FOOTER  (shared)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .footer{background:var(--dk-1);border-top:1px solid var(--dk-5);padding:48px 40px 32px;color:var(--lt-1)}
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOOTER  (shared)
+   4 cols: Shop | Studio | Newsletter | Brand
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 .footer-top{
   display:grid;
   grid-template-columns:1.5fr 1.5fr 5fr 3fr;
@@ -586,10 +590,8 @@ body.fb .recs .card-price{font-size:12px}
   margin-left:auto;
   margin-right:auto;
 }
-/* hide newsletter column on index footer */
-.footer-top .footer-nl-col{display:none}
-/* brand/tagline column: left-aligned text, pushed to right within footer */
-.footer-top > div:last-child{justify-self:end;text-align:left}
+/* index: hide newsletter content but keep the column space intact */
+.footer-top--no-nl .footer-nl-col{visibility:hidden}
 .footer-logo{line-height:1.15;margin-bottom:12px}
 .footer-logo-pre{font-family:var(--fm);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block}
 .footer-logo-name{font-family:var(--fh);color:var(--lt-1);display:block}
@@ -599,27 +601,18 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em;t
 .footer-hd{font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
 .footer-links{
   display:grid;
-  grid-template-columns:max-content max-content; /* columns size to content — no gap stretching */
+  grid-template-columns:max-content max-content;
   gap:8px 14px;
   font-family:var(--fb);font-size:13px;color:rgba(238,238,242,.28);
 }
 .footer-links a:hover{color:var(--gold)}
 .footer-bottom{border-top:1px solid var(--dk-5);padding-top:18px;display:flex;justify-content:space-between;font-family:var(--fm);font-size:9px;letter-spacing:.06em;color:rgba(238,238,242,.16)}
-
-/* product page footer: brand = 2× link columns → newsletter center = page center */
-.footer-top-product{
-  grid-template-columns:1.5fr 1.5fr 5fr 3fr;
-  gap:20px;
-  width:86%; /* recs is 80% — 6% wider, just visibly past alignment */
-  margin-left:auto;
-  margin-right:auto;
-}
-/* center newsletter column content */
+/* newsletter column */
 .footer-nl-col{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-.footer-nl-col .footer-nl-label{
-  font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
-  color:rgba(238,238,242,.4);margin-bottom:10px;
-}
+.footer-nl-col .footer-nl-title{font-family:var(--fh);color:var(--lt-1);margin-bottom:4px}
+body.fa .footer-nl-col .footer-nl-title{font-size:24px;letter-spacing:.04em}
+body.fb .footer-nl-col .footer-nl-title{font-size:16px;font-weight:700}
+.footer-nl-col p{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,238,242,.3);margin-bottom:16px}
 .footer-nl-col .footer-nl-form{display:flex;gap:0;width:85%}
 .footer-nl-col .footer-nl-input{
   flex:1;padding:10px 14px;
@@ -634,11 +627,6 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em;t
   padding:0 18px;transition:background .15s;flex-shrink:0;
 }
 .footer-nl-col .footer-nl-btn:hover{background:var(--gold-hi)}
-.footer-nl-col .footer-nl-title{
-  font-family:var(--fh);color:var(--lt-1);margin-bottom:4px;
-}
-body.fa .footer-nl-col .footer-nl-title{font-size:24px;letter-spacing:.04em}
-body.fb .footer-nl-col .footer-nl-title{font-size:16px;font-weight:700}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FONT B OVERRIDES
