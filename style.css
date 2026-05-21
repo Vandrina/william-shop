@@ -582,7 +582,9 @@ body.fb .recs .card-price{font-size:12px}
   grid-template-columns:1fr 1fr 2fr;
   gap:10px;
   margin-bottom:36px;
-  padding:0 32px; /* slightly less than section 40px = just a bit wider */
+  width:86%;
+  margin-left:auto;
+  margin-right:auto;
 }
 /* brand/tagline column: left-aligned text, pushed to right within footer */
 .footer-top > div:last-child{justify-self:end;text-align:left}
