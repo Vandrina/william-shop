@@ -579,7 +579,7 @@ body.fb .recs .card-price{font-size:12px}
 .footer{background:var(--dk-1);border-top:1px solid var(--dk-5);padding:48px 40px 32px;color:var(--lt-1)}
 .footer-top{
   display:grid;
-  grid-template-columns:1fr 1fr 2fr;
+  grid-template-columns:max-content max-content 1fr;
   gap:10px;
   margin-bottom:36px;
   width:86%;
@@ -618,7 +618,7 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em;t
   font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
   color:rgba(238,238,242,.4);margin-bottom:10px;
 }
-.footer-nl-col .footer-nl-form{display:flex;gap:0;max-width:280px}
+.footer-nl-col .footer-nl-form{display:flex;gap:0;width:100%}
 .footer-nl-col .footer-nl-input{
   flex:1;padding:10px 14px;
   background:var(--dk-3);color:var(--lt-1);
