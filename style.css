@@ -242,11 +242,12 @@ body.fb .cat-heading{font-size:13px;font-weight:700;text-transform:uppercase;let
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FEATURED SECTION  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.section{padding:48px 120px;background:var(--lt-1);flex:1}
+.section{padding:48px 40px;background:var(--lt-1);flex:1}
 .featured-grid{
   display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:20px;
+  grid-template-columns:repeat(3,300px);
+  justify-content:center;
+  gap:36px; /* more breathing room between the smaller cards */
 }
 /* card overrides to match the smaller size */
 .section .card-body{padding:8px 10px}
@@ -579,11 +580,9 @@ body.fb .recs .card-price{font-size:12px}
 .footer-top{
   display:grid;
   grid-template-columns:1fr 1fr 2fr;
-  gap:20px; /* tighter — shop and studio closer */
+  gap:10px;
   margin-bottom:36px;
-  max-width:1100px;
-  margin-left:auto;
-  margin-right:auto;
+  padding:0 24px; /* less padding than sections above = footer reads wider */
 }
 /* brand/tagline column: left-aligned text, pushed to right within footer */
 .footer-top > div:last-child{justify-self:end;text-align:left}
@@ -603,8 +602,12 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em;t
 .footer-links a:hover{color:var(--gold)}
 .footer-bottom{border-top:1px solid var(--dk-5);padding-top:18px;display:flex;justify-content:space-between;font-family:var(--fm);font-size:9px;letter-spacing:.06em;color:rgba(238,238,242,.16)}
 
-/* product page footer: shop | studio | newsletter | brand — ~15% 15% 50% 20% */
-.footer-top-product{grid-template-columns:1.5fr 1.5fr 5fr 2fr;gap:20px}
+/* product page footer: brand = 2× link columns → newsletter center = page center */
+.footer-top-product{
+  grid-template-columns:1.5fr 1.5fr 5fr 3fr;
+  gap:20px;
+  padding:0 8px; /* narrower padding than recs (80% width) so footer is visibly wider */
+}
 /* center newsletter column content */
 .footer-nl-col{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .footer-nl-col .footer-nl-label{
