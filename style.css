@@ -582,7 +582,7 @@ body.fb .recs .card-price{font-size:12px}
   grid-template-columns:1fr 1fr 2fr;
   gap:10px;
   margin-bottom:36px;
-  padding:0 24px; /* less padding than sections above = footer reads wider */
+  padding:0 32px; /* slightly less than section 40px = just a bit wider */
 }
 /* brand/tagline column: left-aligned text, pushed to right within footer */
 .footer-top > div:last-child{justify-self:end;text-align:left}
@@ -606,7 +606,9 @@ body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em;t
 .footer-top-product{
   grid-template-columns:1.5fr 1.5fr 5fr 3fr;
   gap:20px;
-  padding:0 8px; /* narrower padding than recs (80% width) so footer is visibly wider */
+  width:86%; /* recs is 80% — 6% wider, just visibly past alignment */
+  margin-left:auto;
+  margin-right:auto;
 }
 /* center newsletter column content */
 .footer-nl-col{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
