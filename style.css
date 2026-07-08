@@ -17,8 +17,7 @@
 
 /* ── RESET ── */
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100%;display:flex;flex-direction:column}
-body{font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+body{min-height:100vh;display:flex;flex-direction:column;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
 button{cursor:pointer;border:none;background:none;font-family:inherit}
 a{text-decoration:none;color:inherit;cursor:pointer}
 
@@ -30,6 +29,10 @@ a{text-decoration:none;color:inherit;cursor:pointer}
   --lt-1:#eeeef2; /* section bg  */
   --lt-2:#d0d0d8; /* UI surfaces */
   --gold:#c8a46e; --gold-hi:#d4b580; --gold-lo:#6e5830;
+  /* channel tokens: same colors as --lt-1 / --dk-1, as comma-separated
+     RGB so they can be used at any alpha via rgba(var(--x-rgb), a) */
+  --lt-1-rgb:238,238,242;
+  --dk-1-rgb:28,28,30;
 }
 
 /* ── FONT SYSTEMS ── */
@@ -38,6 +41,27 @@ body.fa{--fh:'Bebas Neue',cursive;--fb:'Outfit',sans-serif;--fm:'Space Mono',mon
 /* B: Outfit throughout (matches portfolio exactly) */
 body.fb{--fh:'Outfit',sans-serif;--fb:'Inter',sans-serif;--fm:'Space Mono',monospace}
 body{font-family:var(--fb,'Outfit',sans-serif);background:var(--lt-1);color:var(--dk-1)}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SHARED UTILITIES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* gold button skin — nav cart · hero · newsletter · adults · footer signup.
+   Per-button size/padding/position live on the semantic class beside it. */
+.btn-gold{
+  background:var(--gold);color:var(--dk-1);
+  font-family:var(--fh);letter-spacing:.08em;
+  transition:background .15s;flex-shrink:0;
+}
+.btn-gold:hover{background:var(--gold-hi)}
+/* dark email input — every newsletter / waitlist field.
+   Sits flush against a .btn-gold to its right (border-right:none). */
+.input-dark{
+  flex:1;padding:10px 14px;
+  background:var(--dk-3);color:var(--lt-1);
+  border:1px solid var(--dk-6);border-right:none;
+  font-family:var(--fb);font-size:13px;outline:none;
+}
+.input-dark::placeholder{color:rgba(var(--lt-1-rgb),.2)}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    NAV  (shared)
@@ -60,17 +84,13 @@ body.fb .nav-logo-name{font-size:16px;font-weight:700;letter-spacing:-.01em;text
 .nav-links{display:flex;gap:22px}
 .nav-links a{
   font-family:var(--fb);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
-  color:rgba(238,238,242,.38);transition:color .15s;
+  color:rgba(var(--lt-1-rgb),.38);transition:color .15s;
 }
 .nav-links a:hover{color:var(--gold)}
 .nav-adults{opacity:.55}
-.nav-cart{
-  background:var(--gold);color:var(--dk-1);
-  font-family:var(--fh);letter-spacing:.08em;transition:background .15s;flex-shrink:0;
-}
+/* .nav-cart skin comes from .btn-gold; only per-mode sizing here */
 body.fa .nav-cart{font-size:18px;padding:9px 22px}
 body.fb .nav-cart{font-size:13px;font-weight:700;padding:10px 22px;text-transform:uppercase;letter-spacing:.12em}
-.nav-cart:hover{background:var(--gold-hi)}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    TICKER  (shop)
@@ -91,8 +111,6 @@ body.fb .nav-cart{font-size:13px;font-weight:700;padding:10px 22px;text-transfor
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    HERO  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-/* hero is a standard full-width section — no special frame or padding */
-.hero-frame{background:var(--lt-1)}
 .hero{
   display:grid;grid-template-columns:1fr 1fr;
   min-height:560px;
@@ -120,18 +138,13 @@ body.fa .hero-title{font-size:96px;line-height:.9;letter-spacing:.02em}
 body.fb .hero-title{font-size:64px;line-height:1;letter-spacing:-.03em;font-weight:700}
 .hero-sub{
   font-family:var(--fb);font-size:14px;font-weight:300;
-  color:rgba(238,238,242,.45);max-width:340px;line-height:1.75;margin-bottom:44px;
+  color:rgba(var(--lt-1-rgb),.45);max-width:340px;line-height:1.75;margin-bottom:44px;
   position:relative;z-index:1;
 }
-.hero-btn{
-  background:var(--gold);color:var(--dk-1);
-  font-family:var(--fh);letter-spacing:.08em;
-  transition:background .15s;align-self:flex-start;position:relative;z-index:1;
-}
+/* .hero-btn skin comes from .btn-gold; keep placement + per-mode sizing */
+.hero-btn{align-self:flex-start;position:relative;z-index:1}
 body.fa .hero-btn{font-size:20px;padding:13px 48px}
 body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transform:uppercase;letter-spacing:.12em}
-.hero-btn:hover{background:var(--gold-hi)}
-
 
 /* ── HERO RIGHT: product showcase ── */
 .hero-right{
@@ -152,11 +165,6 @@ body.fb .hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transfor
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
   position:relative;
   flex-shrink:0;
-}
-.hero-product-img svg{opacity:.28}
-.hero-product-img span{
-  font-family:var(--fm);font-size:9px;letter-spacing:.15em;text-transform:uppercase;
-  color:var(--md-2);
 }
 /* featured badge top-left */
 .hero-featured-badge{
@@ -223,18 +231,12 @@ body.fb .cat-heading{font-size:13px;font-weight:700;text-transform:uppercase;let
 .cat-buttons{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
 .cat-btn{
   font-family:var(--fb);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
-  padding:11px 26px;background:none;color:rgba(238,238,242,.55);
-  border:1px solid var(--dk-6);transition:all .18s;
+  padding:11px 26px;background:none;color:rgba(var(--lt-1-rgb),.55);
+  border:1px solid var(--dk-6);transition:background .18s,color .18s,border-color .18s;
 }
 .cat-btn:hover,.cat-btn.on{
   background:var(--gold);color:var(--dk-1);border-color:var(--gold);
 }
-
-/* uniform square images in featured grid */
-.featured-grid .card-img,
-.featured-grid .card-img.portrait,
-.featured-grid .card-img.landscape,
-.featured-grid .card-img.square{padding-top:100%}
 
 /* hero-left inner content: left-aligned with breathing room, not edge-to-edge */
 .hero-left-inner{max-width:480px;padding-left:16px}
@@ -249,13 +251,6 @@ body.fb .cat-heading{font-size:13px;font-weight:700;text-transform:uppercase;let
   justify-content:center;
   gap:36px; /* more breathing room between the smaller cards */
 }
-/* card overrides to match the smaller size */
-.section .card-body{padding:8px 10px}
-.section .card-title{font-size:11px;margin-bottom:6px;line-height:1.2}
-.section .card-type{font-size:7px}
-.section .card-price{font-size:18px}
-body.fb .section .card-price{font-size:14px}
-.section .card-add{font-size:9px;padding:4px 10px}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    CARDS  (shared: featured + recs)
@@ -265,18 +260,15 @@ body.fb .section .card-price{font-size:14px}
   border:1px solid var(--md-2);
   position:relative;transition:transform .15s,box-shadow .15s;display:block;
 }
-.card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(28,28,30,.15)}
+.card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(var(--dk-1-rgb),.15)}
 .card-img{
   width:100%;
+  padding-top:100%; /* all cards square */
   background:var(--lt-2); /* flat fill — no texture */
   border-bottom:1px solid var(--md-2);
   display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
 }
-.card-img,
-.card-img.portrait,
-.card-img.square,
-.card-img.landscape{padding-top:100%} /* all square */
 .card-img-inner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
 .badge{
   position:absolute;top:0;left:0;
@@ -302,6 +294,14 @@ body.fb .card-price{font-size:20px;font-weight:700}
 }
 .card-add:hover{background:var(--gold);color:var(--dk-1)}
 
+/* compact card sizing — shared by the featured grid and the recs grid */
+.section .card-body,.recs .card-body{padding:8px 10px}
+.section .card-title,.recs .card-title{font-size:11px;margin-bottom:6px;line-height:1.2}
+.section .card-type{font-size:7px}
+.section .card-price{font-size:18px}
+body.fb .section .card-price{font-size:14px}
+.section .card-add{font-size:9px;padding:4px 10px}
+
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    SHOP FULL CTA  (shop)
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
@@ -314,10 +314,10 @@ body.fb .card-price{font-size:20px;font-weight:700}
 .shop-cta-title{font-family:var(--fh);color:var(--lt-1);margin-bottom:8px}
 body.fa .shop-cta-title{font-size:36px;letter-spacing:.04em}
 body.fb .shop-cta-title{font-size:24px;font-weight:700;letter-spacing:-.01em}
-.shop-cta-sub{font-family:var(--fb);font-size:13px;font-weight:300;color:rgba(238,238,242,.4);margin-bottom:24px}
+.shop-cta-sub{font-family:var(--fb);font-size:13px;font-weight:300;color:rgba(var(--lt-1-rgb),.4);margin-bottom:24px}
 .shop-cta-btn{
   display:inline-block;font-family:var(--fb);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-  padding:12px 44px;background:none;color:rgba(238,238,242,.7);border:1px solid var(--dk-6);transition:all .18s;
+  padding:12px 44px;background:none;color:rgba(var(--lt-1-rgb),.7);border:1px solid var(--dk-6);transition:background .18s,color .18s,border-color .18s;
 }
 .shop-cta-btn:hover{background:var(--gold);color:var(--dk-1);border-color:var(--gold)}
 
@@ -338,33 +338,23 @@ body.fb .shop-cta-title{font-size:24px;font-weight:700;letter-spacing:-.01em}
 }
 .adults-eyebrow{
   font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
-  color:rgba(238,238,242,.35);margin-bottom:10px;
+  color:rgba(var(--lt-1-rgb),.35);margin-bottom:10px;
 }
 .adults-title{font-family:var(--fh);color:var(--lt-1);margin-bottom:8px}
 body.fa .adults-title{font-size:40px;line-height:.95;letter-spacing:.04em}
 body.fb .adults-title{font-size:28px;font-weight:700;letter-spacing:-.02em}
 .adults-sub{
   font-family:var(--fb);font-size:13px;font-weight:300;
-  color:rgba(238,238,242,.4);max-width:420px;line-height:1.7;margin-bottom:22px;
+  color:rgba(var(--lt-1-rgb),.4);max-width:420px;line-height:1.7;margin-bottom:22px;
 }
-.adults-form{display:flex;gap:0;max-width:380px}
-.adults-input{
-  flex:1;padding:10px 14px;
-  background:var(--dk-3);color:var(--lt-1);
-  border:1px solid var(--dk-6);border-right:none;
-  font-family:var(--fb);font-size:13px;outline:none;
-}
-.adults-input::placeholder{color:rgba(238,238,242,.2)}
-.adults-btn{
-  background:var(--gold);color:var(--dk-1);
-  font-family:var(--fh);letter-spacing:.08em;transition:background .15s;flex-shrink:0;
-}
+.adults-form{display:flex;max-width:380px}
+/* .adults-input skin comes from .input-dark */
+/* .adults-btn skin comes from .btn-gold; per-mode sizing only */
 body.fa .adults-btn{font-size:16px;padding:0 20px}
 body.fb .adults-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:0 20px}
-.adults-btn:hover{background:var(--gold-hi)}
 .adults-note{
   font-family:var(--fm);font-size:9px;letter-spacing:.1em;
-  color:rgba(238,238,242,.2);margin-top:8px;
+  color:rgba(var(--lt-1-rgb),.2);margin-top:8px;
 }
 /* thumbs: crosshatch stripes — blur(8px) reads as genuine photo texture */
 .adults-thumbs{display:flex;gap:10px;align-items:center;flex-shrink:0}
@@ -376,7 +366,6 @@ body.fb .adults-btn{font-size:12px;font-weight:700;text-transform:uppercase;lett
   border:1px solid var(--gold-lo);
   filter:blur(8px);flex-shrink:0;
 }
-.adults-thumb::after{content:''}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    NEWSLETTER  (shop)
@@ -386,22 +375,13 @@ body.fb .adults-btn{font-size:12px;font-weight:700;text-transform:uppercase;lett
 .nl-title{font-family:var(--fh);color:var(--lt-1);margin-bottom:3px}
 body.fa .nl-title{font-size:30px;letter-spacing:.04em}
 body.fb .nl-title{font-size:20px;font-weight:700;letter-spacing:-.01em}
-.nl-sub{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,238,242,.3)}
-.nl-form{display:flex;gap:0}
-.nl-input{
-  flex:1;padding:10px 16px;
-  background:var(--dk-3);color:var(--lt-1);
-  border:1px solid var(--dk-6);border-right:none;
-  font-family:var(--fb);font-size:13px;outline:none;min-width:200px;
-}
-.nl-input::placeholder{color:rgba(238,238,242,.2)}
-.nl-btn{
-  background:var(--gold);color:var(--dk-1);
-  font-family:var(--fh);letter-spacing:.08em;transition:background .15s;flex-shrink:0;
-}
+.nl-sub{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--lt-1-rgb),.3)}
+.nl-form{display:flex}
+/* .nl-input skin comes from .input-dark; these are its only deltas */
+.nl-input{min-width:200px;padding:10px 16px}
+/* .nl-btn skin comes from .btn-gold; per-mode sizing only */
 body.fa .nl-btn{font-size:16px;padding:0 20px}
 body.fb .nl-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:0 20px}
-.nl-btn:hover{background:var(--gold-hi)}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    BREADCRUMB  (product)
@@ -438,8 +418,11 @@ body.fb .nl-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-s
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
   position:relative; /* badge positions relative to this */
 }
-.product-img-ph svg{opacity:.28}
-.product-img-ph span{font-family:var(--fm);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--md-2)}
+/* placeholder icon + label — shared with the hero showcase (temporary scaffolding) */
+.hero-product-img svg,.product-img-ph svg{opacity:.28}
+.hero-product-img span,.product-img-ph span{
+  font-family:var(--fm);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--md-2);
+}
 .product-img-badge{
   position:absolute;top:0;left:0; /* top-left of the image square */
   background:var(--gold);color:var(--dk-1);
@@ -467,7 +450,7 @@ body.fb .product-price{font-size:24px;font-weight:700}
 .swatch{
   width:28px;height:28px;border-radius:50%;
   border:2px solid transparent;outline:2px solid transparent;
-  transition:all .15s;cursor:pointer;position:relative;
+  transition:border-color .15s,outline-color .15s,outline-offset .15s;cursor:pointer;position:relative;
 }
 .swatch:hover{outline-color:var(--gold-lo);outline-offset:3px}
 .swatch.on{border-color:var(--lt-1);outline-color:var(--dk-1);outline-offset:3px}
@@ -484,12 +467,12 @@ body.fb .product-price{font-size:24px;font-weight:700}
   min-width:48px;height:40px;padding:0 10px;
   background:none;color:var(--dk-1);
   font-family:var(--fb);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
-  border:1px solid var(--lt-2);transition:all .15s;
+  border:1px solid var(--lt-2);transition:background .15s,color .15s,border-color .15s;
 }
 .size-btn:hover{border-color:var(--dk-1)}
 .size-btn.on{background:var(--dk-1);color:var(--lt-1);border-color:var(--dk-1)}
-.size-btn.sold{color:rgba(28,28,30,.22);border-color:var(--lt-2);cursor:not-allowed;position:relative}
-.size-btn.sold::after{content:'';position:absolute;top:50%;left:8%;right:8%;height:1px;background:rgba(28,28,30,.18);transform:rotate(-15deg)}
+.size-btn.sold{color:rgba(var(--dk-1-rgb),.22);border-color:var(--lt-2);cursor:not-allowed;position:relative}
+.size-btn.sold::after{content:'';position:absolute;top:50%;left:8%;right:8%;height:1px;background:rgba(var(--dk-1-rgb),.18);transform:rotate(-15deg)}
 .size-guide{
   font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
   color:var(--gold-lo);border-bottom:1px solid var(--gold-lo);
@@ -539,48 +522,17 @@ body.fb .recs-hd{font-size:15px;font-weight:700;letter-spacing:-.01em}
   margin:0 auto;
   row-gap:20px;
 }
-.recs .card-img,
-.recs .card-img.portrait,
-.recs .card-img.square,
-.recs .card-img.landscape{padding-top:100% !important}
-.recs .card-body{padding:8px 10px}
-.recs .card-title{font-size:11px;margin-bottom:6px;line-height:1.2}
+/* recs-only compact deltas (shared body/title live in the CARDS block) */
 .recs .card-type{font-size:7px;margin-bottom:2px;letter-spacing:.12em}
 .recs .card-price{font-size:15px}
 body.fb .recs .card-price{font-size:12px}
 .recs .card-add{font-size:9px;padding:4px 9px}
 
-/* ── FOOTER INLINE NEWSLETTER (product page + future pages) ── */
-.footer-nl{margin-bottom:20px}
-.footer-nl-label{
-  font-family:var(--fm);font-size:8px;letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(238,238,242,.35);margin-bottom:8px;
-}
-.footer-nl-form{display:flex;gap:0}
-.footer-nl-input{
-  flex:0 0 auto;
-  width:110px; /* half the previous flex:1 size */
-  padding:7px 10px;
-  background:var(--dk-3);color:var(--lt-1);
-  border:1px solid var(--dk-6);border-right:none;
-  font-family:var(--fb);font-size:11px;outline:none;
-}
-.footer-nl-input::placeholder{color:rgba(238,238,242,.18)}
-.footer-nl-btn{
-  background:var(--gold);color:var(--dk-1);
-  font-family:var(--fh);font-size:14px;letter-spacing:.06em;
-  padding:0 14px;transition:background .15s;flex-shrink:0;
-}
-.footer-nl-btn:hover{background:var(--gold-hi)}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   FOOTER  (shared)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.footer{background:var(--dk-1);border-top:1px solid var(--dk-5);padding:48px 40px 32px;color:var(--lt-1)}
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FOOTER  (shared)
    4 cols: Shop | Studio | Newsletter | Brand
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.footer{background:var(--dk-1);border-top:1px solid var(--dk-5);padding:48px 40px 32px;color:var(--lt-1)}
 .footer-top{
   display:grid;
   grid-template-columns:1.5fr 1.5fr 5fr 3fr;
@@ -597,36 +549,26 @@ body.fb .recs .card-price{font-size:12px}
 .footer-logo-name{font-family:var(--fh);color:var(--lt-1);display:block}
 body.fa .footer-logo-name{font-size:26px;letter-spacing:.04em}
 body.fb .footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em;text-transform:uppercase}
-.footer-tagline{font-family:var(--fb);font-size:13px;font-weight:300;color:rgba(238,238,242,.28);line-height:1.7}
+.footer-tagline{font-family:var(--fb);font-size:13px;font-weight:300;color:rgba(var(--lt-1-rgb),.28);line-height:1.7}
 .footer-hd{font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
 .footer-links{
   display:grid;
   grid-template-columns:max-content max-content;
   gap:8px 14px;
-  font-family:var(--fb);font-size:13px;color:rgba(238,238,242,.28);
+  font-family:var(--fb);font-size:13px;color:rgba(var(--lt-1-rgb),.28);
 }
 .footer-links a:hover{color:var(--gold)}
-.footer-bottom{border-top:1px solid var(--dk-5);padding-top:18px;display:flex;justify-content:space-between;font-family:var(--fm);font-size:9px;letter-spacing:.06em;color:rgba(238,238,242,.16)}
+.footer-bottom{border-top:1px solid var(--dk-5);padding-top:18px;display:flex;justify-content:space-between;font-family:var(--fm);font-size:9px;letter-spacing:.06em;color:rgba(var(--lt-1-rgb),.16)}
 /* newsletter column */
 .footer-nl-col{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
 .footer-nl-col .footer-nl-title{font-family:var(--fh);color:var(--lt-1);margin-bottom:4px}
 body.fa .footer-nl-col .footer-nl-title{font-size:24px;letter-spacing:.04em}
 body.fb .footer-nl-col .footer-nl-title{font-size:16px;font-weight:700}
-.footer-nl-col p{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(238,238,242,.3);margin-bottom:16px}
-.footer-nl-col .footer-nl-form{display:flex;gap:0;width:85%}
-.footer-nl-col .footer-nl-input{
-  flex:1;padding:10px 14px;
-  background:var(--dk-3);color:var(--lt-1);
-  border:1px solid var(--dk-6);border-right:none;
-  font-family:var(--fb);font-size:13px;outline:none;
-}
-.footer-nl-col .footer-nl-input::placeholder{color:rgba(238,238,242,.2)}
-.footer-nl-col .footer-nl-btn{
-  background:var(--gold);color:var(--dk-1);
-  font-family:var(--fh);font-size:16px;letter-spacing:.06em;
-  padding:0 18px;transition:background .15s;flex-shrink:0;
-}
-.footer-nl-col .footer-nl-btn:hover{background:var(--gold-hi)}
+.footer-nl-col p{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--lt-1-rgb),.3);margin-bottom:16px}
+.footer-nl-col .footer-nl-form{display:flex;width:85%}
+/* .footer-nl-input skin comes from .input-dark */
+/* .footer-nl-btn skin comes from .btn-gold; these are its only deltas */
+.footer-nl-col .footer-nl-btn{font-size:16px;letter-spacing:.06em;padding:0 18px}
 
 /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
    FONT B OVERRIDES
@@ -637,7 +579,7 @@ body.fb .card{
   background:var(--lt-1); /* white polaroid base */
   padding:8px 8px 0; /* equal frame on sides/top */
   border:none;
-  box-shadow:0 2px 8px rgba(28,28,30,.12);
+  box-shadow:0 2px 8px rgba(var(--dk-1-rgb),.12);
 }
 body.fb .card-img{
   border:none; /* remove card-img bottom border — polaroid doesn't have one */
@@ -649,7 +591,7 @@ body.fb .card-body{
 }
 body.fb .card:hover{
   transform:translateY(-3px) rotate(.5deg); /* slight tilt on hover — tactile feel */
-  box-shadow:0 8px 20px rgba(28,28,30,.18);
+  box-shadow:0 8px 20px rgba(var(--dk-1-rgb),.18);
 }
 
 /* Gold ticker — Font B only */
@@ -661,15 +603,15 @@ body.fb .ticker-inner{color:var(--dk-1)}
    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
 #fswitcher{
   position:fixed;bottom:20px;right:20px;z-index:9999;
-  background:rgba(28,28,30,.94);border:1px solid var(--dk-6);
+  background:rgba(var(--dk-1-rgb),.94);border:1px solid var(--dk-6);
   padding:6px;display:flex;gap:4px;
   backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
   border-radius:40px;box-shadow:0 6px 28px rgba(0,0,0,.4);
 }
 .fsw{
   padding:7px 18px;border:none;background:transparent;
-  color:rgba(238,238,242,.38);font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;
-  cursor:pointer;border-radius:28px;transition:all .2s;white-space:nowrap;
+  color:rgba(var(--lt-1-rgb),.38);font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;
+  cursor:pointer;border-radius:28px;transition:background .2s,color .2s;white-space:nowrap;
 }
 .fsw sub{display:block;font-size:8px;opacity:.5;margin-top:1px}
 .fsw.on{background:var(--lt-1);color:var(--dk-1)}
