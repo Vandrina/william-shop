@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout — williammcguire.shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-pre">Official Shop of</span>
+    <span class="nav-logo-name">William McGuire</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Prints</a><a href="index.html">Apparel</a><a href="index.html">Merch</a><a href="index.html">Limited</a>
+    <a class="nav-adults" href="index.html">Adults Only</a>
+    <a href="index.html">Portfolio ↗&#xFE0E;</a>
+  </div>
+  <button class="nav-cart btn-gold">Cart (1)</button>
+</nav>
+
+<div class="breadcrumb">
+  <a href="index.html">Shop</a>
+  <span class="breadcrumb-sep">›</span>
+  <span class="breadcrumb-current">Checkout</span>
+</div>
+
+<section class="checkout">
+  <div class="checkout-grid">
+    <div class="checkout-panel">
+      <div class="checkout-hero">
+        <div class="checkout-eyebrow">Secure checkout</div>
+        <h1 class="checkout-title">Complete your order</h1>
+        <p class="checkout-sub">Review your items and pay securely with Stripe. This page uses the embedded Checkout form for an integrated payment experience.</p>
+      </div>
+
+      <div class="checkout-form-wrap">
+        <form id="payment-form">
+          <div id="express-checkout-element"></div>
+          <div id="separator" class="checkout-separator" hidden><span>Or pay with card</span></div>
+          <div id="contact-details-element" class="checkout-element"></div>
+          <div id="address-element" class="checkout-element"></div>
+          <div id="payment-element" class="checkout-element"></div>
+          <div class="checkout-actions">
+            <button id="submit-button" class="btn-gold checkout-submit" type="submit">Pay</button>
+            <button id="toggle-extra-item" class="btn-gold checkout-submit checkout-secondary" type="button">Add gift wrap</button>
+          </div>
+          <div id="error-message" class="checkout-error" hidden></div>
+        </form>
+        <p class="checkout-note">This page uses Stripe Elements with Express Checkout, Contact Details, Address, and Payment Elements. The server must create a Checkout Session with `ui_mode: 'elements'` and return the client secret.</p>
+      </div>
+    </div>
+
+    <aside class="checkout-side">
+      <div class="summary-card">
+        <h2>Order summary</h2>
+        <div class="summary-row"><span>Concept Series Tee</span><span>$36</span></div>
+        <div class="summary-row"><span>Quantity</span><span>1</span></div>
+        <div class="summary-row"><span>Shipping</span><span>$5</span></div>
+        <div class="summary-row total"><span>Total</span><span>$41</span></div>
+        <p class="muted-note">The page uses Stripe Elements with a Checkout Session. The server creates the session and returns the client secret to the page.</p>
+      </div>
+      <div class="summary-card">
+        <h2>Test card</h2>
+        <p class="muted-note">Use Stripe test card <strong>4242 4242 4242 4242</strong> for a successful transaction.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div>
+      <div class="footer-hd">Shop</div>
+      <div class="footer-links"><a href="index.html">All Products</a><a href="index.html">Prints</a><a href="index.html">Apparel</a><a href="index.html">Merch</a><a href="index.html">Limited</a></div>
+    </div>
+    <div>
+      <div class="footer-hd">Studio</div>
+      <div class="footer-links"><a href="index.html">Portfolio</a><a href="index.html">About</a><a href="index.html">Contact</a><a href="index.html">Instagram</a></div>
+    </div>
+    <div class="footer-nl-col">
+      <div class="footer-nl-title">New drops. First.</div>
+      <p>Limited runs sell out fast — get on the list.</p>
+      <div class="footer-nl-form">
+        <input class="footer-nl-input input-dark" type="email" placeholder="your@email.com">
+        <button class="footer-nl-btn btn-gold">Subscribe</button>
+      </div>
+    </div>
+    <div>
+      <div class="footer-logo">
+        <span class="footer-logo-pre">Official Shop of</span>
+        <span class="footer-logo-name">William McGuire</span>
+      </div>
+      <div class="footer-tagline">Prints, apparel &amp; merch — made in-house, limited runs.<br>Ships from Seattle within two weeks.</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 William McGuire · williammcguire.shop</span>
+    <span>Privacy · Terms · Returns</span>
+  </div>
+</footer>
+
+<script>
+;(async function(){
+  const errorEl = document.getElementById('error-message');
+  const separator = document.getElementById('separator');
+  const submitButton = document.getElementById('submit-button');
+  const changeButton = document.getElementById('toggle-extra-item');
+
+  function showError(message){
+    errorEl.textContent = message;
+    errorEl.hidden = false;
+  }
+
+  function clearError(){
+    errorEl.textContent = '';
+    errorEl.hidden = true;
+  }
+
+  try {
+    const stripe = Stripe('pk_test_replace_with_your_key');
+
+    const clientSecret = await fetch('/create-checkout-session', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        ui_mode: 'elements',
+        mode: 'payment',
+        line_items: [{
+          price_data: {
+            currency: 'usd',
+            product_data: {name: 'Concept Series Tee'},
+            unit_amount: 3600,
+          },
+          quantity: 1,
+        }],
+        shipping_address_collection: {allowed_countries: ['US', 'CA', 'GB']},
+        billing_address_collection: 'required',
+        return_url: window.location.origin + '/index.html'
+      })
+    }).then((response) => {
+      if (!response.ok) throw new Error('Unable to create checkout session');
+      return response.json();
+    }).then((json) => json.client_secret);
+
+    const checkout = stripe.initCheckoutElementsSdk({
+      clientSecret,
+      elementsOptions: {
+        appearance: {
+          theme: 'stripe'
+        }
+      }
+    });
+
+    const expressCheckoutElement = checkout.createExpressCheckoutElement();
+    expressCheckoutElement.mount('#express-checkout-element');
+
+    expressCheckoutElement.on('ready', ({availablePaymentMethods}) => {
+      if (availablePaymentMethods && availablePaymentMethods.length) {
+        separator.hidden = false;
+      }
+    });
+
+    expressCheckoutElement.on('confirm', async (event) => {
+      clearError();
+      const actionsResult = await checkout.loadActions();
+      if (actionsResult.type === 'error') {
+        showError(actionsResult.error.message);
+        return;
+      }
+
+      const confirmResult = await actionsResult.actions.confirm({
+        expressCheckoutConfirmEvent: event,
+      });
+
+      if (confirmResult.error) {
+        showError(confirmResult.error.message);
+      }
+    });
+
+    checkout.createContactDetailsElement().mount('#contact-details-element');
+    checkout.createShippingAddressElement().mount('#address-element');
+    checkout.createPaymentElement().mount('#payment-element');
+
+    if (submitButton) {
+      submitButton.addEventListener('click', async (event) => {
+        event.preventDefault();
+        clearError();
+        submitButton.disabled = true;
+
+        const actionsResult = await checkout.loadActions();
+        if (actionsResult.type === 'error') {
+          showError(actionsResult.error.message);
+          submitButton.disabled = false;
+          return;
+        }
+
+        const {error} = await actionsResult.actions.confirm();
+        if (error) {
+          showError(error.message);
+          submitButton.disabled = false;
+        }
+      });
+    }
+
+    if (changeButton) {
+      let giftWrapAdded = false;
+      changeButton.addEventListener('click', async () => {
+        clearError();
+        changeButton.disabled = true;
+
+        const updateCheckout = async () => {
+          const actionsResult = await checkout.loadActions();
+          if (actionsResult.type === 'error') {
+            throw new Error(actionsResult.error.message);
+          }
+
+          const response = await fetch('/update-checkout-items', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              checkout_session_id: actionsResult.actions.getSession().id,
+              gift_wrap: !giftWrapAdded,
+            }),
+          });
+
+          if (!response.ok) {
+            const body = await response.json();
+            throw new Error(body.message || 'Update failed');
+          }
+        };
+
+        try {
+          const response = await checkout.runServerUpdate(updateCheckout);
+          if (response.type === 'error') {
+            throw new Error('Could not update checkout session');
+          }
+          giftWrapAdded = !giftWrapAdded;
+          changeButton.textContent = giftWrapAdded ? 'Remove gift wrap' : 'Add gift wrap';
+        } catch (error) {
+          console.error(error);
+          showError(error.message || 'Could not update line items.');
+        } finally {
+          changeButton.disabled = false;
+        }
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    showError('Stripe Elements could not be initialized. See console for details.');
+  }
+})();
+</script>
+
+</body>
+</html>
