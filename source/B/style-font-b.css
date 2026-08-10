@@ -1,0 +1,619 @@
+/*
+  williammcguire.shop — shared stylesheet
+  ─────────────────────────────────────────────────────────
+  dark scale  (nav · hero · ticker · footer · adults · nl)
+    #1c1c1e  #222224  #242426  #282828  #2e2e32  #3a3a3e
+  mid         (borders · secondary text · NOT section bgs)
+    #52525a  #7a7a84
+  light       (primary section backgrounds — dominant)
+    #eeeef2   ← main bg   (was portfolio --bright)
+    #d0d0d8   ← UI only: image placeholders, cards, inputs
+  gold
+    #c8a46e  #d4b580  #6e5830
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+*/
+
+/* ── RESET ── */
+*{box-sizing:border-box;margin:0;padding:0}
+body{min-height:100vh;display:flex;flex-direction:column;font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+a{text-decoration:none;color:inherit;cursor:pointer}
+
+/* ── VARIABLES ── */
+:root{
+  --dk-1:#1c1c1e; --dk-2:#222224; --dk-3:#242426;
+  --dk-4:#282828; --dk-5:#2e2e32; --dk-6:#3a3a3e;
+  --md-1:#52525a; --md-2:#7a7a84;
+  --lt-1:#eeeef2; /* section bg  */
+  --lt-2:#d0d0d8; /* UI surfaces */
+  --gold:#c8a46e; --gold-hi:#d4b580; --gold-lo:#6e5830;
+  /* channel tokens: same colors as --lt-1 / --dk-1, as comma-separated
+     RGB so they can be used at any alpha via rgba(var(--x-rgb), a) */
+  --lt-1-rgb:238,238,242;
+  --dk-1-rgb:28,28,30;
+}
+
+/* ── FONT SYSTEM ── */
+/* Portfolio-aligned typography */
+body{
+  --fh:'Outfit',sans-serif;
+  --fb:'Inter',sans-serif;
+  --fm:'Space Mono',monospace;
+  font-family:var(--fb);
+  background:var(--lt-1);
+  color:var(--dk-1);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SHARED UTILITIES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* gold button skin — nav cart · hero · newsletter · adults · footer signup.
+   Per-button size/padding/position live on the semantic class beside it. */
+.btn-gold{
+  background:var(--gold);color:var(--dk-1);
+  font-family:var(--fh);letter-spacing:.08em;
+  transition:background .15s;flex-shrink:0;
+}
+.btn-gold:hover{background:var(--gold-hi)}
+/* dark email input — every newsletter / waitlist field.
+   Sits flush against a .btn-gold to its right (border-right:none). */
+.input-dark{
+  flex:1;padding:10px 14px;
+  background:var(--dk-3);color:var(--lt-1);
+  border:1px solid var(--dk-6);border-right:none;
+  font-family:var(--fb);font-size:13px;outline:none;
+}
+.input-dark::placeholder{color:rgba(var(--lt-1-rgb),.2)}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   NAV  (shared)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;background:var(--dk-1);border-bottom:1px solid var(--dk-6);
+  height:64px;position:sticky;top:0;z-index:100;gap:24px;
+}
+.nav-logo{line-height:1.1;cursor:pointer;text-decoration:none;display:block}
+.nav-logo-pre{
+  font-family:var(--fm);font-size:7px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);display:block;
+}
+.nav-logo-name{
+  font-family:var(--fh);color:var(--lt-1);display:block;
+}
+.nav-logo-name{font-size:24px;letter-spacing:.06em}
+.nav-logo-name{font-size:16px;font-weight:700;letter-spacing:-.01em;text-transform:uppercase}
+.nav-links{display:flex;gap:22px}
+.nav-links a{
+  font-family:var(--fb);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  color:rgba(var(--lt-1-rgb),.38);transition:color .15s;
+}
+.nav-links a:hover{color:var(--gold)}
+.nav-adults{opacity:.55}
+/* .nav-cart skin comes from .btn-gold; only per-mode sizing here */
+.nav-cart{font-size:18px;padding:9px 22px}
+.nav-cart{font-size:13px;font-weight:700;padding:10px 22px;text-transform:uppercase;letter-spacing:.12em}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TICKER  (shop)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.ticker{
+  background:var(--dk-3);
+  border-bottom:1px solid var(--dk-6);
+  padding:11px 0;overflow:hidden;white-space:nowrap;
+}
+.ticker-inner{
+  display:inline-block;
+  font-family:'Bebas Neue',cursive;font-size:14px;letter-spacing:.22em;
+  color:var(--gold);
+  animation:ticker 32s linear infinite;
+}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HERO  (shop)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.hero{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:560px;
+  overflow:hidden;
+}
+.hero-left{
+  background:var(--dk-1);padding:80px 64px 80px 80px;
+  display:flex;flex-direction:column;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.hero-bg-word{
+  position:absolute;top:-20px;
+  left:48px; /* halfway between edge and h1 indent */
+  font-family:'Bebas Neue',cursive;font-size:200px;letter-spacing:-.02em;
+  color:rgba(200,164,110,.04);line-height:1;user-select:none;pointer-events:none;
+}
+.hero-tag{
+  font-family:var(--fm);font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:24px;position:relative;z-index:1;
+}
+.hero-title{
+  font-family:var(--fh);color:var(--lt-1);position:relative;z-index:1;margin-bottom:20px;
+}
+.hero-title{font-size:96px;line-height:.9;letter-spacing:.02em}
+.hero-title{font-size:64px;line-height:1;letter-spacing:-.03em;font-weight:700}
+.hero-sub{
+  font-family:var(--fb);font-size:14px;font-weight:300;
+  color:rgba(var(--lt-1-rgb),.45);max-width:340px;line-height:1.75;margin-bottom:44px;
+  position:relative;z-index:1;
+}
+/* .hero-btn skin comes from .btn-gold; keep placement + per-mode sizing */
+.hero-btn{align-self:flex-start;position:relative;z-index:1}
+.hero-btn{font-size:20px;padding:13px 48px}
+.hero-btn{font-size:13px;font-weight:700;padding:14px 48px;text-transform:uppercase;letter-spacing:.12em}
+
+/* ── HERO RIGHT: product showcase ── */
+.hero-right{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:var(--dk-1);
+  padding:32px;
+}
+/* card wrapper — both image and caption share this width */
+.hero-product-card{
+  width:min(460px,100%); /* never overflows, fills up to 460px */
+  display:flex;flex-direction:column;
+}
+/* image: fills card width, square */
+.hero-product-img{
+  width:100%;
+  aspect-ratio:1/1;
+  background:var(--lt-2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  position:relative;
+  flex-shrink:0;
+}
+/* featured badge top-left */
+.hero-featured-badge{
+  position:absolute;top:0;left:0;
+  background:var(--gold);color:var(--dk-1);
+  font-family:var(--fm);font-size:8px;letter-spacing:.16em;text-transform:uppercase;
+  padding:5px 14px;
+}
+/* caption strip: 100% of .hero-product-card = always same width as image above */
+.hero-caption{
+  width:100%;
+  flex-shrink:0;
+  background:var(--dk-2);
+  border-top:1px solid var(--dk-5);
+  padding:14px 18px;
+  display:grid;grid-template-columns:1fr auto;align-items:center;gap:12px;
+}
+.hero-caption-type{
+  font-family:var(--fm);font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold-lo);margin-bottom:4px;
+}
+.hero-caption-name{
+  font-family:var(--fh);color:var(--lt-1);line-height:1;
+}
+.hero-caption-name{font-size:22px;letter-spacing:.04em}
+.hero-caption-name{font-size:16px;font-weight:700;text-transform:uppercase}
+.hero-caption-right{
+  display:flex;flex-direction:column;align-items:flex-end;gap:6px;
+}
+.hero-caption-price{
+  font-family:var(--fh);color:var(--lt-1);line-height:1;
+}
+.hero-caption-price{font-size:28px;letter-spacing:.04em}
+.hero-caption-price{font-size:20px;font-weight:700}
+.hero-caption-cta{
+  font-family:var(--fm);font-size:8px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold);border-bottom:1px solid var(--gold-lo);
+  padding-bottom:1px;cursor:pointer;transition:color .15s;white-space:nowrap;
+}
+.hero-caption-cta:hover{color:var(--gold-hi)}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SHOP CTA BAR  (shop)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+/* CTA bar — default: heading + generous padding */
+.cat-section{
+  background:var(--dk-4);
+  border-bottom:1px solid var(--dk-5);
+  padding:28px 40px;
+  text-align:center;
+  position:sticky;
+  top:64px;
+  z-index:90;
+  transition:padding .2s ease;
+}
+/* stuck state: compact strip, heading hidden */
+.cat-section.is-stuck{padding:8px 40px}
+.cat-section.is-stuck .cat-heading{display:none}
+.cat-heading{
+  font-family:var(--fh);color:var(--gold);margin-bottom:14px;letter-spacing:.08em;
+}
+.cat-heading{font-size:20px}
+.cat-heading{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.18em}
+.cat-buttons{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.cat-btn{
+  font-family:var(--fb);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;
+  padding:11px 26px;background:none;color:rgba(var(--lt-1-rgb),.55);
+  border:1px solid var(--dk-6);transition:background .18s,color .18s,border-color .18s;
+}
+.cat-btn:hover,.cat-btn.on{
+  background:var(--gold);color:var(--dk-1);border-color:var(--gold);
+}
+
+/* hero-left inner content: left-aligned with breathing room, not edge-to-edge */
+.hero-left-inner{max-width:480px;padding-left:16px}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FEATURED SECTION  (shop)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.section{padding:48px 40px;background:var(--lt-1);flex:1}
+.featured-grid{
+  display:grid;
+  grid-template-columns:repeat(3,300px);
+  justify-content:center;
+  gap:36px; /* more breathing room between the smaller cards */
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CARDS  (shared: featured + recs)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.card{
+  background:var(--lt-2); /* lt-2 card on lt-1 bg = visible contrast without white */
+  border:1px solid var(--md-2);
+  position:relative;transition:transform .15s,box-shadow .15s;display:block;
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(var(--dk-1-rgb),.15)}
+.card-img{
+  width:100%;
+  padding-top:100%; /* all cards square */
+  background:var(--lt-2); /* flat fill — no texture */
+  border-bottom:1px solid var(--md-2);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.card-img-inner{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%)}
+.badge{
+  position:absolute;top:0;left:0;
+  font-family:var(--fm);font-size:8px;letter-spacing:.12em;text-transform:uppercase;
+  padding:5px 10px;z-index:2;font-weight:700;
+  background:var(--gold);color:var(--dk-1);
+}
+.badge.new{background:var(--dk-1);color:var(--lt-1)}
+.card-body{padding:14px}
+.card-type{
+  font-family:var(--fm);font-size:8px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold-lo);margin-bottom:4px;
+}
+.card-title{font-family:var(--fb);font-size:15px;font-weight:600;color:var(--dk-1);margin-bottom:12px;line-height:1.3}
+.card-foot{display:flex;align-items:center;justify-content:space-between}
+.card-price{font-family:var(--fh);color:var(--dk-1)}
+.card-price{font-size:26px;letter-spacing:.05em}
+.card-price{font-size:20px;font-weight:700}
+.card-add{
+  background:var(--dk-1);color:var(--lt-1);
+  font-family:var(--fb);font-weight:700;font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  padding:7px 14px;transition:background .15s;
+}
+.card-add:hover{background:var(--gold);color:var(--dk-1)}
+
+/* compact card sizing — shared by the featured grid and the recs grid */
+.section .card-body,.recs .card-body{padding:8px 10px}
+.section .card-title,.recs .card-title{font-size:11px;margin-bottom:6px;line-height:1.2}
+.section .card-type{font-size:7px}
+.section .card-price{font-size:18px}
+.section .card-price{font-size:14px}
+.section .card-add{font-size:9px;padding:4px 10px}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SHOP FULL CTA  (shop)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.shop-cta{
+  background:var(--dk-4); /* #282828 — matches cat section */
+  border-top:1px solid var(--dk-5);
+  border-bottom:1px solid var(--dk-5);
+  padding:44px 40px;text-align:center;
+}
+.shop-cta-title{font-family:var(--fh);color:var(--lt-1);margin-bottom:8px}
+.shop-cta-title{font-size:36px;letter-spacing:.04em}
+.shop-cta-title{font-size:24px;font-weight:700;letter-spacing:-.01em}
+.shop-cta-sub{font-family:var(--fb);font-size:13px;font-weight:300;color:rgba(var(--lt-1-rgb),.4);margin-bottom:24px}
+.shop-cta-btn{
+  display:inline-block;font-family:var(--fb);font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;
+  padding:12px 44px;background:none;color:rgba(var(--lt-1-rgb),.7);border:1px solid var(--dk-6);transition:background .18s,color .18s,border-color .18s;
+}
+.shop-cta-btn:hover{background:var(--gold);color:var(--dk-1);border-color:var(--gold)}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ADULTS / AFTER HOURS  (shop)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.adults{
+  background:var(--dk-2);
+  border-top:1px solid var(--dk-5);
+  border-bottom:2px solid var(--gold);
+  padding:48px 40px;
+}
+/* constrain content to page width — bg bleeds, content doesn't */
+.adults-inner-wrap{
+  max-width:1100px;
+  margin:0 auto;
+  display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;
+}
+.adults-eyebrow{
+  font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(var(--lt-1-rgb),.35);margin-bottom:10px;
+}
+.adults-title{font-family:var(--fh);color:var(--lt-1);margin-bottom:8px}
+.adults-title{font-size:40px;line-height:.95;letter-spacing:.04em}
+.adults-title{font-size:28px;font-weight:700;letter-spacing:-.02em}
+.adults-sub{
+  font-family:var(--fb);font-size:13px;font-weight:300;
+  color:rgba(var(--lt-1-rgb),.4);max-width:420px;line-height:1.7;margin-bottom:22px;
+}
+.adults-form{display:flex;max-width:380px}
+/* .adults-input skin comes from .input-dark */
+/* .adults-btn skin comes from .btn-gold; per-mode sizing only */
+.adults-btn{font-size:16px;padding:0 20px}
+.adults-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:0 20px}
+.adults-note{
+  font-family:var(--fm);font-size:9px;letter-spacing:.1em;
+  color:rgba(var(--lt-1-rgb),.2);margin-top:8px;
+}
+/* thumbs: crosshatch stripes — blur(8px) reads as genuine photo texture */
+.adults-thumbs{display:flex;gap:10px;align-items:center;flex-shrink:0}
+.adults-thumb{
+  width:96px;height:130px;
+  background:
+    repeating-linear-gradient(45deg,  #3a3a3e 0, #3a3a3e 4px, #52525a 4px, #52525a 5px),
+    repeating-linear-gradient(-45deg, transparent 0, transparent 4px, rgba(110,88,48,.25) 4px, rgba(110,88,48,.25) 5px);
+  border:1px solid var(--gold-lo);
+  filter:blur(8px);flex-shrink:0;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   NEWSLETTER  (shop)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.newsletter{background:var(--dk-1);border-top:1px solid var(--dk-5);padding:28px 40px}
+.nl-inner{max-width:600px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.nl-title{font-family:var(--fh);color:var(--lt-1);margin-bottom:3px}
+.nl-title{font-size:30px;letter-spacing:.04em}
+.nl-title{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.nl-sub{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--lt-1-rgb),.3)}
+.nl-form{display:flex}
+/* .nl-input skin comes from .input-dark; these are its only deltas */
+.nl-input{min-width:200px;padding:10px 16px}
+/* .nl-btn skin comes from .btn-gold; per-mode sizing only */
+.nl-btn{font-size:16px;padding:0 20px}
+.nl-btn{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:0 20px}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BREADCRUMB  (product)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.breadcrumb{
+  background:var(--lt-1);border-bottom:1px solid var(--lt-2);
+  padding:12px 40px;display:flex;align-items:center;gap:8px;
+  font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--md-1);
+}
+.breadcrumb a:hover{color:var(--gold-lo)}
+.breadcrumb-sep{opacity:.35}
+.breadcrumb-current{color:var(--dk-1);font-weight:700}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PRODUCT LAYOUT  (product)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.product{display:grid;grid-template-columns:1fr 1fr;flex:1;align-items:start}
+.product-img-wrap{
+  background:var(--lt-1);
+  border-right:1px solid var(--lt-2);
+  position:sticky;
+  top:64px;
+  height:calc(100vh - 64px);
+  max-height:560px;
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:40px 32px;
+  align-self:start;
+}
+.product-img-ph{
+  width:60%;
+  aspect-ratio:1/1;
+  background:var(--lt-2);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+  position:relative; /* badge positions relative to this */
+}
+/* placeholder icon + label — shared with the hero showcase (temporary scaffolding) */
+.hero-product-img svg,.product-img-ph svg{opacity:.28}
+.hero-product-img span,.product-img-ph span{
+  font-family:var(--fm);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--md-2);
+}
+.product-img-badge{
+  position:absolute;top:0;left:0; /* top-left of the image square */
+  background:var(--gold);color:var(--dk-1);
+  font-family:var(--fm);font-size:9px;letter-spacing:.14em;text-transform:uppercase;
+  padding:5px 12px;z-index:2;
+}
+.product-info{padding:48px 56px;display:flex;flex-direction:column;background:var(--lt-1)}
+.product-type{font-family:var(--fm);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-lo);margin-bottom:10px}
+.product-name{font-family:var(--fh);color:var(--dk-1);margin-bottom:8px}
+.product-name{font-size:52px;line-height:.95;letter-spacing:.03em}
+.product-name{font-size:36px;font-weight:700;line-height:1;letter-spacing:-.02em}
+.product-price{font-family:var(--fh);color:var(--gold-lo);margin-bottom:6px}
+.product-price{font-size:34px;letter-spacing:.04em}
+.product-price{font-size:24px;font-weight:700}
+.product-stock{font-family:var(--fb);font-size:13px;font-weight:300;color:var(--md-1);line-height:1.65;margin-bottom:28px}
+.rule{height:1px;background:var(--lt-2);margin-bottom:28px}
+
+/* ── SELECTORS ── */
+.sel-label{
+  font-family:var(--fm);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--dk-1);margin-bottom:12px;display:flex;align-items:center;gap:8px;
+}
+.sel-label span{color:var(--md-2);font-weight:400}
+.colors{display:flex;gap:10px;margin-bottom:28px}
+.swatch{
+  width:28px;height:28px;border-radius:50%;
+  border:2px solid transparent;outline:2px solid transparent;
+  transition:border-color .15s,outline-color .15s,outline-offset .15s;cursor:pointer;position:relative;
+}
+.swatch:hover{outline-color:var(--gold-lo);outline-offset:3px}
+.swatch.on{border-color:var(--lt-1);outline-color:var(--dk-1);outline-offset:3px}
+.swatch::after{
+  content:attr(data-name);
+  position:absolute;bottom:calc(100% + 7px);left:50%;transform:translateX(-50%);
+  background:var(--dk-1);color:var(--lt-1);
+  font-family:var(--fm);font-size:8px;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 8px;white-space:nowrap;opacity:0;transition:opacity .15s;pointer-events:none;
+}
+.swatch:hover::after{opacity:1}
+.sizes{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.size-btn{
+  min-width:48px;height:40px;padding:0 10px;
+  background:none;color:var(--dk-1);
+  font-family:var(--fb);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;
+  border:1px solid var(--lt-2);transition:background .15s,color .15s,border-color .15s;
+}
+.size-btn:hover{border-color:var(--dk-1)}
+.size-btn.on{background:var(--dk-1);color:var(--lt-1);border-color:var(--dk-1)}
+.size-btn.sold{color:rgba(var(--dk-1-rgb),.22);border-color:var(--lt-2);cursor:not-allowed;position:relative}
+.size-btn.sold::after{content:'';position:absolute;top:50%;left:8%;right:8%;height:1px;background:rgba(var(--dk-1-rgb),.18);transform:rotate(-15deg)}
+.size-guide{
+  font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold-lo);border-bottom:1px solid var(--gold-lo);
+  display:inline-block;padding-bottom:1px;margin-bottom:28px;cursor:pointer;
+}
+
+/* ── ADD TO CART ── */
+.atc-row{display:flex;gap:10px;margin-bottom:20px}
+.qty{display:flex;align-items:center;border:1px solid var(--lt-2)}
+.qty-btn{width:36px;height:48px;font-size:18px;color:var(--dk-1);background:none;transition:background .15s}
+.qty-btn:hover{background:var(--lt-2)}
+.qty-val{width:40px;text-align:center;font-weight:700;font-size:15px;color:var(--dk-1);border-left:1px solid var(--lt-2);border-right:1px solid var(--lt-2);line-height:48px}
+.atc-btn{
+  flex:none;
+  padding:14px 20px; /* equal all four sides */
+  background:var(--dk-1);color:var(--lt-1);
+  font-family:var(--fh);letter-spacing:.1em;transition:background .15s;
+}
+.atc-btn{font-size:22px}
+.atc-btn{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.12em}
+.atc-btn:hover{background:var(--gold-lo)}
+
+/* ── PRODUCT META ── */
+.product-desc{font-family:var(--fb);font-size:13px;color:var(--md-1);line-height:1.75;margin-bottom:24px}
+.product-meta{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--md-2);line-height:2.2}
+.product-meta a{color:var(--gold-lo);border-bottom:1px solid var(--gold-lo)}
+.product-meta a:hover{color:var(--gold)}
+.loyalty{margin-top:20px;background:var(--lt-2);border:1px solid var(--md-2);padding:14px 16px}
+.loyalty-hd{font-family:var(--fm);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-lo);margin-bottom:6px}
+.loyalty-body{font-family:var(--fb);font-size:12px;color:var(--md-1);line-height:1.6}
+.loyalty-body a{color:var(--gold-lo);border-bottom:1px solid var(--gold-lo)}
+.loyalty-body a:hover{color:var(--gold)}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RECS / "ALSO LIKE"  (product)
+   Dark section so it doesn't compete with product info
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.recs{padding:32px 40px;background:var(--dk-4);border-top:1px solid var(--dk-5)}
+.recs-hd{font-family:var(--fh);color:var(--lt-1);margin-bottom:16px}
+.recs-hd{font-size:22px;letter-spacing:.04em}
+.recs-hd{font-size:15px;font-weight:700;letter-spacing:-.01em}
+.recs-grid{
+  display:grid;
+  grid-template-columns:repeat(4,190px); /* ~15% smaller than auto 1fr at 80% width */
+  justify-content:space-evenly; /* spread evenly across the 80% container */
+  width:80%;
+  margin:0 auto;
+  row-gap:20px;
+}
+/* recs-only compact deltas (shared body/title live in the CARDS block) */
+.recs .card-type{font-size:7px;margin-bottom:2px;letter-spacing:.12em}
+.recs .card-price{font-size:15px}
+.recs .card-price{font-size:12px}
+.recs .card-add{font-size:9px;padding:4px 9px}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOOTER  (shared)
+   4 cols: Shop | Studio | Newsletter | Brand
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+.footer{background:var(--dk-1);border-top:1px solid var(--dk-5);padding:48px 40px 32px;color:var(--lt-1)}
+.footer-top{
+  display:grid;
+  grid-template-columns:1.5fr 1.5fr 5fr 3fr;
+  gap:20px;
+  margin-bottom:36px;
+  width:86%;
+  margin-left:auto;
+  margin-right:auto;
+}
+/* index: hide newsletter content but keep the column space intact */
+.footer-top--no-nl .footer-nl-col{visibility:hidden}
+.footer-logo{line-height:1.15;margin-bottom:12px}
+.footer-logo-pre{font-family:var(--fm);font-size:7px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);display:block}
+.footer-logo-name{font-family:var(--fh);color:var(--lt-1);display:block}
+.footer-logo-name{font-size:26px;letter-spacing:.04em}
+.footer-logo-name{font-size:17px;font-weight:700;letter-spacing:-.01em;text-transform:uppercase}
+.footer-tagline{font-family:var(--fb);font-size:13px;font-weight:300;color:rgba(var(--lt-1-rgb),.28);line-height:1.7}
+.footer-hd{font-family:var(--fm);font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.footer-links{
+  display:grid;
+  grid-template-columns:max-content max-content;
+  gap:8px 14px;
+  font-family:var(--fb);font-size:13px;color:rgba(var(--lt-1-rgb),.28);
+}
+.footer-links a:hover{color:var(--gold)}
+.footer-bottom{border-top:1px solid var(--dk-5);padding-top:18px;display:flex;justify-content:space-between;font-family:var(--fm);font-size:9px;letter-spacing:.06em;color:rgba(var(--lt-1-rgb),.16)}
+/* newsletter column */
+.footer-nl-col{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.footer-nl-col .footer-nl-title{font-family:var(--fh);color:var(--lt-1);margin-bottom:4px}
+.footer-nl-col .footer-nl-title{font-size:24px;letter-spacing:.04em}
+.footer-nl-col .footer-nl-title{font-size:16px;font-weight:700}
+.footer-nl-col p{font-family:var(--fm);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:rgba(var(--lt-1-rgb),.3);margin-bottom:16px}
+.footer-nl-col .footer-nl-form{display:flex;width:85%}
+/* .footer-nl-input skin comes from .input-dark */
+/* .footer-nl-btn skin comes from .btn-gold; these are its only deltas */
+.footer-nl-col .footer-nl-btn{font-size:16px;letter-spacing:.06em;padding:0 18px}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FONT B OVERRIDES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Polaroid card style — Font B only */
+.card{
+  background:var(--lt-1); /* white polaroid base */
+  padding:8px 8px 0; /* equal frame on sides/top */
+  border:none;
+  box-shadow:0 2px 8px rgba(var(--dk-1-rgb),.12);
+}
+.card-img{
+  border:none; /* remove card-img bottom border — polaroid doesn't have one */
+  width:100%;
+}
+.card-body{
+  background:var(--lt-1);
+  padding:14px 8px 12px; /* wider bottom = classic polaroid thick base */
+}
+.card:hover{
+  transform:translateY(-3px) rotate(.5deg); /* slight tilt on hover — tactile feel */
+  box-shadow:0 8px 20px rgba(var(--dk-1-rgb),.18);
+}
+
+/* Gold ticker — Font B only */
+.ticker{background:var(--gold)}
+.ticker-inner{color:var(--dk-1)}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FONT SWITCHER  (shared)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+#fswitcher{
+  position:fixed;bottom:20px;right:20px;z-index:9999;
+  background:rgba(var(--dk-1-rgb),.94);border:1px solid var(--dk-6);
+  padding:6px;display:flex;gap:4px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-radius:40px;box-shadow:0 6px 28px rgba(0,0,0,.4);
+}
+.fsw{
+  padding:7px 18px;border:none;background:transparent;
+  color:rgba(var(--lt-1-rgb),.38);font-family:'Outfit',sans-serif;font-size:11px;font-weight:700;
+  cursor:pointer;border-radius:28px;transition:background .2s,color .2s;white-space:nowrap;
+}
+.fsw sub{display:block;font-size:8px;opacity:.5;margin-top:1px}
+.fsw.on{background:var(--lt-1);color:var(--dk-1)}
