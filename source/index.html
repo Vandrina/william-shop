@@ -6,12 +6,10 @@
 <title>Official Shop of William McGuire — williammcguire.shop</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" href="https://fonts.gstatic.com/s/bebasneue/v14/JTUSjIg69CK48gW7CN9iY5.ttf" as="font" type="font/ttf" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="fa">
 
 <nav class="nav">
   <a href="index.html" class="nav-logo">
@@ -47,15 +45,15 @@
   </div>
   <div class="hero-right">
     <div class="hero-product-card">
-      <a class="hero-product-img image" href="wm-product.html">
+      <div class="hero-product-img">
         <div class="hero-featured-badge">Featured</div>
         <svg width="56" height="56" viewBox="0 0 40 40" fill="none">
           <rect x="4" y="4" width="32" height="32" rx="1.5" stroke="#7a7a84" stroke-width="1.5" fill="none"/>
           <circle cx="14" cy="14" r="3.5" fill="#7a7a84"/>
           <path d="M4 30l8-8 7 7 7-9 10 10" stroke="#7a7a84" stroke-width="1.5" fill="none"/>
         </svg>
-        <span>Image Was Stolen - Check the Product Page</span>
-      </a>
+        <span>Product Image</span>
+      </div>
       <div class="hero-caption">
         <div class="hero-caption-left">
           <div class="hero-caption-type">Art Print — Limited Edition</div>
@@ -210,6 +208,11 @@
     <span>Privacy · Terms · Returns</span>
   </div>
 </footer>
+
+<div id="fswitcher">
+  <button class="fsw on" data-f="fa">Font A<sub>Bebas · Industrial</sub></button>
+  <button class="fsw" data-f="fb">Font B<sub>Outfit · Portfolio</sub></button>
+</div>
 
 <script>
 document.querySelectorAll('.cat-btn').forEach(function(b){
