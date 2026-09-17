@@ -1,0 +1,388 @@
+
+{% if errors != blank %}
+  <ul class="errors {{ page.permalink }}-errors">
+    {% for error in errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if theme.image_sets.slideshow.size > 0 %}
+  <div class="splide home-slideshow" data-autoplay="{{ theme.homepage_slideshow_autoplay }}">
+    <div class="splide__track">
+      <div class="splide__list">
+        {% for image in theme.image_sets.slideshow %}
+          <div class="splide__slide"{% if theme.hero_link != blank %} title="{{ theme.hero_link }}"{% endif %}>
+            <img
+              alt="Slideshow image {{ forloop.index }}"
+              {% if forloop.index == 1 %}fetchpriority="high"{% else %}loading="lazy"{% endif %}
+              class="slideshow-image"
+              srcset="{{ image.url | constrain: 1068 }}, {{ image.url | constrain: 2136 }} 2x"
+              src="{{ image.url | constrain: 1068 }}">
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% elsif theme.images.welcome_image != blank %}
+  <section class="home-welcome-image">
+    <img
+      alt="Welcome image"
+      class="welcome-image lazyload blur-up"
+      src="{{ theme.images.welcome_image.url | constrain: 900 }}"
+      data-srcset="
+        {{ theme.images.welcome_image.url | constrain: 450 }} 450w,
+        {{ theme.images.welcome_image.url | constrain: 600 }} 600w,
+        {{ theme.images.welcome_image.url | constrain: 900 }} 900w,
+        {{ theme.images.welcome_image.url | constrain: 1200 }} 1200w,
+        {{ theme.images.welcome_image.url | constrain: 1500 }} 1500w,
+        {{ theme.images.welcome_image.url | constrain: 1800 }} 1800w,
+        {{ theme.images.welcome_image.url | constrain: 2100 }} 2100w,
+        {{ theme.images.welcome_image.url | constrain: 2400 }} 2400w,
+        {{ theme.images.welcome_image.url | constrain: 2700 }} 2700w
+      "
+      data-sizes="auto"{% if theme.hero_link != blank %} title="{{ theme.hero_link }}"{% endif %}
+    >
+  </section>
+{% endif %}
+
+{% if theme.home_featured_video_url %}
+  <div class="home-featured-video-section">
+    <div id="featured-video"></div>
+  </div>
+{% endif %}
+
+{% assign featured_text = theme.homepage_featured_text %}
+{% assign featured_text_position = theme.homepage_featured_text_position %}
+
+{% comment %} Determine if categories can be shown - must check both setting and actual data {% endcomment %}
+{% assign can_show_categories = false %}
+{% if theme.featured_categories > 0 and categories.active.size > 0 %}
+  {% assign categories_with_products = blank %}
+  {% for category in categories.active %}
+    {% if category.products.size > 0 %}
+      {% assign categories_with_products = categories_with_products | append: category.id | append: ',' %}
+    {% endif %}
+  {% endfor %}
+  {% if categories_with_products != blank %}
+    {% assign can_show_categories = true %}
+  {% endif %}
+{% endif %}
+
+{% comment %} Show featured text above when position is "above" OR when no featured content exists (automatic fallback) {% endcomment %}
+{% if featured_text != blank %}
+  {% assign show_above = false %}
+  {% if featured_text_position == "above" %}
+    {% assign show_above = true %}
+  {% endif %}
+  {% if theme.featured_items == 0 and can_show_categories == false %}
+    {% assign show_above = true %}
+  {% endif %}
+  {% if show_above %}
+    <div class="featured-message">{{ featured_text }}</div>
+  {% endif %}
+{% endif %}
+
+<div class="featured-container">
+  {% if theme.featured_items > 0 %}
+    <h1 class="featured-title visually-hidden">{{ t['home.featured'] }}</h1>
+  {% endif %}
+</div>
+
+{% comment %} Featured Products Section {% endcomment %}
+{% if theme.featured_items > 0 %}
+  {% paginate products from products.all by theme.featured_items order:theme.featured_order %}
+    {% if products != blank %}
+      {% comment %} Show featured text within products section when position is "within" and products exist {% endcomment %}
+      {% if featured_text != blank and featured_text_position == "within" %}
+        <div class="featured-message">{{ featured_text }}</div>
+      {% endif %}
+      {% comment %} Show title only if both sections are visible {% endcomment %}
+      {% if theme.featured_categories > 0 and categories.active.size > 0 %}
+        <h2 class="featured-title">{{ t['home.featured_products'] }}</h2>
+      {% endif %}
+      <div class="product-list-container">
+        <div class="product-list {{ theme.product_list_layout }} mobile-{{ theme.mobile_product_grid_style }} grid-{{ theme.layout_style }}">
+          {% for product in products %}
+            {% assign image_width = product.image.width | times: 1.0 %}
+            {% assign image_height = product.image.height | times: 1.0 %}
+            {% assign aspect_ratio = image_width | divided_by: image_height %}
+            {% assign product_status = '' %}
+            {% case product.status %}
+              {% when 'active' %}
+                {% if product.on_sale %}
+                  {% assign product_status = t['products.on_sale'] %}
+                {% endif %}
+              {% when 'sold-out' %}
+                {% assign product_status = t['products.sold_out'] %}
+              {% when 'coming-soon' %}
+                {% assign product_status = t['products.coming_soon'] %}
+            {% endcase %}
+            {% capture image_class %}
+              {% if product.image.height > product.image.width %}
+                image-tall
+              {% elsif product.image.height < product.image.width %}
+                image-wide
+              {% else %}
+                image-square
+              {% endif %}
+            {% endcapture %}
+            {% capture status_classes %}{{ theme.product_badge_style }} {% if product.status == 'active' and product.on_sale %}status-primary{% else %}status-secondary{% endif %}{% endcapture %}
+            <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} {{ theme.show_overlay }} {{ theme.grid_image_style }} {% if theme.show_quickview %}show-quickview{% endif %}" href="{{ product.url }}" title="{{ product.name | escape }}">
+              <div class="prod-thumb-container">
+                <div class="product-list-image-container product-list-image-container-{{ theme.grid_image_style }}">
+                  <img
+                    alt=""
+                    class="blur-up product-list-image lazyload grid-{{ theme.grid_image_style }}"
+                    src="{{ product.image | product_image_url | constrain: 20 }}"
+                    {% unless theme.grid_image_style == 'default' %}data-aspectratio="{{ aspect_ratio }}"{% endunless %}
+                    data-srcset="
+                      {{ product.image | product_image_url | constrain: 200 }} 200w,
+                      {{ product.image | product_image_url | constrain: 280 }} 280w,
+                      {{ product.image | product_image_url | constrain: 350 }} 350w,
+                      {{ product.image | product_image_url | constrain: 400 }} 400w,
+                      {{ product.image | product_image_url | constrain: 500 }} 500w,
+                      {{ product.image | product_image_url | constrain: 650 }} 650w,
+                      {{ product.image | product_image_url | constrain: 800 }} 800w,
+                      {{ product.image | product_image_url | constrain: 1000 }} 1000w,
+                      {{ product.image | product_image_url | constrain: 1200 }} 1200w,
+                      {{ product.image | product_image_url | constrain: 1300 }} 1300w
+                    "
+                    data-sizes="auto"
+                  >
+                  {% if product_status != blank and theme.product_badge_style != 'inline' %}<div class="prod-thumb-status {{ status_classes }}">{{ product_status }}</div>{% endif %}
+                  {% if theme.show_quickview %}
+                    <div class="product-list-quickview-container">
+                      <div class="product-list-quickview-container-background"></div>
+                      <button class="button open-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}" title="{{ t['navigation.quick_view'] }} {{ product.name | escape }}" tabindex="-1">
+                        <span class="open-quickview-text">{{ t['navigation.quick_view'] }}</span>
+                        <svg aria-hidden="true" class="open-quickview-icon" width="19" height="12" viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M9.16664521 12c3.84154359 0 7.19749259-2.23873368 8.89121419-5.54405416.0600279-.1187131.1087338-.32305832.1087338-.45608412 0-.13302581-.0487059-.33737102-.1087338-.45608412C16.3631918 2.23720589 13.0081888.00002861 9.16664521.00002861c-3.84154358 0-7.19749261 2.23873368-8.89121415 5.54405416-.06002794.1187131-.10873388.32305832-.10873388.45608412 0 .13302581.04870594.33737102.10873388.45608412C1.97009865 9.76282272 5.32510163 12 9.1666452 12zm.00219726-1.4999964h-.00219726c-2.48400287 0-4.49998927-2.01598643-4.49998927-4.49998929 0-2.48400287 2.0159864-4.49998928 4.49998927-4.49998928 2.48400289 0 4.49998929 2.01598641 4.49998929 4.49998928v.00219726c0 2.48278216-2.0150099 4.49779203-4.49779203 4.49779203zm.00485228-1.51375984c1.65218725 0 2.99312645-1.34090867 2.99312645-2.99312641 0-1.65218722-1.3409392-2.99309589-2.99312645-2.99309589h-.00704954c-.22271676.00311278-.57705551.05618273-.79092219.11843844.16058312.21823068.29092338.61529394.29092338.88625887 0 .82540697-.66988976 1.49530269-1.49529673 1.49530269-.27096493 0-.66802819-.13034623-.88625887-.29092934-.0577086.21255442-.10452246.56378039-.10452246.78402523 0 1.65221774 1.34090867 2.99312641 2.99312641 2.99312641z" fill-rule="nonzero"/></svg>
+                      </button>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="prod-thumb-info">
+                <div class="prod-thumb-background"></div>
+                <div class="prod-thumb-info-headers">
+                  <div class="prod-thumb-name">{{ product.name }}</div>
+                  <div class="prod-thumb-price">
+                    {% assign hide_price = false %}
+                    {% if product.status == 'sold-out' and theme.show_sold_out_product_prices == false %}
+                      {% assign hide_price = true %}
+                    {% endif -%}
+                    {% if product.status == 'coming-soon' and theme.show_coming_soon_product_prices == false %}
+                      {% assign hide_price = true %}
+                    {% endif %}
+                    {% if product.has_password_protection and theme.show_password_protected_product_prices == false %}
+                      {% assign hide_price = true %}
+                    {% endif %}
+
+                    {% unless hide_price %}
+                      {{ product | product_price: theme.money_format, theme.product_variable_pricing_display_format }}
+
+                      {% if product.price_suffix != blank %}
+                        {% assign variable_price_shown = true %}
+                        {% if theme.product_variable_pricing_display_format == "min_only" or theme.product_variable_pricing_display_format == "max_only" %}
+                          {% assign variable_price_shown = false %}
+                        {% endif %}
+
+                        {% if product.variable_pricing and variable_price_shown %}
+                          {% assign formatted_suffix = '(' | append: product.price_suffix | append: ')' %}
+                        {% else %}
+                          {% assign formatted_suffix = product.price_suffix %}
+                        {% endif %}
+                        <span class="price-suffix">{{ formatted_suffix }}</span>
+                      {% endif %}
+                    {% endunless %}
+                  </div>
+                  {% unless hide_price %}
+                    {% if product.options.size > 1 and theme.show_product_variant_count_in_grid %}
+                      <div class="product-list-thumb-options-description">
+                        {{ product.options.size }} {{ t['products.variants'] | downcase }}
+                      </div>
+                    {% endif %}
+                  {% endunless %}
+                  {% if product_status != blank and theme.product_badge_style == 'inline' %}<div class="prod-thumb-status {{ status_classes }}">{{ product_status }}</div>{% endif %}
+                  {% if theme.show_quickview and theme.mobile_product_grid_style == 'horizontal' %}
+                    <div role="button" class="button open-quickview mobile-stacked-quickview" data-permalink="{{ product.permalink }}" data-has-default="{{ product.has_default_option }}" title="{{ t['navigation.quick_view'] }} {{ product.name | escape }}">
+                      <span class="open-quickview-text">{{ t['navigation.quick_view'] }}</span>
+                      <svg aria-hidden="true" class="open-quickview-icon" width="19" height="12" viewBox="0 0 19 12" xmlns="http://www.w3.org/2000/svg"><path d="M9.16664521 12c3.84154359 0 7.19749259-2.23873368 8.89121419-5.54405416.0600279-.1187131.1087338-.32305832.1087338-.45608412 0-.13302581-.0487059-.33737102-.1087338-.45608412C16.3631918 2.23720589 13.0081888.00002861 9.16664521.00002861c-3.84154358 0-7.19749261 2.23873368-8.89121415 5.54405416-.06002794.1187131-.10873388.32305832-.10873388.45608412 0 .13302581.04870594.33737102.10873388.45608412C1.97009865 9.76282272 5.32510163 12 9.1666452 12zm.00219726-1.4999964h-.00219726c-2.48400287 0-4.49998927-2.01598643-4.49998927-4.49998929 0-2.48400287 2.0159864-4.49998928 4.49998927-4.49998928 2.48400289 0 4.49998929 2.01598641 4.49998929 4.49998928v.00219726c0 2.48278216-2.0150099 4.49779203-4.49779203 4.49779203zm.00485228-1.51375984c1.65218725 0 2.99312645-1.34090867 2.99312645-2.99312641 0-1.65218722-1.3409392-2.99309589-2.99312645-2.99309589h-.00704954c-.22271676.00311278-.57705551.05618273-.79092219.11843844.16058312.21823068.29092338.61529394.29092338.88625887 0 .82540697-.66988976 1.49530269-1.49529673 1.49530269-.27096493 0-.66802819-.13034623-.88625887-.29092934-.0577086.21255442-.10452246.56378039-.10452246.78402523 0 1.65221774 1.34090867 2.99312641 2.99312641 2.99312641z" fill-rule="nonzero"/></svg>
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    {% else %}
+      <div class="alert-message">
+        <div class="alert-message-header">{{ t['products.no_products'] }}</div>
+      </div>
+    {% endif %}
+  {% endpaginate %}
+{% endif %}
+
+{% comment %} Featured Categories Section {% endcomment %}
+{% if theme.featured_categories > 0 and categories.active.size > 0 %}
+  {% assign categories_with_products = blank %}
+  {% for category in categories.active %}
+    {% if category.products.size > 0 %}
+      {% assign categories_with_products = categories_with_products | append: category.id | append: ',' %}
+    {% endif %}
+  {% endfor %}
+
+  {% if categories_with_products != blank %}
+    {% assign category_collages_enabled = false %}
+    {% if theme.features.has_theme_category_collages %}
+      {% assign category_collages_enabled = true %}
+    {% endif %}
+    <div class="featured-categories" data-category-collages-enabled="{{ category_collages_enabled }}">
+      {% comment %} Show featured text within categories section when position is "within", no products, and categories exist {% endcomment %}
+      {% if featured_text != blank and featured_text_position == "within" and theme.featured_items == 0 %}
+        <div class="featured-message">{{ featured_text }}</div>
+      {% endif %}
+      {% comment %} Show title only if both sections are visible {% endcomment %}
+      {% if theme.featured_items > 0 %}
+        <h2 class="featured-title">{{ t['home.featured_categories'] }}</h2>
+      {% endif %}
+      <div class="product-list-container">
+        <div class="product-list {{ theme.product_list_layout }} category-list category-grid-{{ theme.categories_grid_layout }} mobile-{{ theme.mobile_product_grid_style }} grid-{{ theme.layout_style }}">
+        {% for category in categories.active limit:theme.featured_categories %}
+          {% if category.products.size > 0 %}
+        <a class="prod-thumb product-image-{{ theme.product_grid_image_size }} category-link {{ theme.show_overlay }} {{ theme.grid_image_style }}" href="{{ category.url }}" title="{{ category.name | escape }}">
+            {% comment %}Determine if category collages should be enabled based on feature flag setting{% endcomment %}
+            {% if category_collages_enabled == false %}
+              {% for product in category.products limit:1 %}
+                {% assign image_width = product.image.width | times: 1.0 %}
+                {% assign image_height = product.image.height | times: 1.0 %}
+                {% assign aspect_ratio = image_width | divided_by: image_height %}
+
+                {% capture image_class %}
+                  {% if product.image.height > product.image.width %}
+                    image-tall
+                  {% elsif product.image.height < product.image.width %}
+                    image-wide
+                  {% else %}
+                    image-square
+                  {% endif %}
+                {% endcapture %}
+
+                <div class="product-list-image-container product-list-image-container-{{ theme.grid_image_style }}">
+                  <img
+                    alt=""
+                    class="blur-up product-list-image lazyload grid-{{ theme.grid_image_style }}"
+                    src="{{ product.image | product_image_url | constrain: 20 }}"
+                    {% unless theme.grid_image_style == 'default' %}data-aspectratio="{{ aspect_ratio }}"{% endunless %}
+                    data-srcset="
+                      {{ product.image | product_image_url | constrain: 240 }} 240w,
+                      {{ product.image | product_image_url | constrain: 320 }} 320w,
+                      {{ product.image | product_image_url | constrain: 400 }} 400w,
+                      {{ product.image | product_image_url | constrain: 540 }} 540w,
+                      {{ product.image | product_image_url | constrain: 600 }} 600w,
+                      {{ product.image | product_image_url | constrain: 800 }} 800w,
+                      {{ product.image | product_image_url | constrain: 960 }} 960w
+                    "
+                    data-sizes="auto"
+                  >
+                </div>
+                <div class="product-list-thumb-info">
+                  <div class="prod-thumb-background"></div>
+                  <div class="prod-thumb-info-headers">
+                    <div class="product-list-thumb-name">{{ category.name }}</div>
+                    {% if theme.home_page_categories_product_count_display %}
+                      <div class="prod-thumb-price category-count">{{ category.products.size | pluralize: t['products.product'], t['products.products'] }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endfor %}
+            {% else %}
+              {% if category.products.size > 0 %}
+                {% assign first_product = category.products.first %}
+                {% assign image_width = first_product.image.width | times: 1.0 %}
+                {% assign image_height = first_product.image.height | times: 1.0 %}
+                {% assign aspect_ratio = image_width | divided_by: image_height %}
+                
+                {% comment %}
+                  Determine which image URLs to use based on the image style setting
+                {% endcomment %}
+                {% assign image_urls = "" %}
+    
+                {% if theme.home_page_categories_image_style == "grid" %}
+                  {% capture image_urls %}
+                    [{% for product in category.products limit:6 %}"{{ product.image | product_image_url | constrain: 400 }}"{% unless forloop.last %},{% endunless %}{% endfor %}]
+                  {% endcapture %}
+                {% elsif theme.home_page_categories_image_style == "strip" %}
+                  {% capture image_urls %}
+                    [{% for product in category.products limit:4 %}"{{ product.image | product_image_url | constrain: 400 }}"{% unless forloop.last %},{% endunless %}{% endfor %}]
+                  {% endcapture %}
+                {% elsif theme.home_page_categories_image_style == "featured" %}
+                  {% capture image_urls %}
+                    [{% for product in category.products limit:4 %}"{{ product.image | product_image_url | constrain: 400 }}"{% unless forloop.last %},{% endunless %}{% endfor %}]
+                  {% endcapture %}
+                {% else %}
+                  {% comment %} Fallback to single image (first product) {% endcomment %}
+                  {% capture image_urls %}
+                    ["{{ first_product.image | product_image_url | constrain: 800 }}"]
+                  {% endcapture %}
+                {% endif %}
+
+                <div
+                  class="product-list-image-container product-list-image-container-{{ theme.grid_image_style }}" 
+                  id="category-collage-{{ category.id }}"
+                  data-image-urls='{{ image_urls | strip }}'
+                  data-image-style="{{ theme.home_page_categories_image_style }}"
+                >
+                  <!-- Default placeholder while image is being loaded -->
+                  <img
+                    alt=""
+                    class="blur-up product-list-image lazyload grid-{{ theme.grid_image_style }}"
+                    src="{{ first_product.image | product_image_url | constrain: 30 }}"
+                    {% unless theme.grid_image_style == 'default' %}data-aspectratio="{{ aspect_ratio }}"{% endunless %}
+                  >
+                </div>
+                <div class="product-list-thumb-info">
+                  <div class="prod-thumb-background"></div>
+                  <div class="prod-thumb-info-headers">
+                    <div class="product-list-thumb-name">{{ category.name }}</div>
+                    {% if theme.home_page_categories_product_count_display %}
+                      <div class="prod-thumb-price category-count">{{ category.products.size | pluralize: t['products.product'], t['products.products'] }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endif %}
+        </a>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+{% endif %}
+
+{% comment %} All Products Link - Show when pagination exists or when only categories are displayed {% endcomment %}
+{% if theme.featured_items > 0 %}
+  {% paginate products from products.all by theme.featured_items order:theme.featured_order %}
+    {% if products != blank %}
+      {% if theme.homepage_show_all_items_link and paginate.pages > 1 %}
+        {% assign all_products_button_text = t['navigation.all_products'] %}
+        {% if all_products_button_text != blank %}
+          <div class="view-all-link-container">
+            <a class="view-all-link icon-link icon-right-link" href="/products" title="{{ t['navigation.view_all'] }}">{{ all_products_button_text }} <svg aria-hidden="true" width="16" height="15" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></a>
+          </div>
+        {% endif %}
+      {% endif %}
+    {% endif %}
+  {% endpaginate %}
+{% endif %}
+
+{% comment %} Show all products link when no featured products are displayed {% endcomment %}
+{% if theme.homepage_show_all_items_link and theme.featured_items == 0 and products.all.size > 0 %}
+  {% assign all_products_button_text = t['navigation.all_products'] %}
+  {% if all_products_button_text != blank %}
+    <div class="view-all-link-container">
+      <a class="view-all-link icon-link icon-right-link" href="/products" title="{{ t['navigation.view_all'] }}">{{ all_products_button_text }} <svg aria-hidden="true" width="16" height="15" viewBox="0 0 21 20" xmlns="http://www.w3.org/2000/svg"><path d="M10.445798 0l9.9966372 9.99663714-.0035344.00381736.0035344.0029084L10.445798 20l-1.87436943-1.8743695L15.1964286 11.5H0v-3h15.1964286L8.57142857 1.87436946z" fill-rule="evenodd"/></svg></a>
+    </div>
+  {% endif %}
+{% endif %}
