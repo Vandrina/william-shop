@@ -479,6 +479,6 @@ body{
   padding:5px 12px;z-index:2;
 }
 .product-info{padding:48px 56px;display:flex;flex-direction:column;background:var(--lt-1)}
-.product-type{font-family:var(--fm);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-lo);margin-bottom:10px}... (truncated for brevity)
+.product-type{font-family:var(--fm);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-lo);margin-bottom:10px}
 
 /* END william-shop overrides */
